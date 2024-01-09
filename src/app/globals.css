@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind colors;
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -16,12 +17,12 @@
   }
 }
 
+/* Reset */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0;
+}
+
+*:focus-visible {
+  outline: none;
 }
