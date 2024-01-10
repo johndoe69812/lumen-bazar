@@ -15,5 +15,9 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  env: (config) => ({
+    ...config,
+    NEXT_PUBLIC_HOSTNAME: process.env.NEXT_PUBLIC_HOSTNAME!,
+  }),
 };
 export default config;

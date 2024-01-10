@@ -1,8 +1,40 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Container from "../container";
+import clsx from "clsx";
+import { debounce } from "lodash";
 
 const Header = () => {
+  const headerRef = useRef(null);
+  const [isOnTop, setIsOnTop] = useState(true);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const onTop = document.documentElement.scrollTop === 0;
+
+      onTop && !isOnTop && setIsOnTop(true);
+      !onTop && isOnTop && setIsOnTop(false);
+    };
+
+    const onScrollDebounced = debounce(onScroll, 15);
+
+    document.addEventListener("scroll", onScrollDebounced);
+    onScroll();
+
+    return () => {
+      document.removeEventListener("scroll", onScrollDebounced);
+    };
+  }, [isOnTop]);
+
   return (
-    <header className="w-full h-24 shadow-md flex items-center sticky top-0 bg-white justify-items-stretch z-10">
+    <header
+      ref={headerRef}
+      className={clsx(
+        "transition-shadow w-full h-24 flex items-center sticky top-0 bg-white justify-items-stretch z-10",
+        !isOnTop && "shadow-md"
+      )}
+    >
       <Container className="flex gap-4 justify-around">
         <div className="text-2xl heading-8 font-bold flex items-center">
           Lumen Bazar

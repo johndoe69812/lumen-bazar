@@ -20,4 +20,4 @@ const meta = {
 
 export default meta;
 
-export const header = () => <Header />;
+export const Default = () => <Header />;

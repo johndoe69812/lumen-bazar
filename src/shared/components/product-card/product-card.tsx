@@ -2,15 +2,7 @@ import ProductCardGallery from "./product-card-gallery";
 import { IoHeartOutline } from "@react-icons/all-files/io5/IoHeartOutline";
 import { IoHeartSharp } from "@react-icons/all-files/io5/IoHeartSharp";
 import clsx from "clsx";
-
-type Props = {
-  title: string;
-  images: string[];
-  price: string;
-  address: string;
-  date: string;
-  isFavorite?: boolean;
-};
+import { Props } from "./types";
 
 const ProductCard = (props: Props) => {
   const { title, price, address, date, images, isFavorite = false } = props;

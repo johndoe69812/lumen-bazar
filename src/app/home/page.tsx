@@ -1,6 +1,7 @@
 import Container from "@/shared/components/container";
 import Header from "@/shared/components/header";
 import ProductCard from "@/shared/components/product-card";
+import ProductCategories from "@/shared/components/product-categories";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,12 +18,14 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Container className="mt-10">
+      <Container>
+        <ProductCategories />
         <div className="grid grid-cols-4 gap-y-4 max-w-screen-lg">
           {Array(30)
             .fill(0)
-            .map(() => (
+            .map((_, index) => (
               <ProductCard
+                key={index}
                 title={titles[Math.random() > 0.5 ? 0 : 1]}
                 price="15$ per night"
                 address="aaa"
