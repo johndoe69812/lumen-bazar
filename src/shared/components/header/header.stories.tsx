@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/react";
-import Header from "./";
+import Header from "./header";
 
 const meta = {
   title: "Shared Components/Header",
