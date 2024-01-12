@@ -6,7 +6,7 @@ type Props = {
   categories?: CategoryCard[];
 };
 
-const wideTiles = [0, 3, 6, 11, 12, 13];
+const wideTiles = [0, 3, 6, 9, 12, 13];
 
 const ProductCategories = (props: Props) => {
   const { categories = ROOT_CATEGORIES } = props;

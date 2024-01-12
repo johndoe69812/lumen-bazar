@@ -5,11 +5,33 @@ import clsx from "clsx";
 import { Props } from "./types";
 
 const ProductCard = (props: Props) => {
-  const { title, price, address, date, images, isFavorite = false } = props;
+  const {
+    title,
+    price,
+    address,
+    date,
+    images,
+    isFavorite = false,
+    disableRoundImage = false,
+    className,
+    ...rest
+  } = props;
 
   return (
-    <div className="transition duration-300 rounded-lg hover:bg-gray-100 p-2 cursor-pointer">
-      <div className="rounded-lg w-full overflow-hidden">
+    <div
+      className={clsx(
+        "p-2 transition duration-300 hover:bg-gray-100 cursor-pointer",
+        !disableRoundImage && "rounded-lg",
+        className
+      )}
+      {...rest}
+    >
+      <div
+        className={clsx(
+          "w-fulloverflow-hidden",
+          !disableRoundImage && "rounded-lg"
+        )}
+      >
         <ProductCardGallery images={images} />
       </div>
       <div className="flex flex-col mt-2 gap-0.5">

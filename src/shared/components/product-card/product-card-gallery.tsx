@@ -17,7 +17,7 @@ const ProductCardGallery = ({ images }: Props) => {
 
   return (
     <div
-      className="rounded-lg w-full overflow-hidden relative"
+      className={clsx("w-full overflow-hidden relative")}
       onMouseLeave={() => setCurrImageIndex(0)}
     >
       <img src={images[currImageIndex]} className="object-cover w-full" />
