@@ -1,6 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta } from "@storybook/react";
 import ProductCategories from "./product-categories";
-import { PLACEHOLD_CATEGORIES } from "./constants";
 
 const meta = {
   title: "Cards/Product Categories",
@@ -13,6 +12,4 @@ const meta = {
 
 export default meta;
 
-export const Default = () => (
-  <ProductCategories categories={PLACEHOLD_CATEGORIES} />
-);
+export const Default = () => <ProductCategories />;

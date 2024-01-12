@@ -8,12 +8,12 @@ const ProductCard = (props: Props) => {
   const { title, price, address, date, images, isFavorite = false } = props;
 
   return (
-    <div className="transition duration-300 rounded-lg hover:bg-gray-100 p-2 cursor-pointer ">
+    <div className="transition duration-300 rounded-lg hover:bg-gray-100 p-2 cursor-pointer">
       <div className="rounded-lg w-full overflow-hidden">
         <ProductCardGallery images={images} />
       </div>
       <div className="flex flex-col mt-2 gap-0.5">
-        <div className="break-words flex flex-row items-start justify-between ">
+        <div className="break-words flex flex-row items-start justify-between">
           <a
             className="font-semibold text-blue-500 hover:text-red-500 mr-4"
             href="#"
@@ -22,7 +22,7 @@ const ProductCard = (props: Props) => {
           </a>
           <button
             className={clsx(
-              "text-blue-500 hover:text-red-500 leading-6 text-2xl",
+              "text-blue-500 hover:text-red-500 leading-6 text-2xl transition-transform hover:scale-110",
               isFavorite && "text-red-500"
             )}
           >

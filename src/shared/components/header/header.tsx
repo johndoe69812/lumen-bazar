@@ -1,13 +1,26 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Container from "../container";
 import clsx from "clsx";
 import { debounce } from "lodash";
+import Image from "next/image";
+import { BiCategory } from "@react-icons/all-files/bi/BiCategory";
+import { IoLocationOutline } from "@react-icons/all-files/io5/IoLocationOutline";
+import { IoClose } from "@react-icons/all-files/io5/IoClose";
+import Button from "@/shared/components/button";
+import CategoriesPopup, { CategoriesPopupLoading } from "./categories-popup";
+import dynamic from "next/dynamic";
+
+const DynamicCategoriesPopup = dynamic(() => import("./categories-popup"), {
+  loading: () => <CategoriesPopupLoading />,
+});
 
 const Header = () => {
   const headerRef = useRef(null);
   const [isOnTop, setIsOnTop] = useState(true);
+  const [isCategoriesOpened, setIsCategoriesOpened] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -27,35 +40,65 @@ const Header = () => {
     };
   }, [isOnTop]);
 
+  const handleOpenCategories = useCallback(() => {
+    setIsCategoriesOpened((prev) => !prev);
+  }, []);
+
   return (
-    <header
-      ref={headerRef}
-      className={clsx(
-        "transition-shadow w-full h-24 flex items-center sticky top-0 bg-white justify-items-stretch z-10",
-        !isOnTop && "shadow-md"
-      )}
-    >
-      <Container className="flex gap-4 justify-around">
-        <div className="text-2xl heading-8 font-bold flex items-center">
-          Lumen Bazar
-        </div>
-        <div className="flex grow gap-2">
-          <button className="flex items-center gap-1 bg-blue-400 text-white px-3 leading-8 rounded-lg hover:bg-blue-500 focus-visible:ring-2">
-            All categories
-          </button>
-          <div className="leading-8 rounded overflow-hidden bg-blue-400 p-0.5 flex grow">
-            <input
-              className="border rounded pl-2 w-full"
-              placeholder="Search ads"
+    <>
+      <header
+        ref={headerRef}
+        className={clsx(
+          "transition-shadow w-full h-24 flex items-center sticky top-0 bg-white justify-items-stretch z-10",
+          !isOnTop && !isCategoriesOpened && "shadow-md"
+        )}
+      >
+        <Container className="flex gap-4 justify-around">
+          <div className="transition cursor-pointer text-2xl heading-8 font-bold flex items-center hover:sepia">
+            <Image
+              src="/logo.svg"
+              alt="Lumen Bazar Logo"
+              width={152.5}
+              height={25}
+              priority
             />
-            <button className="px-5 text-white hover:bg-blue-500 focus-visible:ring-2">
-              Find
-            </button>
           </div>
-        </div>
-        <button className="mr-10">All locations</button>
-      </Container>
-    </header>
+          <div className="flex grow gap-2">
+            <Button
+              className={clsx(
+                "flex items-center gap-1 bg-blue-400 text-white px-3 leading-8 rounded-lg hover:bg-blue-500 focus-visible:ring-2",
+                isCategoriesOpened && "ring-2"
+              )}
+              onClick={handleOpenCategories}
+            >
+              {isCategoriesOpened ? <IoClose /> : <BiCategory />}
+              All categories
+            </Button>
+            <div className="leading-8 rounded overflow-hidden bg-blue-400 p-0.5 flex grow">
+              <input
+                className="border rounded pl-2 w-full"
+                placeholder="Search ads"
+              />
+              <Button className="px-5 text-white hover:bg-blue-500 focus-visible:ring-2">
+                Find
+              </Button>
+            </div>
+          </div>
+          <Button
+            className="flex items-center gap-1 mr-10 hover:text-red-500 focus-visible:text-red-500"
+            title="Specify Location"
+          >
+            <IoLocationOutline />
+            Anywhere
+          </Button>
+        </Container>
+      </header>
+      {isCategoriesOpened &&
+        createPortal(
+          <DynamicCategoriesPopup onClose={handleOpenCategories} />,
+          document.getElementById("modal-root")!
+        )}
+    </>
   );
 };
 

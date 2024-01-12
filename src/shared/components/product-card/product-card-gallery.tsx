@@ -33,8 +33,8 @@ const ProductCardGallery = ({ images }: Props) => {
               >
                 <div
                   className={clsx(
-                    "bg-white h-0.5 w-full",
-                    currImageIndex === index && "bg-blue-300"
+                    "h-0.5 w-full",
+                    currImageIndex === index ? "bg-blue-400" : "bg-white"
                   )}
                 />
               </div>

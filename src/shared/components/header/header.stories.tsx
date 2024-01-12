@@ -9,9 +9,7 @@ const meta = {
     backgroundColor: { control: "color" },
   },
   parameters: {
-    // Stop *this* story from being stacked in Chromatic
     theme: "default",
-    // these are to test the deprecated features of the Description block
     notes: "These are notes for the Button stories",
     info: "This is info for the Button stories",
     jsx: { useBooleanShorthandSyntax: false },
@@ -20,4 +18,9 @@ const meta = {
 
 export default meta;
 
-export const Default = () => <Header />;
+export const Default = () => (
+  <>
+    <Header />
+    <div id="modal-root"></div>
+  </>
+);
