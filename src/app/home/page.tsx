@@ -3,7 +3,36 @@ import Header from "@/shared/components/header";
 import ProductCard from "@/shared/components/product-card";
 import ProductCategories from "@/shared/components/product-categories";
 import ProductsSection from "@/shared/components/products-section";
+import StoriesLoading from "@/shared/widgets/stories/stories.loading";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+const generateStories = () => {
+  return Array(10)
+    .fill(0)
+    .map((_, storyIndex) => {
+      return {
+        id: `story-${storyIndex}`,
+        title: `Story - ${storyIndex}`,
+        thumbImage: `${process.env.NEXT_PUBLIC_HOSTNAME}/story-1.jpg`,
+        slides: Array(2)
+          .fill(0)
+          .map((_, slideIndex) => {
+            return {
+              id: `Slide - ${slideIndex}`,
+              image: `${process.env.NEXT_PUBLIC_HOSTNAME}/story-1-img.png`,
+              description: `Slide from story ${storyIndex}`,
+              title: `My Story Slide #${slideIndex}`,
+              background: "white",
+              link: {
+                title: "My Link",
+                url: "url",
+              },
+            };
+          }),
+      };
+    });
+};
 
 export const metadata: Metadata = {
   title: "Lumen Bazar - Best Worldwide Marketplace!",
@@ -15,6 +44,13 @@ const titles = [
   "3-bed cozzy super fancy 2 floors special house",
 ];
 
+const DynamicStories = dynamic(() => import("@/shared/widgets/stories"), {
+  loading: () => <StoriesLoading />,
+  ssr: false,
+});
+
+const placeholdedStories = generateStories();
+
 const Home = () => {
   return (
     <div>
@@ -24,6 +60,7 @@ const Home = () => {
           <div className="grid grid-cols-6">
             <div className="col-span-4">
               <ProductCategories />
+              <DynamicStories list={placeholdedStories} />
               <ProductsSection title="Special offers">
                 <div className="grid grid-cols-4 gap-2 gap-y-4">
                   {Array(30)
@@ -35,7 +72,7 @@ const Home = () => {
                         price="15$ per night"
                         address="aaa"
                         date="Today"
-                        className="!p-0"
+                        className="!pt-0 !px-0"
                         isFavorite={Math.random() > 0.5}
                         disableRoundImage
                         images={[

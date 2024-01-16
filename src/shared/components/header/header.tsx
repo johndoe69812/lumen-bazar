@@ -10,7 +10,7 @@ import { BiCategory } from "@react-icons/all-files/bi/BiCategory";
 import { IoLocationOutline } from "@react-icons/all-files/io5/IoLocationOutline";
 import { IoClose } from "@react-icons/all-files/io5/IoClose";
 import Button from "@/shared/components/button";
-import CategoriesPopup, { CategoriesPopupLoading } from "./categories-popup";
+import { CategoriesPopupLoading } from "./categories-popup";
 import dynamic from "next/dynamic";
 
 const DynamicCategoriesPopup = dynamic(() => import("./categories-popup"), {

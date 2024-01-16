@@ -4,6 +4,8 @@ import Link from "../../link";
 import { HTMLAttributes, useEffect, useState } from "react";
 import { ALL_CATEGORIES } from "@/mock-data/categories";
 import clsx from "clsx";
+import preventBodyScroll from "@/shared/utils/prevent-body-scroll";
+import enableBodyScroll from "@/shared/utils/enable-body-scroll";
 
 const DEFAULT_CATEGORY_ID = "vehicles";
 
@@ -16,16 +18,16 @@ const CategoriesPopup = ({ onClose, ...rest }: Props) => {
     useState(DEFAULT_CATEGORY_ID);
 
   useEffect(() => {
-    document.body.classList.add("overflow-hidden");
+    preventBodyScroll();
 
     return () => {
-      document.body.classList.remove("overflow-hidden");
+      enableBodyScroll();
     };
   }, []);
 
   return (
     <div
-      className="fixed inset-0 flex justify-center items-start top-24"
+      className="fixed inset-0 z-10 flex justify-center items-start top-24"
       {...rest}
     >
       <div
