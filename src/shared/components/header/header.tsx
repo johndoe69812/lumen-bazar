@@ -49,7 +49,7 @@ const Header = () => {
       <header
         ref={headerRef}
         className={clsx(
-          "transition-shadow w-full h-24 flex items-center sticky top-0 bg-white justify-items-stretch z-10",
+          "transition-shadow w-full h-24 flex items-center sticky top-0 bg-white justify-items-stretch z-20",
           !isOnTop && !isCategoriesOpened && "shadow-md"
         )}
       >

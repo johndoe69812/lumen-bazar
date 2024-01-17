@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { storyTimer } from "../utils";
 
 type Props = {
@@ -8,9 +8,7 @@ type Props = {
   slidesLength: number;
 };
 
-type Ref = ForwardedRef<HTMLDivElement>;
-
-const ProgressBar = forwardRef((props: Props) => {
+const ProgressBar = (props: Props) => {
   const { id, currentSlide, slidesLength } = props;
 
   const ref = useRef<HTMLDivElement>(null);
@@ -21,10 +19,9 @@ const ProgressBar = forwardRef((props: Props) => {
     ] as HTMLDivElement;
 
     const progressThumb = currentProgressBar?.children[0] as HTMLElement;
-    console.log("progressThumb", currentSlide, progressThumb);
 
-    storyTimer.onTimeUpdate((permile) => {
-      progressThumb.style.transform = `scaleX(${permile})`;
+    storyTimer.onTimeUpdate((completion) => {
+      progressThumb.style.transform = `scaleX(${completion})`;
     });
   }, [currentSlide]);
 
@@ -39,15 +36,15 @@ const ProgressBar = forwardRef((props: Props) => {
           >
             <div
               className={clsx(
-                "w-full h-full origin-left bg-neutral-800 scale-x-0"
+                "w-full h-full origin-left bg-neutral-800",
+                index < currentSlide && "!scale-x-100",
+                index > currentSlide && "!scale-x-0"
               )}
             />
           </div>
         ))}
     </div>
   );
-});
-
-ProgressBar.displayName = "ProgressBar";
+};
 
 export default ProgressBar;

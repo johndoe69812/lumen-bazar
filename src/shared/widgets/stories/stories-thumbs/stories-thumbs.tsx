@@ -20,8 +20,7 @@ const StoriesThumbs = ({ list }: Props) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
-  const { stories, setCurrentSlide, setCurrentStory, setIsExpanded } =
-    useStories();
+  const { setCurrentSlide, setCurrentStory, setIsExpanded } = useStories();
 
   const [itemsInView, setItemsInView] = useState(0);
   const [current, setCurrent] = useState(0);

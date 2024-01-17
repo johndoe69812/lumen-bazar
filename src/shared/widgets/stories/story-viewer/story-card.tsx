@@ -24,27 +24,41 @@ const StroyCard = (props: Props) => {
     }
 
     storyTimer.onEnd(() => {
-      setCurrentSlide((p) => (p < slides.length - 1 ? p + 1 : p));
+      if (currentSlide < slides.length - 1) {
+        setCurrentSlide((p) => p + 1);
+      } else {
+        onFinish();
+      }
     });
-  }, [isVisible, slides.length, setCurrentSlide]);
+  }, [isVisible, currentSlide, slides.length, onFinish, setCurrentSlide]);
 
+  // Stop when touched
   useEffect(() => {
-    if (!isVisible) {
+    const card = cardRef.current;
+
+    if (!isVisible || !card) {
       return;
     }
 
-    cardRef.current?.addEventListener("mousedown", () => {
+    const pauseTimer = () => {
       storyTimer.pause();
-    });
+    };
 
-    document.body.addEventListener("mouseup", () => {
+    const resumeTimer = () => {
       storyTimer.resume();
-    });
+    };
+
+    card.addEventListener("mousedown", pauseTimer);
+    card.addEventListener("mouseup", resumeTimer);
+    window.addEventListener("focus", resumeTimer);
 
     storyTimer.start();
 
     return () => {
       storyTimer.stop();
+      card.removeEventListener("mousedown", pauseTimer);
+      card.removeEventListener("mouseup", resumeTimer);
+      window.removeEventListener("focus", resumeTimer);
     };
   }, [isVisible, id, currentSlide]);
 

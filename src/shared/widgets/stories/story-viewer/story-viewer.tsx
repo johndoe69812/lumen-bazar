@@ -1,5 +1,4 @@
 import { IoClose } from "@react-icons/all-files/io5/IoClose";
-import { Story } from "../types";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import preventBodyScroll from "@/shared/utils/prevent-body-scroll";
 import enableBodyScroll from "@/shared/utils/enable-body-scroll";
@@ -57,16 +56,6 @@ const StoryViewer = (props: Props) => {
     };
   }, []);
 
-  const handlePreviousClick = useCallback(() => {
-    const isFirst = currentSlide === 0;
-
-    if (isFirst) {
-      handlePreviousStory();
-    } else {
-      setCurrentSlide((p) => p - 1);
-    }
-  }, [handlePreviousStory, setCurrentSlide]);
-
   const handleNextStory = useCallback(() => {
     const slider = storiesSlider.current;
 
@@ -81,6 +70,16 @@ const StoryViewer = (props: Props) => {
       slider.style.transform = "rotateY(0deg)";
     };
   }, [totalStories, setCurrentStory]);
+
+  const handlePreviousClick = useCallback(() => {
+    const isFirst = currentSlide === 0;
+
+    if (isFirst) {
+      handlePreviousStory();
+    } else {
+      setCurrentSlide((p) => p - 1);
+    }
+  }, [currentSlide, handlePreviousStory, setCurrentSlide]);
 
   const handleNextClick = useCallback(() => {
     const isLastSlide = currentSlide === totalSlides - 1;
@@ -104,7 +103,7 @@ const StoryViewer = (props: Props) => {
   const hasNextStory = currentStory < stories.length - 1;
 
   return (
-    <div className="fixed z-10 inset-0 flex justify-center items-center">
+    <div className="fixed z-30 inset-0 flex justify-center items-center">
       <div
         className="absolute inset-0 opacity-70 bg-neutral-950"
         onClick={() => onClose()}
