@@ -46,7 +46,7 @@ const StoriesThumbs = ({ list }: Props) => {
 
     const resizeObserver = new ResizeObserver(() => {
       setItemsInView(
-        Math.floor(outerElement.offsetWidth / (STORIES_THUMBS_GAP + 96))
+        Math.ceil(outerElement.offsetWidth / (STORIES_THUMBS_GAP + 96))
       );
       if (innerElement.offsetWidth > outerElement.offsetWidth) {
         setIsForwardArrows(true);

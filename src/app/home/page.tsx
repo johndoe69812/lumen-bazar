@@ -1,4 +1,5 @@
 import Container from "@/shared/components/container";
+import FavoriteCard from "@/shared/components/favorite-card";
 import Header from "@/shared/components/header";
 import ProductCard from "@/shared/components/product-card";
 import ProductCategories from "@/shared/components/product-categories";
@@ -57,7 +58,7 @@ const Home = () => {
       <Header />
       <div className="relative" id="main">
         <Container>
-          <div className="grid grid-cols-6">
+          <div className="grid grid-cols-6 gap-4">
             <div className="col-span-4">
               <ProductCategories />
               <DynamicStories list={placeholdedStories} />
@@ -90,7 +91,19 @@ const Home = () => {
                 </div>
               </ProductsSection>
             </div>
-            <div className="col-span-2">Sidebar Widgets</div>
+            <div className="col-span-2">
+              <div>
+                <h3 className="font-semibold">Favorites</h3>
+                <div className="">
+                  <FavoriteCard
+                    image="https://picsum.photos/400/300?random=1"
+                    link="/"
+                    title="Software Engineer"
+                    price="5000 usd"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </Container>
       </div>
