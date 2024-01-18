@@ -54,58 +54,51 @@ const placeholdedStories = generateStories();
 
 const Home = () => {
   return (
-    <div>
-      <Header />
-      <div className="relative" id="main">
-        <Container>
-          <div className="grid grid-cols-6 gap-4">
-            <div className="col-span-4">
-              <ProductCategories />
-              <DynamicStories list={placeholdedStories} />
-              <ProductsSection title="Special offers">
-                <div className="grid grid-cols-4 gap-2 gap-y-4">
-                  {Array(30)
-                    .fill(0)
-                    .map((_, index) => (
-                      <ProductCard
-                        key={index}
-                        title={titles[Math.random() > 0.5 ? 0 : 1]}
-                        price="15$ per night"
-                        address="aaa"
-                        date="Today"
-                        className="!pt-0 !px-0"
-                        isFavorite={Math.random() > 0.5}
-                        disableRoundImage
-                        images={[
-                          "https://picsum.photos/400/300?random=1",
-                          "https://picsum.photos/400/300?random=2",
-                          "https://picsum.photos/400/300?random=3",
-                          "https://picsum.photos/400/300?random=4",
-                          "https://picsum.photos/400/300?random=5",
-                          "https://picsum.photos/400/300?random=6",
-                          "https://picsum.photos/400/300?random=7",
-                          "https://picsum.photos/400/300?random=8",
-                        ]}
-                      />
-                    ))}
-                </div>
-              </ProductsSection>
-            </div>
-            <div className="col-span-2">
-              <div>
-                <h3 className="font-semibold">Favorites</h3>
-                <div className="">
-                  <FavoriteCard
-                    image="https://picsum.photos/400/300?random=1"
-                    link="/"
-                    title="Software Engineer"
-                    price="5000 usd"
-                  />
-                </div>
-              </div>
-            </div>
+    <div className="grid grid-cols-6 gap-4">
+      <div className="col-span-4">
+        <ProductCategories />
+        <DynamicStories list={placeholdedStories} />
+        <ProductsSection title="Special offers">
+          <div className="grid grid-cols-4 gap-2 gap-y-4">
+            {Array(30)
+              .fill(0)
+              .map((_, index) => (
+                <ProductCard
+                  key={index}
+                  title={titles[Math.random() > 0.5 ? 0 : 1]}
+                  price="15$ per night"
+                  address="aaa"
+                  date="Today"
+                  className="!pt-0 !px-0"
+                  isFavorite={Math.random() > 0.5}
+                  disableRoundImage
+                  images={[
+                    "https://picsum.photos/400/300?random=1",
+                    "https://picsum.photos/400/300?random=2",
+                    "https://picsum.photos/400/300?random=3",
+                    "https://picsum.photos/400/300?random=4",
+                    "https://picsum.photos/400/300?random=5",
+                    "https://picsum.photos/400/300?random=6",
+                    "https://picsum.photos/400/300?random=7",
+                    "https://picsum.photos/400/300?random=8",
+                  ]}
+                />
+              ))}
           </div>
-        </Container>
+        </ProductsSection>
+      </div>
+      <div className="col-span-2">
+        <div>
+          <h3 className="font-semibold">Favorites</h3>
+          <div className="">
+            <FavoriteCard
+              image="https://picsum.photos/400/300?random=1"
+              link="/"
+              title="Software Engineer"
+              price="5000 usd"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
