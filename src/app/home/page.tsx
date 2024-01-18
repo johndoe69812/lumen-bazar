@@ -1,12 +1,11 @@
-import Container from "@/shared/components/container";
 import FavoriteCard from "@/shared/components/favorite-card";
-import Header from "@/shared/components/header";
 import ProductCard from "@/shared/components/product-card";
 import ProductCategories from "@/shared/components/product-categories";
 import ProductsSection from "@/shared/components/products-section";
 import StoriesLoading from "@/shared/widgets/stories/stories.loading";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const generateStories = () => {
   return Array(10)
@@ -63,26 +62,27 @@ const Home = () => {
             {Array(30)
               .fill(0)
               .map((_, index) => (
-                <ProductCard
-                  key={index}
-                  title={titles[Math.random() > 0.5 ? 0 : 1]}
-                  price="15$ per night"
-                  address="aaa"
-                  date="Today"
-                  className="!pt-0 !px-0"
-                  isFavorite={Math.random() > 0.5}
-                  disableRoundImage
-                  images={[
-                    "https://picsum.photos/400/300?random=1",
-                    "https://picsum.photos/400/300?random=2",
-                    "https://picsum.photos/400/300?random=3",
-                    "https://picsum.photos/400/300?random=4",
-                    "https://picsum.photos/400/300?random=5",
-                    "https://picsum.photos/400/300?random=6",
-                    "https://picsum.photos/400/300?random=7",
-                    "https://picsum.photos/400/300?random=8",
-                  ]}
-                />
+                <Link key={index} href="/ad/sample-ad">
+                  <ProductCard
+                    title={titles[Math.random() > 0.5 ? 0 : 1]}
+                    price="15$ per night"
+                    address="aaa"
+                    date="Today"
+                    className="!pt-0 !px-0"
+                    isFavorite={Math.random() > 0.5}
+                    disableRoundImage
+                    images={[
+                      "https://picsum.photos/400/300?random=1",
+                      "https://picsum.photos/400/300?random=2",
+                      "https://picsum.photos/400/300?random=3",
+                      "https://picsum.photos/400/300?random=4",
+                      "https://picsum.photos/400/300?random=5",
+                      "https://picsum.photos/400/300?random=6",
+                      "https://picsum.photos/400/300?random=7",
+                      "https://picsum.photos/400/300?random=8",
+                    ]}
+                  />
+                </Link>
               ))}
           </div>
         </ProductsSection>

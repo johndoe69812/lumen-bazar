@@ -36,12 +36,7 @@ const ProductCard = (props: Props) => {
       </div>
       <div className="flex flex-col mt-2 gap-0.5">
         <div className="break-words flex flex-row items-start justify-between">
-          <a
-            className="font-semibold text-blue-500 hover:text-red-500 mr-4"
-            href="#"
-          >
-            <h3>{title}</h3>
-          </a>
+          <h3>{title}</h3>
           <button
             className={clsx(
               "text-blue-500 hover:text-red-500 leading-6 text-2xl transition-transform hover:scale-110",
