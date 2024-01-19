@@ -1,11 +1,10 @@
 import { IoChevronForward } from "@react-icons/all-files/io5/IoChevronForward";
 import Image from "next/image";
-import Link from "../../link";
-import { HTMLAttributes, useEffect, useState } from "react";
+import Link from "@/shared/components/link";
+import Modal from "@/shared/components/modal";
+import { HTMLAttributes, useState } from "react";
 import { ALL_CATEGORIES } from "@/mock-data/categories";
 import clsx from "clsx";
-import preventBodyScroll from "@/shared/utils/prevent-body-scroll";
-import enableBodyScroll from "@/shared/utils/enable-body-scroll";
 
 const DEFAULT_CATEGORY_ID = "vehicles";
 
@@ -13,27 +12,12 @@ type Props = HTMLAttributes<HTMLDivElement> & {
   onClose: () => void;
 };
 
-const CategoriesPopup = ({ onClose, ...rest }: Props) => {
+const CategoriesPopup = ({ onClose }: Props) => {
   const [selectedCategoryId, setSelectedCategoryId] =
     useState(DEFAULT_CATEGORY_ID);
 
-  useEffect(() => {
-    preventBodyScroll();
-
-    return () => {
-      enableBodyScroll();
-    };
-  }, []);
-
   return (
-    <div
-      className="fixed inset-0 z-10 flex justify-center items-start top-24"
-      {...rest}
-    >
-      <div
-        className="absolute bg-gray-800 w-full h-full opacity-50"
-        onClick={onClose}
-      ></div>
+    <Modal className="top-24" onClose={onClose}>
       <div className="h-[65vh] 2xl:w-[1440px] z-10 rounded-b-3xl grid grid-cols-12 py-6 pl-16 overflow-hidden bg-white">
         <div className="relative col-span-3 h-full overflow-y-auto">
           <ul>
@@ -96,7 +80,7 @@ const CategoriesPopup = ({ onClose, ...rest }: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 

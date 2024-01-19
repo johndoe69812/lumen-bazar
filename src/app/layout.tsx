@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MODAL_ROOT } from "@/constants";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <div id="modal-root" />
+        <div id={MODAL_ROOT} />
       </body>
     </html>
   );
