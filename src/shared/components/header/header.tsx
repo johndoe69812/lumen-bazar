@@ -12,6 +12,7 @@ import { IoClose } from "@react-icons/all-files/io5/IoClose";
 import Button from "@/shared/components/button";
 import { CategoriesPopupLoading } from "./categories-popup";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const DynamicCategoriesPopup = dynamic(() => import("./categories-popup"), {
   loading: () => <CategoriesPopupLoading />,
@@ -55,13 +56,15 @@ const Header = () => {
       >
         <Container className="flex gap-4 justify-around">
           <div className="transition cursor-pointer text-2xl heading-8 font-bold flex items-center hover:sepia">
-            <Image
-              src="/logo.svg"
-              alt="Lumen Bazar Logo"
-              width={152.5}
-              height={25}
-              priority
-            />
+            <Link href="/">
+              <Image
+                src="/logo.svg"
+                alt="Lumen Bazar Logo"
+                width={152.5}
+                height={25}
+                priority
+              />
+            </Link>
           </div>
           <div className="flex grow gap-2">
             <Button
