@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import ProductCard from "./product-card";
+import { generateBaseAd } from "@/mock-data/ads/generate-ads";
 
 const meta = {
   title: "Cards/Product Card",
@@ -21,16 +22,9 @@ export const Default: StoryObj<typeof ProductCard> = {
   decorators: [
     (Story) => (
       <div className="max-w-xs">
-        {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
         <Story />
       </div>
     ),
   ],
-  args: {
-    title: "Product Title",
-    price: "30USD",
-    images: ["https://picsum.photos/400/300"],
-    date: "1Feb",
-    address: "Default Address",
-  },
+  args: { ...generateBaseAd(0) },
 };

@@ -17,7 +17,7 @@ const FavoriteCard = (props: Props) => {
     <div className="group relative w-full py-2 text-sm">
       <div className="flex gap-2">
         <div className="w-1/4">
-          <img src={image} className="w-full" />
+          <img src={image} className="w-full" alt={title} />
         </div>
         <div className="flex flex-col gap-1">
           <Link

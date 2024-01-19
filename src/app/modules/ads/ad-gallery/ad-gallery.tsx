@@ -1,26 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IoChevronBack } from "@react-icons/all-files/io5/IoChevronBack";
 import { IoChevronForward } from "@react-icons/all-files/io5/IoChevronForward";
 import Button from "@/shared/components/button";
 import clsx from "clsx";
 import Loader from "@/shared/components/loader";
-import Image from "next/image";
+import NextImage from "next/image";
+import { AdGallery, Image } from "@/types";
 
-type Props = {
-  images: {
-    title: string;
-    imageUrl: string;
-    thumbUrl: string;
-  }[];
-};
+type Props = { gallery: AdGallery };
 
-const AdGallery = (props: Props) => {
-  const { images } = props;
+const Gallery = (props: Props) => {
+  const { gallery } = props;
 
   const [currentImage, setCurrentImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const images = useMemo(
+    () => gallery.filter((item) => item.type === "image"),
+    [gallery]
+  ) as Image[];
 
   const isFirst = currentImage === 0;
   const isLast = currentImage === images.length - 1;
@@ -44,21 +44,21 @@ const AdGallery = (props: Props) => {
           {!isLoaded && <Loader />}
           {isLoaded && (
             <div className="absolute inset-0 overflow-hidden">
-              <Image
+              <NextImage
                 key={currentImage}
                 src={images[currentImage].imageUrl}
-                alt={images[currentImage].title}
+                alt={images[currentImage].title ?? ""}
                 className="scale-110 blur-lg brightness-150"
                 fill
               />
             </div>
           )}
-          <Image
+          <NextImage
             key={currentImage}
             className={clsx("object-contain", !isLoaded && "opacity-0")}
             onLoad={() => setIsLoaded(true)}
             src={images[currentImage].imageUrl}
-            alt={images[currentImage].title}
+            alt={images[currentImage].title ?? ""}
             fill
           />
         </div>
@@ -74,7 +74,7 @@ const AdGallery = (props: Props) => {
       </div>
       <div className="mt-6 w-full">
         <div className="flex flex-wrap gap-2">
-          {images.map(({ thumbUrl }, index) => (
+          {images.map(({ thumbUrl, title }, index) => (
             <Button
               key={index}
               className={clsx(
@@ -85,7 +85,7 @@ const AdGallery = (props: Props) => {
                 setCurrentImage(index);
               }}
             >
-              <img className="h-full" src={thumbUrl} />
+              <img className="h-full" src={thumbUrl} alt={title} />
             </Button>
           ))}
         </div>
@@ -94,4 +94,4 @@ const AdGallery = (props: Props) => {
   );
 };
 
-export default AdGallery;
+export default Gallery;

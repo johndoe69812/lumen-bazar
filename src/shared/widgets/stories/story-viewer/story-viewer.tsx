@@ -39,7 +39,7 @@ const StoryViewer = (props: Props) => {
     } else {
       setIsExpanded(false);
     }
-  }, [currentStory, stories.length, setCurrentSlide, setIsExpanded]);
+  }, [currentStory, stories.length, setCurrentStory, setIsExpanded]);
 
   const handlePreviousStory = useCallback(() => {
     const slider = storiesSlider.current;
@@ -54,7 +54,7 @@ const StoryViewer = (props: Props) => {
       slider.style.transition = "0ms";
       slider.style.transform = "rotateY(0deg)";
     };
-  }, []);
+  }, [setCurrentStory]);
 
   const handleNextStory = useCallback(() => {
     const slider = storiesSlider.current;
@@ -89,7 +89,7 @@ const StoryViewer = (props: Props) => {
     } else {
       setCurrentSlide((p) => p + 1);
     }
-  }, [currentSlide, handleNextStory, setCurrentSlide]);
+  }, [currentSlide, totalSlides, handleNextStory, setCurrentSlide]);
 
   useEffect(() => {
     preventBodyScroll();

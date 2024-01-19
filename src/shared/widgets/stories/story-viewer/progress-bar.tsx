@@ -21,7 +21,9 @@ const ProgressBar = (props: Props) => {
     const progressThumb = currentProgressBar?.children[0] as HTMLElement;
 
     storyTimer.onTimeUpdate((completion) => {
-      progressThumb.style.transform = `scaleX(${completion})`;
+      if (progressThumb) {
+        progressThumb.style.transform = `scaleX(${completion})`;
+      }
     });
   }, [currentSlide]);
 

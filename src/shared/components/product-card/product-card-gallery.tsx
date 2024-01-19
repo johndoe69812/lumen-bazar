@@ -3,25 +3,35 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { MAX_IMAGES_PER_GALLERY } from "./constants";
+import { Image, Video, MediaItem } from "@/types";
 
 type Props = {
-  images: string[];
+  gallery: MediaItem[];
 };
 
-const ProductCardGallery = ({ images }: Props) => {
+const ProductCardGallery = ({ gallery }: Props) => {
   const [currImageIndex, setCurrImageIndex] = useState(0);
 
-  const actualLength = images.length;
+  const actualLength = gallery.length;
   const displayLength = Math.min(MAX_IMAGES_PER_GALLERY, actualLength);
   const showTotalImages = actualLength > displayLength;
+  const currentMedia = gallery[currImageIndex];
 
   return (
     <div
       className={clsx("w-full overflow-hidden relative")}
       onMouseLeave={() => setCurrImageIndex(0)}
     >
-      <img src={images[currImageIndex]} className="object-cover w-full" />
-      {images.length > 1 && (
+      <img
+        className="w-full h-[150px] object-cover"
+        src={
+          currentMedia.type === "image"
+            ? (currentMedia as Image).thumbUrl
+            : (currentMedia as Video).videoUrl
+        }
+        alt={currentMedia.title}
+      />
+      {gallery.length > 1 && (
         <div className="absolute top-0 w-full h-full p-2 flex gap-0.5 opacity-0 hover:opacity-100 transition-opacity">
           {Array(displayLength)
             .fill(0)

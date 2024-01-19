@@ -3,6 +3,8 @@ import { IoHeartOutline } from "@react-icons/all-files/io5/IoHeartOutline";
 import { IoHeartSharp } from "@react-icons/all-files/io5/IoHeartSharp";
 import clsx from "clsx";
 import { Props } from "./types";
+import { Image } from "@/types";
+import Price from "../price";
 
 const ProductCard = (props: Props) => {
   const {
@@ -10,12 +12,14 @@ const ProductCard = (props: Props) => {
     price,
     address,
     date,
-    images,
+    gallery,
     isFavorite = false,
     disableRoundImage = false,
     className,
     ...rest
   } = props;
+
+  const images = gallery.filter((item) => item.type === "image") as Image[];
 
   return (
     <div
@@ -32,7 +36,7 @@ const ProductCard = (props: Props) => {
           !disableRoundImage && "rounded-lg"
         )}
       >
-        <ProductCardGallery images={images} />
+        {images.length > 0 && <ProductCardGallery gallery={images} />}
       </div>
       <div className="flex flex-col mt-2 gap-0.5">
         <div className="break-words flex flex-row items-start justify-between">
@@ -47,9 +51,10 @@ const ProductCard = (props: Props) => {
           </button>
         </div>
         <div>
-          <b>{price}</b>
+          {/* <b>{price}</b> */}
+          <Price {...price} />
         </div>
-        <div className="text-neutral-500 font-regular">{address}</div>
+        <div className="text-neutral-500 font-regular">{address.country}</div>
         <div className="text-neutral-500 font-regular">{date}</div>
       </div>
     </div>

@@ -40,33 +40,14 @@ const StroyCard = (props: Props) => {
       return;
     }
 
-    const pauseTimer = () => {
-      storyTimer.pause();
-    };
-
-    const resumeTimer = () => {
-      storyTimer.resume();
-    };
-
-    card.addEventListener("mousedown", pauseTimer);
-    card.addEventListener("mouseup", resumeTimer);
-    window.addEventListener("focus", resumeTimer);
-
     storyTimer.start();
-
-    return () => {
-      storyTimer.stop();
-      card.removeEventListener("mousedown", pauseTimer);
-      card.removeEventListener("mouseup", resumeTimer);
-      window.removeEventListener("focus", resumeTimer);
-    };
   }, [isVisible, id, currentSlide]);
 
   useEffect(() => {
     if (!isVisible) {
       setCurrentSlide(0);
     }
-  }, [currentStory, slides.length, isVisible]);
+  }, [currentStory, slides.length, isVisible, setCurrentSlide]);
 
   return (
     <div
@@ -90,8 +71,9 @@ const StroyCard = (props: Props) => {
         )}
         <div className="inset-0">
           <img
-            src={slides[currentSlide]?.image}
             className="max-w-full mx-auto"
+            src={slides[currentSlide]?.image}
+            alt={slides[currentSlide]?.title}
           />
           <h1 className="mt-10 text-4xl font-bold">
             {slides[currentSlide]?.title}

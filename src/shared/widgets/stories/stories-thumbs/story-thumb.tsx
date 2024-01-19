@@ -24,7 +24,7 @@ const StoryThumb = (props: Props) => {
         )}
       >
         <div className="w-[95%] h-[95%] m-[2.5%] overflow-hidden rounded-full bg-blue-100">
-          <img src={thumbImage} />
+          <img src={thumbImage} alt={title} />
         </div>
       </div>
       <div className="mt-2 text-sm group-hover:text-red-500 cursor-pointer">

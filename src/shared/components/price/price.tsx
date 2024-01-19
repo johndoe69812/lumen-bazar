@@ -1,18 +1,16 @@
 import { HTMLAttributes } from "react";
 import { getFormattedPriceValue } from "./utils";
+import { Price } from "@/types";
 
-type Props = HTMLAttributes<HTMLSpanElement> & {
-  value: number;
-  currency: string;
-  unit?: string;
-};
+type Props = HTMLAttributes<HTMLSpanElement> & Price;
 
 const Price = (props: Props) => {
   const { value, currency, unit, ...rest } = props;
 
   return (
     <span {...rest}>
-      {getFormattedPriceValue(value)} {currency} {unit}
+      {getFormattedPriceValue(value)}
+      <span title={currency.title}>{currency.sign}</span> {unit}
     </span>
   );
 };
