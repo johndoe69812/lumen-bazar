@@ -1,5 +1,6 @@
+import { IoHeartOutline } from "@react-icons/all-files/io5/IoHeartOutline";
+import { IoHeartSharp } from "@react-icons/all-files/io5/IoHeartSharp";
 import AdGallery from "@/app/modules/ads/ad-gallery/ad-gallery";
-import AdPagination from "@/app/modules/ads/ad-breadcrumbs";
 import Button from "@/shared/components/button";
 import Price from "@/shared/components/price";
 import { Metadata } from "next";
@@ -20,6 +21,21 @@ const AdPage = () => {
         <div className="grid grid-cols-10 gap-10 mt-4">
           <div className="col-span-6">
             <h1 className="text-3xl font-bold">{ad.title}</h1>
+            <div className="flex mt-5">
+              <Button className="flex items-center gap-2 px-4 leading-8 rounded transition bg-gray-200 hover:bg-gray-300">
+                {ad.isFavorite ? (
+                  <>
+                    <IoHeartOutline />
+                    Add to favorite
+                  </>
+                ) : (
+                  <>
+                    <IoHeartSharp />
+                    In favorite
+                  </>
+                )}
+              </Button>
+            </div>
             <AdGallery gallery={ad.gallery} />
             {ad.fields.map((field) => {
               if (field.type === "description") {
