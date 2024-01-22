@@ -1,6 +1,5 @@
 "use client";
 
-import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Container from "../container";
 import clsx from "clsx";
@@ -13,6 +12,7 @@ import Button from "@/shared/components/button";
 import { CategoriesPopupLoading } from "./categories-popup";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import LocationModal from "./location-modal";
 
 const DynamicCategoriesPopup = dynamic(() => import("./categories-popup"), {
   loading: () => <CategoriesPopupLoading />,
@@ -22,6 +22,7 @@ const Header = () => {
   const headerRef = useRef(null);
   const [isOnTop, setIsOnTop] = useState(true);
   const [isCategoriesOpened, setIsCategoriesOpened] = useState(false);
+  const [isLocationOpened, setIsLocationOpened] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -41,8 +42,16 @@ const Header = () => {
     };
   }, [isOnTop]);
 
-  const handleOpenCategories = useCallback(() => {
+  const handleToggleCategories = useCallback(() => {
     setIsCategoriesOpened((prev) => !prev);
+  }, []);
+
+  const handleToggleLocation = useCallback(() => {
+    setIsLocationOpened((prev) => !prev);
+  }, []);
+
+  const handleChangeLocation = useCallback(() => {
+    setIsLocationOpened(false);
   }, []);
 
   return (
@@ -72,7 +81,8 @@ const Header = () => {
                 "flex items-center gap-1 bg-blue-400 text-white px-3 leading-8 rounded-lg hover:bg-blue-500 focus-visible:ring-2",
                 isCategoriesOpened && "ring-2"
               )}
-              onClick={handleOpenCategories}
+              title="Open Categories"
+              onClick={handleToggleCategories}
             >
               {isCategoriesOpened ? <IoClose /> : <BiCategory />}
               All categories
@@ -90,17 +100,22 @@ const Header = () => {
           <Button
             className="flex items-center gap-1 mr-10 hover:text-red-500 focus-visible:text-red-500"
             title="Specify Location"
+            onClick={handleToggleLocation}
           >
             <IoLocationOutline />
             Anywhere
           </Button>
         </Container>
       </header>
-      {isCategoriesOpened &&
-        createPortal(
-          <DynamicCategoriesPopup onClose={handleOpenCategories} />,
-          document.getElementById("modal-root")!
-        )}
+      {isCategoriesOpened && (
+        <DynamicCategoriesPopup onClose={handleToggleCategories} />
+      )}
+      {isLocationOpened && (
+        <LocationModal
+          onClose={handleToggleLocation}
+          onSave={handleChangeLocation}
+        />
+      )}
     </>
   );
 };

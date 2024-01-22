@@ -1,7 +1,7 @@
 import { IoChevronForward } from "@react-icons/all-files/io5/IoChevronForward";
 import Image from "next/image";
 import Link from "@/shared/components/link";
-import Modal from "@/shared/components/modal";
+import { ModalOverlay } from "@/shared/components/modal";
 import { HTMLAttributes, useState } from "react";
 import { ALL_CATEGORIES } from "@/mock-data/categories";
 import clsx from "clsx";
@@ -17,7 +17,7 @@ const CategoriesPopup = ({ onClose }: Props) => {
     useState(DEFAULT_CATEGORY_ID);
 
   return (
-    <Modal className="top-24" onClose={onClose}>
+    <ModalOverlay className="top-24" onClose={onClose}>
       <div className="h-[65vh] 2xl:w-[1440px] z-10 rounded-b-3xl grid grid-cols-12 py-6 pl-16 overflow-hidden bg-white">
         <div className="relative col-span-3 h-full overflow-y-auto">
           <ul>
@@ -80,7 +80,7 @@ const CategoriesPopup = ({ onClose }: Props) => {
           </div>
         </div>
       </div>
-    </Modal>
+    </ModalOverlay>
   );
 };
 

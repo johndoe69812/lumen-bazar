@@ -22,19 +22,21 @@ const Gallery = (props: Props) => {
     [gallery]
   ) as Image[];
 
-  const isFirst = currentImage === 0;
-  const isLast = currentImage === images.length - 1;
-
   useEffect(() => {
     setIsLoaded(false);
   }, [currentImage]);
+
+  const isFirst = currentImage === 0;
+  const isLast = currentImage === images.length - 1;
+  const navButtonClasses =
+    "absolute z-10 top-0 w-9 h-full flex justify-center items-center text-2xl opacity-0 group-hover:opacity-100 transition text-white hover:bg-neutral-500/50 focus-visible:bg-neutral-500/50";
 
   return (
     <div className="group w-full mt-5">
       <div className="relative flex justify-center items-center h-96 select-none border bg-black">
         {!isFirst && (
           <Button
-            className="absolute z-10 top-0 left-0 w-9 h-full flex justify-center items-center text-2xl opacity-0 group-hover:opacity-100 transition text-white hover:bg-neutral-500/75"
+            className={clsx(navButtonClasses, "left-0")}
             onClick={() => setCurrentImage((p) => p - 1)}
           >
             <IoChevronBack />
@@ -65,7 +67,7 @@ const Gallery = (props: Props) => {
 
         {!isLast && (
           <Button
-            className="absolute z-10 top-0 right-0 w-9 h-full flex justify-center items-center text-2xl opacity-0 group-hover:opacity-100 transition text-white hover:bg-neutral-500/75"
+            className={clsx(navButtonClasses, "right-0")}
             onClick={() => setCurrentImage((p) => p + 1)}
           >
             <IoChevronForward />
