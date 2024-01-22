@@ -1,8 +1,8 @@
-import { Circle, Square } from "../../skeleton";
+import { Circle, Square } from "@/shared/components/skeleton";
 
 const CategoriesPopupLoading = () => {
   return (
-    <div className="fixed z-10 inset-0 flex justify-center items-start top-24">
+    <div className="fixed z-10 inset-0 flex justify-center items-start top-[8rem]">
       <div className="absolute bg-gray-800 w-full h-full opacity-50" />
       <div className="h-[65vh] 2xl:w-[1440px] z-10 rounded-b-3xl grid grid-cols-12 py-6 pl-16 overflow-hidden bg-white">
         <div className="relative col-span-3 flex flex-col gap-2 h-full">

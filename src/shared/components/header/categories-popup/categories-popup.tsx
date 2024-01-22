@@ -17,7 +17,7 @@ const CategoriesPopup = ({ onClose }: Props) => {
     useState(DEFAULT_CATEGORY_ID);
 
   return (
-    <ModalOverlay className="top-24" onClose={onClose}>
+    <ModalOverlay className="top-[8rem]" onClose={onClose}>
       <div className="h-[65vh] 2xl:w-[1440px] z-10 rounded-b-3xl grid grid-cols-12 py-6 pl-16 overflow-hidden bg-white">
         <div className="relative col-span-3 h-full overflow-y-auto">
           <ul>

@@ -10,7 +10,7 @@ type Props = HTMLAttributes<HTMLAnchorElement> & {
 const Link = (props: Props) => {
   const { isExternal, children, className, ...rest } = props;
 
-  const classNames = clsx("hover:text-red-500", className);
+  const classNames = clsx("hover:text-red-500 focus-visible:ring", className);
 
   if (isExternal) {
     return (

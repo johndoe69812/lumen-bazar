@@ -13,6 +13,7 @@ import { CategoriesPopupLoading } from "./categories-popup";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import LocationModal from "./location-modal";
+import TopHeader from "./top-header";
 
 const DynamicCategoriesPopup = dynamic(() => import("./categories-popup"), {
   loading: () => <CategoriesPopupLoading />,
@@ -56,6 +57,7 @@ const Header = () => {
 
   return (
     <>
+      <TopHeader />
       <header
         ref={headerRef}
         className={clsx(
