@@ -39,10 +39,12 @@ const LocationModal = (props: Props) => {
             <div>
               <Input
                 ref={inputRef}
+                name="location-search"
                 className="w-full leading-8 pl-2 text-base rounded border border-neutral-400 hover:border-neutral-500 focus:ring"
                 placeholder="City/Street or Postal"
                 defaultValue={selectedCity}
                 isLoading={isLoading}
+                relyOnContext={false}
                 isClearable
                 onInput={handleSearchString}
               />

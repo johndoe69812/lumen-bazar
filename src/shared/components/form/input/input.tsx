@@ -13,6 +13,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   inputClassName?: string;
   error?: string;
   touched?: boolean;
+  relyOnContext?: boolean;
 };
 
 type Ref = ForwardedRef<HTMLInputElement>;
@@ -26,6 +27,7 @@ const Input = forwardRef((props: Props, ref: Ref) => {
     type,
     error,
     touched = false,
+    relyOnContext = true,
     ...rest
   } = props;
 
@@ -35,6 +37,7 @@ const Input = forwardRef((props: Props, ref: Ref) => {
   const rightIconClassName =
     "absolute right-2 top-0 h-full flex justify-center items-center text-xl";
   const isError = touched && error;
+  const InputTag = relyOnContext ? Field : "input";
 
   return (
     <div className="w-full">
@@ -45,7 +48,7 @@ const Input = forwardRef((props: Props, ref: Ref) => {
           isError && "border !border-red-500"
         )}
       >
-        <Field
+        <InputTag
           ref={ref}
           className={clsx("w-full bg-transparent", inputClassName)}
           type={isPassword ? (isHidden ? "password" : "text") : type}
