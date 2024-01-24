@@ -22,11 +22,14 @@ const ModalOverlay = (props: Props) => {
 
   return createPortal(
     <div
-      className={clsx("fixed inset-0 z-10 flex justify-center", className)}
+      className={clsx(
+        "fixed inset-0 z-10 flex items-center justify-center backdrop-blur-sm",
+        className
+      )}
       {...rest}
     >
       <div
-        className="absolute z-0 inset-0 opacity-50 bg-gray-800"
+        className="absolute z-0 inset-0 opacity-75 bg-slate-950"
         onClick={() => onClose()}
       />
       {children}

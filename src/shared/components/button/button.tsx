@@ -11,7 +11,7 @@ const Button = (props: Props) => {
   return (
     <button
       className={clsx(
-        "select-none focus-visible:ring",
+        "transition select-none focus-visible:ring active:scale-95",
         className,
         isLoading && "pointer-events-none opacity-80"
       )}

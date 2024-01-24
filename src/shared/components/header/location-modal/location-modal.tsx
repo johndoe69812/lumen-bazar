@@ -29,8 +29,8 @@ const LocationModal = (props: Props) => {
   );
 
   return (
-    <ModalOverlay className="items-center" onClose={onClose}>
-      <ModalWindow className="h-[80vh]" size="lg">
+    <ModalOverlay onClose={onClose}>
+      <ModalWindow className="h-[80vh]" size="lg" onClose={onClose}>
         <div className="p-6 h-full flex flex-col">
           <h2 className="mb-2 text-2xl font-semibold">
             Specify search location

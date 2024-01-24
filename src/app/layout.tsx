@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MODAL_ROOT } from "@/constants";
+
 import "./globals.css";
 
 export const metadata: Metadata = {

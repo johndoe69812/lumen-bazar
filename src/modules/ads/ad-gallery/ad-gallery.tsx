@@ -48,8 +48,8 @@ const Gallery = (props: Props) => {
             <div className="absolute inset-0 overflow-hidden">
               <NextImage
                 key={currentImage}
-                src={images[currentImage].imageUrl}
-                alt={images[currentImage].title ?? ""}
+                src={images[currentImage]?.imageUrl}
+                alt={images[currentImage]?.title ?? ""}
                 className="scale-110 blur-lg brightness-150"
                 fill
               />
@@ -59,8 +59,8 @@ const Gallery = (props: Props) => {
             key={currentImage}
             className={clsx("object-contain", !isLoaded && "opacity-0")}
             onLoad={() => setIsLoaded(true)}
-            src={images[currentImage].imageUrl}
-            alt={images[currentImage].title ?? ""}
+            src={images[currentImage]?.imageUrl}
+            alt={images[currentImage]?.title ?? ""}
             fill
           />
         </div>

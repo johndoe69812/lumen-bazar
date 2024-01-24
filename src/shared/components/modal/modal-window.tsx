@@ -1,25 +1,41 @@
 import clsx from "clsx";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, ReactNode, useRef } from "react";
 import { SIZE_TO_CLASS_NAME } from "./constants";
+import { MdClose } from "@react-icons/all-files/md/MdClose";
+import Button from "@/shared/components/button";
 
-type Props = HTMLAttributes<HTMLDivElement> & {
+type Props = HTMLAttributes<HTMLDialogElement> & {
   size?: "sm" | "md" | "lg";
+  title?: ReactNode;
+  onClose: () => void;
 };
 
 const ModalWindow = (props: Props) => {
-  const { children, className, size = "md", ...rest } = props;
+  const { children, className, title, size = "md", onClose, ...rest } = props;
+
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   return (
-    <div
+    <dialog
+      open
       className={clsx(
-        "relative w-1/3 rounded-lg bg-white",
+        "relative animate-fadeIn rounded-xl bg-white",
         SIZE_TO_CLASS_NAME[size],
         className
       )}
+      ref={modalRef}
       {...rest}
     >
+      {title && <h2>{title}</h2>}
       {children}
-    </div>
+      <Button
+        className="absolute -right-2 top-0 p-2 text-4xl rounded-full translate-x-full transition text-white hover:bg-gray-500"
+        title="Close modal"
+        onClick={onClose}
+      >
+        <MdClose />
+      </Button>
+    </dialog>
   );
 };
 

@@ -67,7 +67,7 @@ const Header = () => {
       >
         <Container className="flex gap-4 justify-around">
           <div className="transition cursor-pointer text-2xl heading-8 font-bold flex items-center hover:sepia">
-            <Link href="/">
+            <Link className="transition active:scale-90" href="/">
               <Image
                 src="/logo.svg"
                 alt="Lumen Bazar Logo"

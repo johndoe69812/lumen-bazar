@@ -1,10 +1,10 @@
 import { IoHeartOutline } from "@react-icons/all-files/io5/IoHeartOutline";
 import { IoHeartSharp } from "@react-icons/all-files/io5/IoHeartSharp";
-import AdGallery from "@/app/modules/ads/ad-gallery/ad-gallery";
+import AdGallery from "@/modules/ads/ad-gallery/ad-gallery";
+import AdBreadcrumbs from "@/modules/ads/ad-breadcrumbs";
 import Button from "@/shared/components/button";
 import Price from "@/shared/components/price";
 import { Metadata } from "next";
-import AdBreadcrumbs from "@/app/modules/ads/ad-breadcrumbs";
 import { generateFullAd } from "@/mock-data/ads/generate-ads";
 
 export const metadata: Metadata = {

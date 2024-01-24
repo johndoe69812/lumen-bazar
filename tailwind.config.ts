@@ -4,6 +4,7 @@ const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/shared/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/modules/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
@@ -22,6 +23,15 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      keyframes: {
+        "fade-in": {
+          from: { transform: "scale(0.3)", opacity: "0" },
+          to: { transform: "scale(1)", opacity: "1" },
+        },
+      },
+      animation: {
+        fadeIn: "fade-in 300ms ease-in-out forwards",
       },
     },
   },

@@ -11,7 +11,10 @@ const TopHeader = () => {
           <div></div>
           <div className="flex justify-self-end items-center gap-6">
             <ProfileLinks />
-            <Link className="transition hover:text-red-500" href="/auth">
+            <Link
+              className="transition hover:text-red-500"
+              href="?auth=sign-in"
+            >
               Sign On
             </Link>
             <Button className="px-4 leading-8 rounded transition bg-blue-500 hover:bg-blue-600">
