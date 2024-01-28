@@ -1,0 +1,41 @@
+.scene {
+  perspective: 550vh;
+  height: 80vh;
+  max-width: 80vw;
+  aspect-ratio: 9/16;
+  margin: auto;
+}
+
+.cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+  transition: transform 1000ms;
+}
+
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.front {
+  transform: rotateY(0deg) translateZ(22.5vh);
+}
+.right {
+  transform: rotateY(90deg) translateZ(22.5vh);
+}
+.left {
+  transform: rotateY(-90deg) translateZ(22.5vh);
+}
+
+@keyframes rotateCube {
+  from {
+    transform: rotateX(0) rotateY(0);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
