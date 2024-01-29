@@ -1,5 +1,9 @@
 version: '3.5'
 
+networks:
+  app-network:
+    driver: bridge
+
 services:
   postgres:
     image: postgres
@@ -12,6 +16,8 @@ services:
       - ./api/pgdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    networks:
+      - app-network
 
   api:
     build:
@@ -25,7 +31,9 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./api/src:/app/src
+      - ./api:/app
+    networks:
+      - app-network
   
   web:
     build:
@@ -41,6 +49,8 @@ services:
       - api
     volumes:
       - ./web:/app
+    networks:
+      - app-network
 
   pgadmin:
     image: dpage/pgadmin4
@@ -53,3 +63,5 @@ services:
       - '5050:80'
     depends_on:
       - postgres
+    networks:
+      - app-network

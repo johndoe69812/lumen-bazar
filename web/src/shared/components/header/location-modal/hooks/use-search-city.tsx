@@ -7,15 +7,15 @@ const useCitiesList = (searchString: string) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const sendRequest = async (searchString: string) => {
-    const url = `/api/search-cities?q=${searchString}`;
+    const url = `/api/locations/find-city/${searchString}`;
 
     setIsLoading(true);
 
     try {
       const resp = await fetch(url);
-      const json: { cities: City[] } = await resp.json();
+      const json: City[] = await resp.json();
 
-      if (json.cities) return setCities(json.cities);
+      if (json && json.length > 0) return setCities(json);
     } finally {
       setIsLoading(false);
     }

@@ -20,6 +20,8 @@ const LocationModal = (props: Props) => {
 
   const { cities, isLoading } = useCitiesList(searchString);
 
+  console.log("cities", cities);
+
   const handleSearchString: FormEventHandler<HTMLInputElement> = useCallback(
     async (e) => {
       const query = e.currentTarget.value;
@@ -63,7 +65,9 @@ const LocationModal = (props: Props) => {
                       }}
                     >
                       {city.name}
-                      <span className="text-gray-500">, {city.country}</span>
+                      <span className="text-gray-500">
+                        , {city.country.name}
+                      </span>
                     </div>
                   ))}
                 </div>

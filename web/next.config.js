@@ -8,6 +8,14 @@ const nextConfig = {
       aggregateTimeout: 300,
     },
   }),
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `http://nest-api:3000/api/:path*`, // Proxy to Backend
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

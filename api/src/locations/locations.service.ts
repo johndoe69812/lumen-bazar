@@ -19,10 +19,15 @@ export class LocationsService {
     });
   }
 
-  async findCity(searchString: string): Promise<City[] | null> {
-    const cities = await this.citiesRepository.findBy({
-      name: ILike(`%${searchString}%`),
+  async findCities(searchString: string): Promise<City[] | null> {
+    const cities = await this.citiesRepository.find({
+      relations: ['country'],
+      where: {
+        name: ILike(`%${searchString}%`),
+      },
+      take: 10,
     });
+
     return cities;
   }
 

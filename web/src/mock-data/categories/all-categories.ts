@@ -5,7 +5,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
     title: "Vehicles",
     id: "vehicles",
     link: "/vehicles",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_vehicle.png`,
+    image: "/cat_vehicle.png",
     subCategories: [
       {
         title: "Cars  ›",
@@ -260,7 +260,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
     title: "Real Estate",
     id: "estate",
     link: "/estate",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_estate.png`,
+    image: "/cat_estate.png",
     subCategories: [
       {
         title: "Buy a home >",
@@ -382,7 +382,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
   jobs: {
     id: "jobs",
     title: "Jobs",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_jobs.png`,
+    image: "/cat_jobs.png",
     link: "/jobs",
     subCategories: [
       {
@@ -642,7 +642,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
   services: {
     title: "Services",
     id: "services",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_services.png`,
+    image: "/cat_services.png",
     link: "/services",
     subCategories: [
       {
@@ -1226,7 +1226,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
   personal: {
     title: "Personal Items",
     id: "personal",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_clothes.png`,
+    image: "/cat_clothes.png",
     link: "/personal",
     subCategories: [
       {
@@ -1357,7 +1357,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
     title: "For home and garden",
     id: "home-garden",
     link: "/home-garden",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_homecare.png`,
+    image: "/cat_homecare.png",
     subCategories: [
       {
         title: "Repair and construction  ›",
@@ -1486,7 +1486,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
     title: "Spare parts and accessories",
     id: "autoparts",
     link: "/autoparts",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_autoparts.png`,
+    image: "/cat_autoparts.png",
     subCategories: [
       {
         title: "Spare parts  ›",
@@ -1609,7 +1609,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
     id: "electronics",
     title: "Electronics",
     link: "/electronics",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_electronics.png`,
+    image: "/cat_electronics.png",
     subCategories: [
       {
         title: "Phones  ›",
@@ -1853,7 +1853,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
   "hobby-and-outdoor": {
     id: "hobby-and-outdoor",
     title: "Hobby & outdoor",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_hobby.png`,
+    image: "/cat_hobby.png",
     link: "/hobby",
     subCategories: [
       {
@@ -2095,7 +2095,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
     id: "animals",
     title: "Animals",
     link: "/animals",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_pets.png`,
+    image: "/cat_pets.png",
     subCategories: [
       {
         title: "Dogs  ›",
@@ -2145,7 +2145,7 @@ const ALL_CATEGORIES: Record<string, RootCategory> = {
   "business-and-equipment": {
     id: "business-and-equipment",
     title: "Business and equipment",
-    image: `${process.env.NEXT_PUBLIC_HOSTNAME}/cat_business.png`,
+    image: "/cat_business.png",
     link: "/business-and-equipment",
     subCategories: [
       {
