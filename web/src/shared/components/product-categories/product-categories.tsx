@@ -1,20 +1,17 @@
-import { ROOT_CATEGORIES } from "@/mock-data/categories";
-import { CategoryCard } from "./types";
-import clsx from "clsx";
+"use client";
 
-type Props = {
-  categories?: CategoryCard[];
-};
+import useAllCategories from "@/shared/hooks/use-all-categories";
+import clsx from "clsx";
 
 const wideTiles = [0, 3, 6, 9, 12, 13];
 
-const ProductCategories = (props: Props) => {
-  const { categories = ROOT_CATEGORIES } = props;
+const ProductCategories = () => {
+  const { allCategories } = useAllCategories();
 
   return (
     <div className="product-categories">
       <div className="grid grid-cols-[repeat(17,_minmax(0,_1fr))] gap-2">
-        {categories.map((category, index) => (
+        {allCategories.map((category, index) => (
           <div
             key={category.id}
             className={clsx(
@@ -22,7 +19,7 @@ const ProductCategories = (props: Props) => {
               wideTiles.includes(index) ? "col-span-3" : "col-span-2"
             )}
             style={{
-              backgroundImage: `url(${category.image})`,
+              backgroundImage: `url(${category.imageUrl})`,
             }}
           >
             <div className="text-sm w-4/6">{category.title}</div>

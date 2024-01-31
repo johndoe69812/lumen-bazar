@@ -1,8 +1,8 @@
 export type Category = {
   id: string;
   title: string;
-  link: string;
-  image?: string;
+  alias: string;
+  imageUrl?: string;
   subCategories?: Category[];
 };
 

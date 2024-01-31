@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, Param } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { LocationsService } from './locations.service';
 import { Country } from './entities/country.entity';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -19,15 +19,13 @@ export class LocationsController {
   @Get('find-city/:queryString')
   @ApiResponse({
     status: 200,
-    description: 'The list of all satisfied locations',
+    description: 'The list of all locations',
     type: CityListResponse,
   })
   async findCity(
     @Param('queryString') cityName: string,
   ): Promise<CityListResponse[]> {
     const result = await this.locationsService.findCities(cityName);
-
-    Logger.verbose('Request started: /find-city');
 
     return result.map((city) => {
       const { country, country_code, ...rest } = city;

@@ -1,13 +1,46 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
+import { AdCategoryModel } from '../interfaces/ad-category.model';
 
 @Entity({ name: 'ad_categories' })
-export class City {
+export class AdCategory implements AdCategoryModel {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  title: string;
 
   @Column()
-  country_code: string;
+  alias: string;
+
+  @Column({ name: 'parent_id' })
+  parentId: number;
+
+  @Column({
+    name: 'image_url',
+  })
+  imageUrl: number;
+
+  @Column({ name: 'date_created' })
+  dateCreated: Date;
+
+  @Column({ name: 'date_updated' })
+  dateUpdated: Date;
+
+  @ManyToOne(() => AdCategory, (category) => category.subCategories)
+  @JoinColumn({
+    name: 'parent_id',
+    referencedColumnName: 'id',
+    foreignKeyConstraintName: 'custom',
+  })
+  parent: AdCategory;
+
+  @OneToMany(() => AdCategory, (category) => category.parent)
+  subCategories: AdCategory[];
 }

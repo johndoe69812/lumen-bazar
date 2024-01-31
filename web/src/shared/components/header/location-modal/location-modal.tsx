@@ -20,8 +20,6 @@ const LocationModal = (props: Props) => {
 
   const { cities, isLoading } = useCitiesList(searchString);
 
-  console.log("cities", cities);
-
   const handleSearchString: FormEventHandler<HTMLInputElement> = useCallback(
     async (e) => {
       const query = e.currentTarget.value;
