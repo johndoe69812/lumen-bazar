@@ -2,6 +2,9 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +12,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "generate-api": "node ./api-generation/run.js"
+    "generate-api": "ts-node src/api/generate-api.ts"
   },
   "dependencies": {
     "@mui/icons-material": "^5.15.3",
@@ -43,6 +46,7 @@
     "storybook": "^7.6.7",
     "swagger-typescript-api": "^13.0.3",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

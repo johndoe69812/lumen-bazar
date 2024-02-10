@@ -1,3 +1,82 @@
+export interface Country {
+  code: string;
+  name: string;
+}
+
+export interface ListOfCountriesResponse {
+  /** @example 11 */
+  id: number;
+  /** @example "New York" */
+  name: string;
+  country: Country;
+}
+
+export namespace Api {
+  /**
+   * No description
+   * @tags locations
+   * @name LocationsServiceFindOne
+   * @request GET:/api/locations/{id}
+   * @response `200` `void`
+   */
+  export namespace LocationsServiceFindOne {
+    export type RequestParams = {
+      id: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags locations
+   * @name LocationsServiceFindCity
+   * @request GET:/api/locations/find-city/{queryString}
+   * @response `200` `(ListOfCountriesResponse)[]` The list of all locations
+   * @response `400` `void` Bad Request
+   */
+  export namespace LocationsServiceFindCity {
+    export type RequestParams = {
+      queryString: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ListOfCountriesResponse[];
+  }
+  /**
+   * No description
+   * @tags Ads
+   * @name AdsServiceFindOne
+   * @request GET:/api/ads/category/{alias}
+   * @response `200` `void` Found ads category
+   */
+  export namespace AdsServiceFindOne {
+    export type RequestParams = {
+      alias: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags Ads
+   * @name AdsServiceGetAll
+   * @request GET:/api/ads/categories/all
+   * @response `200` `void`
+   */
+  export namespace AdsServiceGetAll {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -205,5 +284,84 @@ export class HttpClient<SecurityDataType = unknown> {
       if (!response.ok) throw data;
       return data.data;
     });
+  };
+}
+
+/**
+ * @title Lumen Bazar API
+ * @version 1.0
+ * @contact
+ *
+ * Lumen Bazar API description
+ */
+export class Api<SecurityDataType extends unknown> {
+  http: HttpClient<SecurityDataType>;
+
+  constructor(http: HttpClient<SecurityDataType>) {
+    this.http = http;
+  }
+
+  api = {
+    /**
+     * No description
+     *
+     * @tags locations
+     * @name LocationsServiceFindOne
+     * @request GET:/api/locations/{id}
+     * @response `200` `void`
+     */
+    locationsServiceFindOne: (id: string, params: RequestParams = {}) =>
+      this.http.request<void, any>({
+        path: `/api/locations/${id}`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags locations
+     * @name LocationsServiceFindCity
+     * @request GET:/api/locations/find-city/{queryString}
+     * @response `200` `(ListOfCountriesResponse)[]` The list of all locations
+     * @response `400` `void` Bad Request
+     */
+    locationsServiceFindCity: (queryString: string, params: RequestParams = {}) =>
+      this.http.request<ListOfCountriesResponse[], void>({
+        path: `/api/locations/find-city/${queryString}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Ads
+     * @name AdsServiceFindOne
+     * @request GET:/api/ads/category/{alias}
+     * @response `200` `void` Found ads category
+     */
+    adsServiceFindOne: (alias: string, params: RequestParams = {}) =>
+      this.http.request<void, any>({
+        path: `/api/ads/category/${alias}`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Ads
+     * @name AdsServiceGetAll
+     * @request GET:/api/ads/categories/all
+     * @response `200` `void`
+     */
+    adsServiceGetAll: (params: RequestParams = {}) =>
+      this.http.request<void, any>({
+        path: `/api/ads/categories/all`,
+        method: "GET",
+        ...params,
+      }),
   };
 }

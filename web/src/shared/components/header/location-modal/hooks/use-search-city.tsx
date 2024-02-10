@@ -1,6 +1,5 @@
-import apiClient from "@/api/api-client";
-import { ListOfCountriesResponse } from "@/api/data-contracts";
-import { City } from "@/types/location";
+import { Api, ListOfCountriesResponse } from "@/api";
+import APIService from "@/api/api-service";
 import { debounce } from "lodash";
 import { useEffect, useMemo, useState } from "react";
 
@@ -12,7 +11,7 @@ const useCitiesList = (searchString: string) => {
     setIsLoading(true);
 
     try {
-      const resp = await apiClient.locationsControllerFindCity(searchString);
+      const resp = await APIService.api.locationsServiceFindCity(searchString);
 
       if (resp && resp.length > 0) return setCities(resp);
     } finally {
