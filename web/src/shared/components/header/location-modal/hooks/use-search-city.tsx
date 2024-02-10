@@ -1,21 +1,20 @@
+import apiClient from "@/api/api-client";
+import { ListOfCountriesResponse } from "@/api/data-contracts";
 import { City } from "@/types/location";
 import { debounce } from "lodash";
 import { useEffect, useMemo, useState } from "react";
 
 const useCitiesList = (searchString: string) => {
-  const [cities, setCities] = useState<City[]>([]);
+  const [cities, setCities] = useState<ListOfCountriesResponse[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const sendRequest = async (searchString: string) => {
-    const url = `/api/locations/find-city/${searchString}`;
-
     setIsLoading(true);
 
     try {
-      const resp = await fetch(url);
-      const json: City[] = await resp.json();
+      const resp = await apiClient.locationsControllerFindCity(searchString);
 
-      if (json && json.length > 0) return setCities(json);
+      if (resp && resp.length > 0) return setCities(resp);
     } finally {
       setIsLoading(false);
     }

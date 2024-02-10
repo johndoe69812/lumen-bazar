@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "@/shared/components/link";
 import { ModalOverlay } from "@/shared/components/modal";
 import { HTMLAttributes, useMemo, useState } from "react";
-import { ALL_CATEGORIES } from "@/mock-data/categories";
 import clsx from "clsx";
 import useAllCategories from "@/shared/hooks/use-all-categories";
 
@@ -20,7 +19,7 @@ const CategoriesPopup = ({ onClose }: Props) => {
   const { allCategories } = useAllCategories();
 
   const selectedCategory = useMemo(() => {
-    return allCategories.find((cat) => cat.id === selectedCategoryId);
+    return allCategories.find((cat) => cat.alias === selectedCategoryId);
   }, [allCategories, selectedCategoryId]);
 
   return (
@@ -36,7 +35,7 @@ const CategoriesPopup = ({ onClose }: Props) => {
                   "relative z-10 py-2 pl-2 pr-4 flex items-center justify-between rounded cursor-pointer",
                   selectedCategoryId === cat.id && "bg-gray-200"
                 )}
-                onMouseEnter={() => setSelectedCategoryId(cat.id)}
+                onMouseEnter={() => setSelectedCategoryId(cat.alias)}
               >
                 <div className="flex gap-2">
                   {cat.imageUrl && (

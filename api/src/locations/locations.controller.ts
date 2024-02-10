@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { LocationsService } from './locations.service';
 import { Country } from './entities/country.entity';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import CityListResponse from './schemas/city-list.response';
 
 @ApiTags('locations')
@@ -17,10 +17,13 @@ export class LocationsController {
   }
 
   @Get('find-city/:queryString')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'The list of all locations',
+    isArray: true,
     type: CityListResponse,
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad Request',
   })
   async findCity(
     @Param('queryString') cityName: string,

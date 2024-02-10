@@ -1,20 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-class CityListResponse {
-  @ApiProperty({ example: 11 })
-  id: number;
-  @ApiProperty({ example: 'New York' })
+class Country {
+  @ApiProperty()
+  code: string;
+  @ApiProperty()
   name: string;
-  @ApiProperty({
-    example: {
-      code: 'US',
-      name: 'United States',
-    },
-  })
-  country: {
-    code: string;
-    name: string;
-  };
 }
 
-export default CityListResponse;
+class ListOfCountriesResponse {
+  @ApiProperty({ example: 11 })
+  id: number;
+
+  @ApiProperty({ example: 'New York' })
+  name: string;
+
+  @ApiProperty({ type: Country })
+  country: Country;
+}
+
+export default ListOfCountriesResponse;

@@ -16,7 +16,7 @@ const LocationModal = (props: Props) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchString, setSearchString] = useState("");
-  const [selectedCity, setSelectedCity] = useState<string>();
+  const [selectedCity, setSelectedCity] = useState<number>();
 
   const { cities, isLoading } = useCitiesList(searchString);
 
