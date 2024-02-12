@@ -11,6 +11,14 @@ export interface ListOfCountriesResponse {
   country: Country;
 }
 
+export interface CreateAdRequest {
+  /**
+   * @min 10
+   * @max 200
+   */
+  title: string;
+}
+
 export namespace Api {
   /**
    * No description
@@ -47,15 +55,13 @@ export namespace Api {
   }
   /**
    * No description
-   * @tags Ads
-   * @name AdsServiceFindOne
-   * @request GET:/api/ads/category/{alias}
-   * @response `200` `void` Found ads category
+   * @tags ads
+   * @name AdsServiceGetAdvertisements
+   * @request GET:/api/ads
+   * @response `200` `void`
    */
-  export namespace AdsServiceFindOne {
-    export type RequestParams = {
-      alias: string;
-    };
+  export namespace AdsServiceGetAdvertisements {
+    export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
@@ -63,15 +69,15 @@ export namespace Api {
   }
   /**
    * No description
-   * @tags Ads
-   * @name AdsServiceGetAll
-   * @request GET:/api/ads/categories/all
-   * @response `200` `void`
+   * @tags ads
+   * @name AdsServiceCreateAdvertisement
+   * @request POST:/api/ads/create
+   * @response `201` `void`
    */
-  export namespace AdsServiceGetAll {
+  export namespace AdsServiceCreateAdvertisement {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = CreateAdRequest;
     export type RequestHeaders = {};
     export type ResponseBody = void;
   }
@@ -337,14 +343,14 @@ export class Api<SecurityDataType extends unknown> {
     /**
      * No description
      *
-     * @tags Ads
-     * @name AdsServiceFindOne
-     * @request GET:/api/ads/category/{alias}
-     * @response `200` `void` Found ads category
+     * @tags ads
+     * @name AdsServiceGetAdvertisements
+     * @request GET:/api/ads
+     * @response `200` `void`
      */
-    adsServiceFindOne: (alias: string, params: RequestParams = {}) =>
+    adsServiceGetAdvertisements: (params: RequestParams = {}) =>
       this.http.request<void, any>({
-        path: `/api/ads/category/${alias}`,
+        path: `/api/ads`,
         method: "GET",
         ...params,
       }),
@@ -352,15 +358,17 @@ export class Api<SecurityDataType extends unknown> {
     /**
      * No description
      *
-     * @tags Ads
-     * @name AdsServiceGetAll
-     * @request GET:/api/ads/categories/all
-     * @response `200` `void`
+     * @tags ads
+     * @name AdsServiceCreateAdvertisement
+     * @request POST:/api/ads/create
+     * @response `201` `void`
      */
-    adsServiceGetAll: (params: RequestParams = {}) =>
+    adsServiceCreateAdvertisement: (data: CreateAdRequest, params: RequestParams = {}) =>
       this.http.request<void, any>({
-        path: `/api/ads/categories/all`,
-        method: "GET",
+        path: `/api/ads/create`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         ...params,
       }),
   };

@@ -1,29 +1,20 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AdCategory } from './entities/category.entity';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AdsService } from './ads.service';
+import { CreateAdRequest } from './schemas/createAd.request';
 
-@ApiTags('Ads')
+@ApiTags('ads')
 @Controller('ads')
 export class AdsController {
   constructor(private readonly adsService: AdsService) {}
 
-  @Get('category/:alias')
-  @ApiResponse({
-    status: 200,
-    description: 'Found ads category',
-    // type: AdCategory[],
-  })
-  async findOne(@Param('alias') alias: string): Promise<AdCategory[]> {
-    const result = await this.adsService.findCategory(alias);
-
-    return result;
+  @Get('/')
+  getAdvertisements() {
+    return this.adsService.getAdvertisements();
   }
 
-  @Get('categories/all')
-  async getAll(): Promise<AdCategory[]> {
-    const result = await this.adsService.getAllCategories();
-
-    return result;
+  @Post('/create')
+  async createAdvertisement(@Body() createAdRequest: CreateAdRequest) {
+    return await this.adsService.createAdvertisement(createAdRequest);
   }
 }

@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { upperFirst } from 'lodash';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { INestApplication, Logger } from '@nestjs/common';
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 
 const PORT = process.env.PORT;
 
@@ -28,6 +28,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: false });
 
   app.setGlobalPrefix('api');
+  app.useGlobalPipes(new ValidationPipe());
   setupSwagger(app);
 
   await app.listen(PORT);

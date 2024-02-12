@@ -46,11 +46,6 @@ const params: GenerateApiParams = {
 const opApiOutput = ({ files, configuration }: GenerateApiOutput) => {
   const { output } = configuration.config;
 
-  console.log(
-    "output",
-    files.map((f) => f.fileName)
-  );
-
   files.forEach(({ fileContent, fileName }) => {
     fs.writeFileSync(`${output}/${fileName}.ts`, fileContent);
   });
