@@ -20,13 +20,14 @@ export class LocationsService {
   }
 
   async findCities(searchString: string): Promise<City[] | null> {
-    const cities = await this.citiesRepository.find({
+    const options = {
       relations: ['country'],
       where: {
         name: ILike(`%${searchString}%`),
       },
       take: 10,
-    });
+    };
+    const cities = await this.citiesRepository.find(options);
 
     return cities;
   }

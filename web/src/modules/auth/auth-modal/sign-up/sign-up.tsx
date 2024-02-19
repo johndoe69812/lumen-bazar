@@ -2,7 +2,8 @@ import Button from "@/shared/components/button";
 import Input from "@/shared/components/form/input";
 import Link from "next/link";
 import SignUpSchema from "./schema";
-import { Form, Formik, FormikProps } from "formik";
+import { Form, Formik } from "formik";
+import OAuthLinks from "../oauth-links";
 
 const initialValues = {
   username: "",
@@ -78,6 +79,8 @@ const SignUp = () => {
         )}
       </Formik>
       <div className="flex pt-4 pb-8 px-6 flex-col items-start gap-2 bg-gray-200">
+        <h3 className="text-lg text-neutral-700">Or proceed with</h3>
+        <OAuthLinks />
         <h3 className="mt-2">Have an account?</h3>
         <Link
           className="leading-10 px-6 text-lg shadow-lg bg-white rounded-md"

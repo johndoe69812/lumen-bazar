@@ -25,9 +25,7 @@ export class LocationsController {
   @ApiBadRequestResponse({
     description: 'Bad Request',
   })
-  async findCity(
-    @Param('queryString') cityName: string,
-  ): Promise<CityListResponse[]> {
+  async findCity(@Param('queryString') cityName: string) {
     const result = await this.locationsService.findCities(cityName);
 
     return result.map((city) => {

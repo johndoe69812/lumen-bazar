@@ -5,10 +5,12 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  Tree,
 } from 'typeorm';
 import { AdCategoryModel } from '../interfaces/ad-category.model';
 
 @Entity({ name: 'ad_categories' })
+@Tree('adjacency-list')
 export class AdCategory implements AdCategoryModel {
   @PrimaryGeneratedColumn()
   id: number;
@@ -37,7 +39,6 @@ export class AdCategory implements AdCategoryModel {
   @JoinColumn({
     name: 'parent_id',
     referencedColumnName: 'id',
-    foreignKeyConstraintName: 'custom',
   })
   parent: AdCategory;
 

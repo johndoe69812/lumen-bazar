@@ -16,14 +16,17 @@ const CategoriesPopup = ({ onClose }: Props) => {
   const [selectedCategoryId, setSelectedCategoryId] =
     useState(DEFAULT_CATEGORY_ID);
 
-  const { allCategories } = useAllCategories();
+  const { allCategories } = useAllCategories(false);
 
   const selectedCategory = useMemo(() => {
     return allCategories.find((cat) => cat.alias === selectedCategoryId);
   }, [allCategories, selectedCategoryId]);
 
   return (
-    <ModalOverlay className="top-[8rem] !items-start" onClose={onClose}>
+    <ModalOverlay
+      className="top-24 [.top-nav_&]:top-32 !items-start"
+      onClose={onClose}
+    >
       <div className="h-[65vh] 2xl:w-[1440px] z-10 rounded-b-3xl grid grid-cols-12 py-6 pl-16 overflow-hidden bg-white">
         <div className="relative col-span-3 h-full overflow-y-auto">
           <ul>
@@ -33,7 +36,7 @@ const CategoriesPopup = ({ onClose }: Props) => {
                 data-category={cat.id}
                 className={clsx(
                   "relative z-10 py-2 pl-2 pr-4 flex items-center justify-between rounded cursor-pointer",
-                  selectedCategoryId === cat.id && "bg-gray-200"
+                  selectedCategoryId === cat.alias && "bg-gray-200"
                 )}
                 onMouseEnter={() => setSelectedCategoryId(cat.alias)}
               >

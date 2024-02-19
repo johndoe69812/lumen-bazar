@@ -43,6 +43,10 @@ const Header = () => {
     };
   }, [isOnTop]);
 
+  useEffect(() => {
+    document.body.classList[isOnTop ? "add" : "remove"]("top-nav");
+  }, [isOnTop]);
+
   const handleToggleCategories = useCallback(() => {
     setIsCategoriesOpened((prev) => !prev);
   }, []);

@@ -1,24 +1,42 @@
 "use client";
-import { Category } from "@/mock-data/categories/type";
+
+import { AdCategorySchema } from "@/api";
+import APIService from "@/api/api-service";
 import { useEffect, useState } from "react";
 
-const url = `/api/ads/categories/all`;
+const ApiEndpoints = {
+  general: {
+    endpoint: APIService.api.adsServiceGetGeneralCategories,
+    cancelToken: "generalCategories",
+  },
+  all: {
+    endpoint: APIService.api.adsServiceGetAllCategories,
+    cancelToken: "allCategories",
+  },
+  flat: {
+    endpoint: APIService.api.adsServiceGetFlatCategories,
+    cancelToken: "flatCategories",
+  },
+};
 
-const useAllCategories = () => {
-  const [allCategories, setAllCategories] = useState<Category[]>([]);
+const useAllCategories = (
+  onlyGeneral: boolean = true,
+  flat: boolean = false
+) => {
+  const [allCategories, setAllCategories] = useState<AdCategorySchema[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const endpointKey = flat ? "flat" : onlyGeneral ? "general" : "all";
+
   useEffect(() => {
-    const abortController = new AbortController();
+    const { cancelToken, endpoint } = ApiEndpoints[endpointKey];
 
     const sendRequest = async () => {
       setIsLoading(true);
 
       try {
-        const resp = await fetch(url, { signal: abortController.signal });
-        const json = await resp.json();
-
-        if (json && json.length > 0) return setAllCategories(json);
+        const categories = await endpoint({ cancelToken });
+        if (categories) return setAllCategories(categories);
       } finally {
         setIsLoading(false);
       }
@@ -27,9 +45,9 @@ const useAllCategories = () => {
     sendRequest();
 
     return () => {
-      abortController.abort();
+      APIService.http.abortRequest(cancelToken);
     };
-  }, []);
+  }, [endpointKey]);
 
   return {
     allCategories,

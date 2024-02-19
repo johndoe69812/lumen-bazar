@@ -11,6 +11,19 @@ export interface ListOfCountriesResponse {
   country: Country;
 }
 
+export interface AdCategorySchema {
+  id: string;
+  title: string;
+  alias: string;
+  parentId: number;
+  imageUrl: string;
+  /** @format date-time */
+  dateCreated: string;
+  /** @format date-time */
+  dateUpdated: string;
+  subCategories: AdCategorySchema[];
+}
+
 export interface CreateAdRequest {
   /**
    * @min 10
@@ -66,6 +79,48 @@ export namespace Api {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceGetAllCategories
+   * @request GET:/api/ads/categories/all
+   * @response `200` `(AdCategorySchema)[]` The list of all categories
+   */
+  export namespace AdsServiceGetAllCategories {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = AdCategorySchema[];
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceGetGeneralCategories
+   * @request GET:/api/ads/categories/general
+   * @response `200` `(AdCategorySchema)[]` The list of general categories
+   */
+  export namespace AdsServiceGetGeneralCategories {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = AdCategorySchema[];
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceGetFlatCategories
+   * @request GET:/api/ads/categories/flat
+   * @response `200` `(AdCategorySchema)[]` The list of flat all categories
+   */
+  export namespace AdsServiceGetFlatCategories {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = AdCategorySchema[];
   }
   /**
    * No description
@@ -352,6 +407,54 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<void, any>({
         path: `/api/ads`,
         method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceGetAllCategories
+     * @request GET:/api/ads/categories/all
+     * @response `200` `(AdCategorySchema)[]` The list of all categories
+     */
+    adsServiceGetAllCategories: (params: RequestParams = {}) =>
+      this.http.request<AdCategorySchema[], any>({
+        path: `/api/ads/categories/all`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceGetGeneralCategories
+     * @request GET:/api/ads/categories/general
+     * @response `200` `(AdCategorySchema)[]` The list of general categories
+     */
+    adsServiceGetGeneralCategories: (params: RequestParams = {}) =>
+      this.http.request<AdCategorySchema[], any>({
+        path: `/api/ads/categories/general`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceGetFlatCategories
+     * @request GET:/api/ads/categories/flat
+     * @response `200` `(AdCategorySchema)[]` The list of flat all categories
+     */
+    adsServiceGetFlatCategories: (params: RequestParams = {}) =>
+      this.http.request<AdCategorySchema[], any>({
+        path: `/api/ads/categories/flat`,
+        method: "GET",
+        format: "json",
         ...params,
       }),
 
