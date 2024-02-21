@@ -8,9 +8,8 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 const Container = ({ children, className, ...rest }: Props) => {
   return (
     <div
-      className={clsx("container mx-auto p-0", className)}
+      className={clsx("container mx-auto p-0 xl:w-[1350]", className)}
       {...rest}
-      style={{ maxWidth: 1350 }}
     >
       {children}
     </div>

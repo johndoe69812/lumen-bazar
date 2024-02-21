@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from "react";
 import { CgSpinner } from "@react-icons/all-files/cg/CgSpinner";

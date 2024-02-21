@@ -1,4 +1,4 @@
-import SelectCategory from "@/modules/create-ad/select-category";
+import AdWizard from "@/modules/create-ad/ad-wizard";
 import Heading from "@/shared/components/heading";
 import { Metadata } from "next";
 
@@ -10,7 +10,7 @@ const CreateAdPage = () => {
   return (
     <div>
       <Heading variant="h2">Category</Heading>
-      <SelectCategory />
+      <AdWizard categoryId="cars" />
     </div>
   );
 };

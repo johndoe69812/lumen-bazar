@@ -13,7 +13,7 @@ const CategoriesCol = (props: Props) => {
 
   return (
     <div className="h-full w-60 py-2 border-r overflow-auto max-h-[400px]">
-      <div className="px-2 py-1 mb-1 text-gray-500">{title}</div>
+      <div className="px-2 py-1 mb-1 text-sm text-gray-500">{title}</div>
       {list.map((cat) => (
         <div
           key={cat.alias}
