@@ -11,6 +11,9 @@ import {
   useState,
 } from "react";
 import { CgSpinner } from "@react-icons/all-files/cg/CgSpinner";
+import { GoChevronDown } from "@react-icons/all-files/go/GoChevronDown";
+import { GoChevronUp } from "@react-icons/all-files/go/GoChevronUp";
+import { IoCloseOutline } from "@react-icons/all-files/io5/IoCloseOutline";
 import { filterOptions } from "./utils";
 import { Option } from "./types";
 import OptionsPopup from "./options-popup";
@@ -19,6 +22,7 @@ import { useClickOutside } from "@/shared/hooks/use-click-outside";
 type Props = InputHTMLAttributes<HTMLSelectElement> & {
   name: string;
   options: Option[];
+  isClearable?: boolean;
   isLoading?: boolean;
   className?: string;
   error?: string;
@@ -36,19 +40,23 @@ const Select = forwardRef((props: Props, ref: Ref) => {
     options,
     className,
     isLoading = false,
-    type,
     error,
     value,
+    isClearable = false,
     touched = false,
     relyOnContext = true,
     onChange,
-    ...rest
   } = props;
 
   const [isOpened, setIsOpened] = useState(false);
   const [strValue, setStrValue] = useState("");
   const [selected, setSelected] = useState<Option>();
   const popupRef = useClickOutside(() => setIsOpened(false));
+
+  const handleClearValue = useCallback(() => {
+    setSelected(undefined);
+    setStrValue("");
+  }, []);
 
   const handleSelect = useCallback(
     (option: Option) => {
@@ -57,13 +65,12 @@ const Select = forwardRef((props: Props, ref: Ref) => {
         onChange?.(option.value);
         setStrValue(option.label);
       } else {
-        setSelected(undefined);
-        setStrValue("");
+        handleClearValue();
       }
 
       setIsOpened(false);
     },
-    [selected, onChange]
+    [selected, onChange, handleClearValue]
   );
 
   const filteredItems = useMemo(() => {
@@ -76,8 +83,9 @@ const Select = forwardRef((props: Props, ref: Ref) => {
   }, [value, options]);
 
   const rightIconClassName =
-    "absolute right-2 top-0 h-full flex justify-center items-center text-xl";
+    "absolute right-2 top-0 h-full flex justify-center items-center text-md";
   const isError = touched && error;
+  const showClearIcon = isClearable && strValue;
 
   return (
     <div className="w-full">
@@ -90,14 +98,27 @@ const Select = forwardRef((props: Props, ref: Ref) => {
       >
         <div>
           <div
-            className="w-[200px] p-2 rounded-lg focus-within:text-red bg-stone-200 hover:bg-stone-300"
-            onClick={() => setIsOpened(true)}
+            className="relative w-[200px] px-2 py-1 rounded-lg focus-within:ring bg-stone-200 hover:bg-stone-300"
+            onFocus={() => setIsOpened(true)}
+            onBlur={() => setTimeout(() => setIsOpened(false), 100)}
           >
             <input
               className="bg-transparent"
               value={strValue}
               onInput={(e) => setStrValue(e.currentTarget.value)}
             />
+
+            <div className={rightIconClassName}>
+              {isLoading && <CgSpinner className="animate-spin" />}
+              {showClearIcon && (
+                <IoCloseOutline
+                  className="cursor-pointer"
+                  onClick={handleClearValue}
+                />
+              )}
+              {!showClearIcon && !isOpened && <GoChevronUp />}
+              {!showClearIcon && isOpened && <GoChevronDown />}
+            </div>
           </div>
           {isOpened && (
             <OptionsPopup
@@ -108,11 +129,6 @@ const Select = forwardRef((props: Props, ref: Ref) => {
             />
           )}
         </div>
-        {isLoading && (
-          <div className={rightIconClassName}>
-            <CgSpinner className="animate-spin" />
-          </div>
-        )}
       </div>
       {isError && <span className="text-red-600">{error}</span>}
     </div>

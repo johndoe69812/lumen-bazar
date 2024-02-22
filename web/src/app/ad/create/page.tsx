@@ -1,5 +1,4 @@
 import AdWizard from "@/modules/create-ad/ad-wizard";
-import Heading from "@/shared/components/heading";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +8,6 @@ export const metadata: Metadata = {
 const CreateAdPage = () => {
   return (
     <div>
-      <Heading variant="h2">Category</Heading>
       <AdWizard categoryId="cars" />
     </div>
   );

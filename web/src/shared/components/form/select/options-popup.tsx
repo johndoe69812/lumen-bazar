@@ -16,7 +16,7 @@ const OptionsPopup = forwardRef(
     return (
       <div
         ref={ref}
-        className="absolute w-[200px] max-h-[200px] overflow-auto mt-1 py-2 rounded-lg shadow-xl bg-white animate-fadeIn"
+        className="absolute w-[200px] max-h-[200px] z-10 overflow-auto mt-2 py-2 rounded-lg shadow-slate-200 shadow-[0_0_2px_1px] bg-white animate-fadeIn"
       >
         {options.length === 0 && <div className="p-2">Nothing found</div>}
         {options.length > 0 &&
