@@ -1,4 +1,8 @@
+import { Key } from "react";
+
 export type Option = {
-  value: string | number;
+  value: Key;
   label: string;
+  labelCompact?: string;
+  tooltip?: string;
 };

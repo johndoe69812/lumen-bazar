@@ -23,6 +23,7 @@ const OptionsPopup = forwardRef(
           options.map((option) => (
             <div
               className="p-2 cursor-pointer flex justify-between items-center hover:bg-slate-100"
+              role="button"
               key={option.value}
               onClick={() => onSelect(option)}
             >

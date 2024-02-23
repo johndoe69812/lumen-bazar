@@ -8,7 +8,7 @@ type Props = ComponentProps<typeof Select>;
 type Ref = ForwardedRef<HTMLInputElement>;
 
 const SelectField = forwardRef((props: Props, ref: Ref) => {
-  const [field, meta, helpers] = useField(props.name);
+  const [field, , helpers] = useField(props.name);
 
   return (
     <Select

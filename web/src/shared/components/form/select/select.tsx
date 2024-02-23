@@ -8,6 +8,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { CgSpinner } from "@react-icons/all-files/cg/CgSpinner";
@@ -52,6 +53,7 @@ const Select = forwardRef((props: Props, ref: Ref) => {
   const [strValue, setStrValue] = useState("");
   const [selected, setSelected] = useState<Option>();
   const popupRef = useClickOutside(() => setIsOpened(false));
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClearValue = useCallback(() => {
     setSelected(undefined);
@@ -100,11 +102,13 @@ const Select = forwardRef((props: Props, ref: Ref) => {
           <div
             className="relative w-[200px] px-2 py-1 rounded-lg focus-within:ring bg-stone-200 hover:bg-stone-300"
             onFocus={() => setIsOpened(true)}
+            onClick={() => inputRef.current?.focus()}
             onBlur={() => setTimeout(() => setIsOpened(false), 100)}
           >
             <input
               className="bg-transparent"
               value={strValue}
+              ref={inputRef}
               onInput={(e) => setStrValue(e.currentTarget.value)}
             />
 
@@ -116,8 +120,8 @@ const Select = forwardRef((props: Props, ref: Ref) => {
                   onClick={handleClearValue}
                 />
               )}
-              {!showClearIcon && !isOpened && <GoChevronUp />}
-              {!showClearIcon && isOpened && <GoChevronDown />}
+              {!showClearIcon && !isOpened && <GoChevronDown />}
+              {!showClearIcon && isOpened && <GoChevronUp />}
             </div>
           </div>
           {isOpened && (

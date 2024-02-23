@@ -5,13 +5,15 @@ import { AiOutlineCamera } from "@react-icons/all-files/ai/AiOutlineCamera";
 import { FaCheck } from "@react-icons/all-files/fa/FaCheck";
 
 import SelectCategory from "../select-category";
-import Input from "@/shared/components/form/input";
+import Input, { InputField } from "@/shared/components/form/input";
 import { SelectField } from "@/shared/components/form/select";
 import Button from "@/shared/components/button";
 import { brandList } from "./brands.stub";
 import { PropsWithChildren, useState } from "react";
 import Heading from "@/shared/components/heading";
 import clsx from "clsx";
+import { Option } from "@/shared/components/form/select/types";
+import RadioGroup from "@/shared/components/form/radio-group";
 
 type Props = {
   categoryId: string;
@@ -25,7 +27,7 @@ const Row = (props: PropsWithChildren<{ title: string }>) => {
       <div className="col-span-3">
         <div className="leading-8">{title}</div>
       </div>
-      <div className="col-span-9">{children}</div>
+      <div className="col-span-9 text-sm">{children}</div>
     </div>
   );
 };
@@ -53,93 +55,27 @@ const MediaUploader = () => {
 };
 
 const ColorSwatches = () => {
-  const colors = [
-    {
-      label: "White",
-      value: "#fff",
-    },
-    {
-      label: "Silver",
-      value:
-        "linear-gradient(137.23deg, #A0A0A0 10.41%, #BBBBBB 26.75%, #C8C8C8 36.61%, #D7D7D7 44.49%, #E9E8E8 57.99%, #E9E9E9 63.45%, #A7A7A7 79.24%, #727171 87.65%, #CCCCCC 87.66%, #676767 87.66%)",
-    },
-    {
-      label: "Gray",
-      value: "#9C9C9C",
-    },
-    {
-      label: "Black",
-      value: "#292929",
-    },
-    {
-      label: "Brown",
-      value: "#805C3A",
-    },
-    {
-      label: "Golden",
-      value:
-        "linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C)",
-    },
-    {
-      label: "Beige",
-      value: "#CEC4AD",
-    },
-    {
-      label: "Red",
-      value: "#F54043",
-    },
-    {
-      label: "Burgundy",
-      value: "#C71C3B",
-    },
-    {
-      label: "Orange",
-      value: "#FFB021",
-    },
-    {
-      label: "Yellow",
-      value: "#FFE433",
-    },
-    {
-      label: "Green",
-      value: "#1C8C38",
-    },
-    {
-      label: "Blue",
-      value: "#3264FA",
-    },
-    {
-      label: "Violet",
-      value: "#6A36E3",
-    },
-    {
-      label: "Purple",
-      value: "#c400aa",
-    },
-    { label: "Pink", value: "#FFA1EA" },
-  ];
-
   const [activeIndex, setActiveIndex] = useState<number>();
 
   return (
     <div className="">
       <div className="flex gap-2">
-        {colors.map(({ label, value }, index) => {
+        {colorsOptions.map(({ label, value }, index) => {
           const showBorder = value === "#fff";
 
           const extraStyle = showBorder ? { border: "1px solid #ddd" } : {};
           const isActive = activeIndex === index;
 
           return (
-            <div
+            <button
               key={index}
               title={label}
               className={clsx(
-                "w-7 h-7 rounded-full cursor-pointer transition",
+                "w-7 h-7 rounded-full cursor-pointer transition focus-visible:ring",
                 !isActive && "hover:scale-105"
               )}
               style={{
-                background: value,
+                background: value as string,
                 ...extraStyle,
               }}
               onClick={() =>
@@ -154,7 +90,7 @@ const ColorSwatches = () => {
               >
                 <FaCheck />
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
@@ -162,15 +98,173 @@ const ColorSwatches = () => {
   );
 };
 
+const colorsOptions: Option[] = [
+  {
+    label: "White",
+    value: "#fff",
+  },
+  {
+    label: "Silver",
+    value:
+      "linear-gradient(137.23deg, #A0A0A0 10.41%, #BBBBBB 26.75%, #C8C8C8 36.61%, #D7D7D7 44.49%, #E9E8E8 57.99%, #E9E9E9 63.45%, #A7A7A7 79.24%, #727171 87.65%, #CCCCCC 87.66%, #676767 87.66%)",
+  },
+  {
+    label: "Gray",
+    value: "#9C9C9C",
+  },
+  {
+    label: "Black",
+    value: "#292929",
+  },
+  {
+    label: "Brown",
+    value: "#805C3A",
+  },
+  {
+    label: "Golden",
+    value:
+      "linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C)",
+  },
+  {
+    label: "Beige",
+    value: "#CEC4AD",
+  },
+  {
+    label: "Red",
+    value: "#F54043",
+  },
+  {
+    label: "Burgundy",
+    value: "#C71C3B",
+  },
+  {
+    label: "Orange",
+    value: "#FFB021",
+  },
+  {
+    label: "Yellow",
+    value: "#FFE433",
+  },
+  {
+    label: "Green",
+    value: "#1C8C38",
+  },
+  {
+    label: "Blue",
+    value: "#3264FA",
+  },
+  {
+    label: "Violet",
+    value: "#6A36E3",
+  },
+  {
+    label: "Purple",
+    value: "#c400aa",
+  },
+  { label: "Pink", value: "#FFA1EA" },
+];
+
+const years: Option[] = Array(70)
+  .fill(null)
+  .map((_, index) => ({
+    label: (new Date().getFullYear() - index).toString(),
+    value: new Date().getFullYear() - index,
+  }));
+
+const doors: Option[] = [
+  {
+    label: "2",
+    value: 2,
+  },
+  {
+    label: "3",
+    value: 3,
+  },
+  {
+    label: "4",
+    value: 4,
+  },
+  {
+    label: "5",
+    value: 5,
+  },
+];
+
+const engineOptions: Option[] = [
+  {
+    label: "Petrol",
+    value: "petrol",
+  },
+  {
+    label: "Diesel",
+    value: "diesel",
+  },
+  {
+    label: "Electric",
+    value: "electric",
+  },
+];
+
+const driveTrainOptions: Option[] = [
+  {
+    label: "AWD",
+    value: "awd",
+    tooltip: "all-wheel drive",
+  },
+  {
+    label: "4WD",
+    value: "4wd",
+    tooltip: "four-wheel drive",
+  },
+  {
+    label: "FWD",
+    value: "fwd",
+    tooltip: "front-wheel drive",
+  },
+  {
+    label: "RWD",
+    value: "rwd",
+    tooltip: "rear-wheel drive",
+  },
+];
+
+const steeringWheelOptions: Option[] = [
+  {
+    label: "Left",
+    value: "left",
+  },
+  {
+    label: "Right",
+    value: "right",
+  },
+];
+
+const transmissionOptions: Option[] = [
+  {
+    label: "Automatic (AT)",
+    labelCompact: "AT",
+
+    value: "at",
+  },
+  {
+    label: "Manual Transmission (MT)",
+    labelCompact: "MT",
+    value: "mt",
+  },
+  {
+    label: "Automated Manual Transmission (AM)",
+    labelCompact: "AM",
+    value: "am",
+  },
+  {
+    label: "Continuously Variable Transmission (CVT)",
+    labelCompact: "CVT",
+    value: "cvt",
+  },
+];
+
 const AdBuilder = (props: Props) => {
   const { categoryId } = props;
-
-  const years = Array(70)
-    .fill(null)
-    .map((_, index) => ({
-      label: (new Date().getFullYear() - index).toString(),
-      value: new Date().getFullYear() - index,
-    }));
 
   if (!categoryId) {
     return null;
@@ -197,7 +291,7 @@ const AdBuilder = (props: Props) => {
                 <MediaUploader />
               </Row>
               <Row title="Video link">
-                <Input
+                <InputField
                   name="video"
                   placeholder="https://youtube.com/my-video"
                   className="pl-2 py-1 w-[400px] rounded border border-gray-300 focus-within:ring"
@@ -210,7 +304,7 @@ const AdBuilder = (props: Props) => {
 
             <Section title="Registration data">
               <Row title="VIN or chassis number">
-                <Input
+                <InputField
                   name="vin"
                   className="pl-2 py-1 w-[400px] rounded border border-gray-300 focus-within:ring"
                 />
@@ -222,7 +316,7 @@ const AdBuilder = (props: Props) => {
                 <SelectField name="brand" options={brandList} isClearable />
               </Row>
               <Row title="Model">
-                <Input
+                <InputField
                   name="model"
                   className="bg-stone-200 w-[200px] px-2 py-1 rounded-lg focus-within:ring"
                 />
@@ -230,10 +324,53 @@ const AdBuilder = (props: Props) => {
               <Row title="Production year">
                 <SelectField name="year" options={years} isClearable />
               </Row>
+              <Row title="Number of doors">
+                <SelectField name="doors" options={doors} isClearable />
+              </Row>
+              <Row title="Drivetrain">
+                <RadioGroup options={driveTrainOptions} />
+              </Row>
+              <Row title="Steering wheel">
+                <RadioGroup options={steeringWheelOptions} />
+              </Row>
+              <Row title="Transmission">
+                <RadioGroup options={transmissionOptions} />
+              </Row>
+              <Row title="Engine's type">
+                <RadioGroup options={engineOptions} value="petrol" />
+              </Row>
+              <Row title="Engine's capacity">
+                <InputField
+                  name="enginePower"
+                  className="bg-stone-200 w-[200px] px-2 py-1 rounded-lg focus-within:ring"
+                />
+              </Row>
+              <Row title="Engine's power">
+                <InputField
+                  name="enginePower"
+                  className="bg-stone-200 w-[200px] px-2 py-1 rounded-lg focus-within:ring"
+                />
+              </Row>
             </Section>
-            <Button type="submit" onClick={submitForm}>
-              Submit
-            </Button>
+
+            <Section title="Options">
+              <Row title="Engine's power">
+                <InputField
+                  name="enginePower"
+                  className="bg-stone-200 w-[200px] px-2 py-1 rounded-lg focus-within:ring"
+                />
+              </Row>
+            </Section>
+
+            <footer className="py-4">
+              <Button
+                className="px-8 py-2 rounded transition font-medium bg-blue-500 text-white hover:bg-blue-600"
+                type="submit"
+                onClick={submitForm}
+              >
+                Continue
+              </Button>
+            </footer>
           </div>
         )}
       </Formik>

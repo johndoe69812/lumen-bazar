@@ -1,0 +1,25 @@
+body {
+  margin: 8px;
+}
+
+input {
+  border: 1px solid #ccc;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+fieldset {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+}
+
+fieldset > div {
+  display: grid;
+  grid-auto-columns: 2fr 10fr;
+}

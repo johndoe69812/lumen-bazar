@@ -6,7 +6,6 @@ import { CgSpinner } from "@react-icons/all-files/cg/CgSpinner";
 import { FaEye } from "@react-icons/all-files/fa/FaEye";
 import { FaEyeSlash } from "@react-icons/all-files/fa/FaEyeSlash";
 import Button from "@/shared/components/button";
-import { Field } from "formik";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
@@ -29,7 +28,6 @@ const Input = forwardRef((props: Props, ref: Ref) => {
     type,
     error,
     touched = false,
-    relyOnContext = true,
     ...rest
   } = props;
 
@@ -39,18 +37,17 @@ const Input = forwardRef((props: Props, ref: Ref) => {
   const rightIconClassName =
     "absolute right-2 top-0 h-full flex justify-center items-center text-xl";
   const isError = touched && error;
-  const InputTag = relyOnContext ? Field : "input";
 
   return (
     <div className="w-full">
       <div
         className={clsx(
-          "relative w-full overflow-hidden",
+          "relative overflow-hidden",
           className,
           isError && "border border-red-500"
         )}
       >
-        <InputTag
+        <input
           ref={ref}
           className={clsx("w-full bg-transparent", inputClassName)}
           type={isPassword ? (isHidden ? "password" : "text") : type}
