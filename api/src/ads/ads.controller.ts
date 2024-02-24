@@ -1,9 +1,19 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AdsService } from './ads.service';
 import { CreateAdRequest } from './schemas/create-ad.request';
 import { AdsCategoriesService } from './categories.service';
 import { AdCategorySchema } from './schemas/ad-category.schema';
+import { CreateCategoryDTO } from './dto/create-category.dto';
 
 @ApiTags('ads')
 @Controller('ads')
@@ -14,8 +24,17 @@ export class AdsController {
   ) {}
 
   @Get('/')
-  getAdvertisements() {
+  async getAdvertisements() {
     return this.adsService.getAdvertisements();
+  }
+
+  @Post('/category')
+  @ApiOkResponse({
+    description: 'Create ad category',
+    type: AdCategorySchema,
+  })
+  async createCategory(@Body() createCategoryDto: CreateCategoryDTO) {
+    return this.categoriesService.createCategory(createCategoryDto);
   }
 
   @Get('/categories/all')
@@ -24,7 +43,7 @@ export class AdsController {
     isArray: true,
     type: AdCategorySchema,
   })
-  getAllCategories() {
+  async getAllCategories() {
     return this.categoriesService.getAllCategories();
   }
 
@@ -34,7 +53,7 @@ export class AdsController {
     isArray: true,
     type: AdCategorySchema,
   })
-  getGeneralCategories() {
+  async getGeneralCategories() {
     return this.categoriesService.getAllCategories(true);
   }
 
@@ -44,8 +63,26 @@ export class AdsController {
     isArray: true,
     type: AdCategorySchema,
   })
-  getFlatCategories() {
+  async getFlatCategories() {
     return this.categoriesService.getAllCategories(false, true);
+  }
+
+  @Patch('/category')
+  @ApiOkResponse({
+    description: 'Update ad category',
+    isArray: true,
+    type: AdCategorySchema,
+  })
+  async updateCategory(@Body() createCategoryDto: CreateCategoryDTO) {
+    return this.categoriesService.createCategory(createCategoryDto);
+  }
+
+  @Delete('/category/:categoryId')
+  @ApiOkResponse({
+    description: 'Delete ad category',
+  })
+  async deleteCategory(@Param('categoryId', ParseIntPipe) categoryId: number) {
+    return this.categoriesService.deleteCategory(categoryId);
   }
 
   @Post('/create')

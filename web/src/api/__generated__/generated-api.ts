@@ -11,6 +11,15 @@ export interface ListOfCountriesResponse {
   country: Country;
 }
 
+export interface CreateCategoryDTO {
+  /**
+   * @min 10
+   * @max 200
+   */
+  title: string;
+  parentId: number;
+}
+
 export interface AdCategorySchema {
   id: string;
   title: string;
@@ -83,6 +92,34 @@ export namespace Api {
   /**
    * No description
    * @tags ads
+   * @name AdsServiceCreateCategory
+   * @request POST:/api/ads/category
+   * @response `200` `(AdCategorySchema)[]` Create ad category
+   */
+  export namespace AdsServiceCreateCategory {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = CreateCategoryDTO;
+    export type RequestHeaders = {};
+    export type ResponseBody = AdCategorySchema[];
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceUpdateCategory
+   * @request PATCH:/api/ads/category
+   * @response `200` `(AdCategorySchema)[]` Update ad category
+   */
+  export namespace AdsServiceUpdateCategory {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = CreateCategoryDTO;
+    export type RequestHeaders = {};
+    export type ResponseBody = AdCategorySchema[];
+  }
+  /**
+   * No description
+   * @tags ads
    * @name AdsServiceGetAllCategories
    * @request GET:/api/ads/categories/all
    * @response `200` `(AdCategorySchema)[]` The list of all categories
@@ -121,6 +158,22 @@ export namespace Api {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = AdCategorySchema[];
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceDeleteCategory
+   * @request DELETE:/api/ads/category/{categoryId}
+   * @response `200` `void` Delete ad category
+   */
+  export namespace AdsServiceDeleteCategory {
+    export type RequestParams = {
+      categoryId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
   }
   /**
    * No description
@@ -414,6 +467,42 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags ads
+     * @name AdsServiceCreateCategory
+     * @request POST:/api/ads/category
+     * @response `200` `(AdCategorySchema)[]` Create ad category
+     */
+    adsServiceCreateCategory: (data: CreateCategoryDTO, params: RequestParams = {}) =>
+      this.http.request<AdCategorySchema[], any>({
+        path: `/api/ads/category`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceUpdateCategory
+     * @request PATCH:/api/ads/category
+     * @response `200` `(AdCategorySchema)[]` Update ad category
+     */
+    adsServiceUpdateCategory: (data: CreateCategoryDTO, params: RequestParams = {}) =>
+      this.http.request<AdCategorySchema[], any>({
+        path: `/api/ads/category`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
      * @name AdsServiceGetAllCategories
      * @request GET:/api/ads/categories/all
      * @response `200` `(AdCategorySchema)[]` The list of all categories
@@ -455,6 +544,21 @@ export class Api<SecurityDataType extends unknown> {
         path: `/api/ads/categories/flat`,
         method: "GET",
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceDeleteCategory
+     * @request DELETE:/api/ads/category/{categoryId}
+     * @response `200` `void` Delete ad category
+     */
+    adsServiceDeleteCategory: (categoryId: number, params: RequestParams = {}) =>
+      this.http.request<void, any>({
+        path: `/api/ads/category/${categoryId}`,
+        method: "DELETE",
         ...params,
       }),
 

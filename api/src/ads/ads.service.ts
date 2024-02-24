@@ -20,11 +20,11 @@ export class AdsService implements IAdsService {
     const ad = new Advertisement();
     ad.title = adItem.title;
 
-    const insertedAd = await this.advertisementsRepository.save(ad);
-    insertedAd.alias = generateAdSlug(ad.title, insertedAd.id);
-    this.advertisementsRepository.save(insertedAd);
+    const saved = await this.advertisementsRepository.save(ad);
+    saved.alias = generateAdSlug(ad.title, saved.id);
+    this.advertisementsRepository.save(saved);
 
-    return insertedAd.id;
+    return saved.id;
   }
 
   async archiveAdvertisement() {}

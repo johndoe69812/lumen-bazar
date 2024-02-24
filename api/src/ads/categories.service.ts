@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
 import { AdCategory } from './entities/category.entity';
 import buildCategoryTree from './utils/build-category-tree';
+import { generateAdSlug } from './utils/generate-ad-slug';
 
 @Injectable()
 export class AdsCategoriesService {
@@ -10,6 +11,18 @@ export class AdsCategoriesService {
     @InjectRepository(AdCategory)
     private categoriesRepository: Repository<AdCategory>,
   ) {}
+
+  async createCategory(candidate: Partial<AdCategory>) {
+    const cat = new AdCategory();
+    cat.title = candidate.title;
+    cat.parentId = candidate.parentId;
+
+    const saved = await this.categoriesRepository.save(cat);
+    saved.alias = generateAdSlug(cat.title, saved.id);
+    this.categoriesRepository.save(saved);
+
+    return saved.id;
+  }
 
   async getAllCategories(onlyGeneral: boolean = false, flat: boolean = false) {
     if (onlyGeneral) {
@@ -24,5 +37,27 @@ export class AdsCategoriesService {
 
     const categories = await this.categoriesRepository.find();
     return buildCategoryTree(categories);
+  }
+
+  async updateCategory(updates: Partial<AdCategory>): Promise<AdCategory> {
+    const { id, ...data } = updates;
+
+    if (!id) {
+      throw Error('Id not found');
+    }
+
+    const category = await this.categoriesRepository.findOne({ where: { id } });
+    this.categoriesRepository.save({ ...category, ...data });
+
+    return category;
+  }
+
+  async deleteCategory(id: number): Promise<boolean> {
+    try {
+      await this.categoriesRepository.delete({ id });
+      return true;
+    } catch (err) {
+      throw Error("Can't remove category");
+    }
   }
 }

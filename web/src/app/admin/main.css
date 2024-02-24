@@ -12,14 +12,35 @@ main {
   gap: 25px;
 }
 
-fieldset {
+main > fieldset {
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
   background-color: #eee;
 }
 
-fieldset > div {
+main > fieldset > div {
   display: grid;
   grid-auto-columns: 2fr 10fr;
+}
+
+select {
+  border: 1px solid #ccc;
+}
+
+/* Dialog */
+:root {
+  --spacing-1: 1rem;
+  --spacing-2: 2rem;
+  --spacing-3: 3rem;
+}
+
+dialog {
+  padding: var(--spacing-1);
+  background-color: white;
+  border-radius: 10px;
+}
+
+dialog::backdrop {
+  background: rgba(150, 100, 200, 0.5);
 }

@@ -19,7 +19,11 @@ CREATE TABLE public.ad_items (
     date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 COPY ad_categories(id, title, alias, parent_id, image_url)
 FROM '/docker-entrypoint-initdb.d/ad_categories.csv'
 DELIMITER ','
 CSV HEADER;
+
+-- Rewrite PK Sequence start
+SELECT setval('ad_categories_id_seq', (SELECT MAX(id) FROM ad_categories)+1);
