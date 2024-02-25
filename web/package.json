@@ -17,6 +17,7 @@
   "dependencies": {
     "@mui/icons-material": "^5.15.3",
     "@react-icons/all-files": "https://github.com/react-icons/react-icons/releases/download/v4.7.1/react-icons-all-files-4.7.1.tgz",
+    "antd": "^5.14.2",
     "clsx": "^2.1.0",
     "formik": "^2.4.5",
     "lodash": "^4.17.21",

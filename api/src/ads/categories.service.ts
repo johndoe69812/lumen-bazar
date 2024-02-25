@@ -39,15 +39,18 @@ export class AdsCategoriesService {
     return buildCategoryTree(categories);
   }
 
-  async updateCategory(updates: Partial<AdCategory>): Promise<AdCategory> {
-    const { id, ...data } = updates;
-
-    if (!id) {
-      throw Error('Id not found');
+  async updateCategory(
+    categoryId: number,
+    updates: Partial<AdCategory>,
+  ): Promise<AdCategory> {
+    if (!categoryId) {
+      throw Error('categoryId not found');
     }
 
-    const category = await this.categoriesRepository.findOne({ where: { id } });
-    this.categoriesRepository.save({ ...category, ...data });
+    const category = await this.categoriesRepository.findOne({
+      where: { id: categoryId },
+    });
+    this.categoriesRepository.save({ ...category, ...updates });
 
     return category;
   }

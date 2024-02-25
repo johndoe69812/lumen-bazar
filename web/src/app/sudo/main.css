@@ -1,0 +1,102 @@
+input {
+  border: 1px solid #ccc;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+main > fieldset {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+}
+
+main > fieldset > div {
+  display: grid;
+  grid-auto-columns: 2fr 10fr;
+}
+
+select {
+  border: 1px solid #ccc;
+}
+
+/* Dialog */
+:root {
+  --spacing-1: 1rem;
+  --spacing-2: 2rem;
+  --spacing-3: 3rem;
+}
+
+dialog {
+  background-color: transparent;
+}
+
+dialog > * {
+  padding: var(--spacing-1);
+  background-color: white;
+  border-radius: 10px;
+}
+
+dialog:before {
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+dialog::backdrop {
+  background: rgba(144, 144, 144, 0.75);
+}
+
+/* Categories */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-1);
+}
+
+.categories li {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.cat-tree {
+  width: 75%;
+  bottom: rgba(110, 110, 110, 0.2);
+  border: 1px solid #ccc;
+}
+
+.cat-tree li {
+  position: relative;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.cat-tree li .actions {
+  position: absolute;
+  right: 5px;
+}
+
+li.dragging {
+  opacity: 0.4;
+}
+
+.cat-tree li.dragover {
+  background-color: red;
+}
+
+.card {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-1);
+}

@@ -14,12 +14,18 @@ import { CreateAdRequest } from './schemas/create-ad.request';
 import { AdsCategoriesService } from './categories.service';
 import { AdCategorySchema } from './schemas/ad-category.schema';
 import { CreateCategoryDTO } from './dto/create-category.dto';
+import { UpdateCategoryDTO } from './dto/update-category.dto.';
+import { AdParamsService } from './ad-params.service';
+import { CreateAdParamDTO } from './dto/create-ad-param.dto';
+import { AdParam } from './entities/ad-parameter.entity';
+import { AdParamSchema } from './schemas/ad-param.schema';
 
 @ApiTags('ads')
 @Controller('ads')
 export class AdsController {
   constructor(
     private readonly adsService: AdsService,
+    private readonly adParamsService: AdParamsService,
     private readonly categoriesService: AdsCategoriesService,
   ) {}
 
@@ -67,14 +73,17 @@ export class AdsController {
     return this.categoriesService.getAllCategories(false, true);
   }
 
-  @Patch('/category')
+  @Patch('/category/:categoryId')
   @ApiOkResponse({
     description: 'Update ad category',
     isArray: true,
     type: AdCategorySchema,
   })
-  async updateCategory(@Body() createCategoryDto: CreateCategoryDTO) {
-    return this.categoriesService.createCategory(createCategoryDto);
+  async updateCategory(
+    @Param('categoryId', ParseIntPipe) categoryId: number,
+    @Body() updateCategoryDTO: UpdateCategoryDTO,
+  ) {
+    return this.categoriesService.updateCategory(categoryId, updateCategoryDTO);
   }
 
   @Delete('/category/:categoryId')
@@ -87,6 +96,24 @@ export class AdsController {
 
   @Post('/create')
   async createAdvertisement(@Body() createAdRequest: CreateAdRequest) {
-    return await this.adsService.createAdvertisement(createAdRequest);
+    return this.adsService.createAdvertisement(createAdRequest);
+  }
+
+  @Post('/ad-param')
+  @ApiOkResponse({
+    description: 'Create ad parameter',
+  })
+  async createParam(@Body() createParamDTO: CreateAdParamDTO) {
+    return this.adParamsService.createParam(createParamDTO);
+  }
+
+  @Get('/ad-params')
+  @ApiOkResponse({
+    description: 'Get all ad parameters',
+    isArray: true,
+    type: AdParamSchema,
+  })
+  async getAllParameters() {
+    return this.adParamsService.getAllParams();
   }
 }

@@ -13,15 +13,15 @@ export interface ListOfCountriesResponse {
 
 export interface CreateCategoryDTO {
   /**
-   * @min 10
-   * @max 200
+   * @min 3
+   * @max 50
    */
   title: string;
-  parentId: number;
+  parentId?: number | null;
 }
 
 export interface AdCategorySchema {
-  id: string;
+  id: number;
   title: string;
   alias: string;
   parentId: number;
@@ -33,12 +33,37 @@ export interface AdCategorySchema {
   subCategories: AdCategorySchema[];
 }
 
+export interface UpdateCategoryDTO {
+  /**
+   * @min 3
+   * @max 50
+   */
+  title?: string;
+  parentId?: number | null;
+}
+
 export interface CreateAdRequest {
   /**
    * @min 10
    * @max 200
    */
   title: string;
+}
+
+export interface CreateAdParamDTO {
+  /**
+   * @min 3
+   * @max 50
+   */
+  name: string;
+}
+
+export interface AdParamSchema {
+  id: number;
+  name: string;
+  dataType: string;
+  /** @format date-time */
+  dateCreated: string;
 }
 
 export namespace Api {
@@ -94,28 +119,14 @@ export namespace Api {
    * @tags ads
    * @name AdsServiceCreateCategory
    * @request POST:/api/ads/category
-   * @response `200` `(AdCategorySchema)[]` Create ad category
+   * @response `200` `AdCategorySchema` Create ad category
    */
   export namespace AdsServiceCreateCategory {
     export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = CreateCategoryDTO;
     export type RequestHeaders = {};
-    export type ResponseBody = AdCategorySchema[];
-  }
-  /**
-   * No description
-   * @tags ads
-   * @name AdsServiceUpdateCategory
-   * @request PATCH:/api/ads/category
-   * @response `200` `(AdCategorySchema)[]` Update ad category
-   */
-  export namespace AdsServiceUpdateCategory {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = CreateCategoryDTO;
-    export type RequestHeaders = {};
-    export type ResponseBody = AdCategorySchema[];
+    export type ResponseBody = AdCategorySchema;
   }
   /**
    * No description
@@ -162,6 +173,22 @@ export namespace Api {
   /**
    * No description
    * @tags ads
+   * @name AdsServiceUpdateCategory
+   * @request PATCH:/api/ads/category/{categoryId}
+   * @response `200` `(AdCategorySchema)[]` Update ad category
+   */
+  export namespace AdsServiceUpdateCategory {
+    export type RequestParams = {
+      categoryId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = UpdateCategoryDTO;
+    export type RequestHeaders = {};
+    export type ResponseBody = AdCategorySchema[];
+  }
+  /**
+   * No description
+   * @tags ads
    * @name AdsServiceDeleteCategory
    * @request DELETE:/api/ads/category/{categoryId}
    * @response `200` `void` Delete ad category
@@ -188,6 +215,34 @@ export namespace Api {
     export type RequestBody = CreateAdRequest;
     export type RequestHeaders = {};
     export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceCreateParam
+   * @request POST:/api/ads/ad-param
+   * @response `200` `void` Create ad parameter
+   */
+  export namespace AdsServiceCreateParam {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = CreateAdParamDTO;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceGetAllParameters
+   * @request GET:/api/ads/ad-params
+   * @response `200` `(AdParamSchema)[]` Get all ad parameters
+   */
+  export namespace AdsServiceGetAllParameters {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = AdParamSchema[];
   }
 }
 
@@ -469,30 +524,12 @@ export class Api<SecurityDataType extends unknown> {
      * @tags ads
      * @name AdsServiceCreateCategory
      * @request POST:/api/ads/category
-     * @response `200` `(AdCategorySchema)[]` Create ad category
+     * @response `200` `AdCategorySchema` Create ad category
      */
     adsServiceCreateCategory: (data: CreateCategoryDTO, params: RequestParams = {}) =>
-      this.http.request<AdCategorySchema[], any>({
+      this.http.request<AdCategorySchema, any>({
         path: `/api/ads/category`,
         method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ads
-     * @name AdsServiceUpdateCategory
-     * @request PATCH:/api/ads/category
-     * @response `200` `(AdCategorySchema)[]` Update ad category
-     */
-    adsServiceUpdateCategory: (data: CreateCategoryDTO, params: RequestParams = {}) =>
-      this.http.request<AdCategorySchema[], any>({
-        path: `/api/ads/category`,
-        method: "PATCH",
         body: data,
         type: ContentType.Json,
         format: "json",
@@ -551,6 +588,24 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags ads
+     * @name AdsServiceUpdateCategory
+     * @request PATCH:/api/ads/category/{categoryId}
+     * @response `200` `(AdCategorySchema)[]` Update ad category
+     */
+    adsServiceUpdateCategory: (categoryId: number, data: UpdateCategoryDTO, params: RequestParams = {}) =>
+      this.http.request<AdCategorySchema[], any>({
+        path: `/api/ads/category/${categoryId}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
      * @name AdsServiceDeleteCategory
      * @request DELETE:/api/ads/category/{categoryId}
      * @response `200` `void` Delete ad category
@@ -576,6 +631,39 @@ export class Api<SecurityDataType extends unknown> {
         method: "POST",
         body: data,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceCreateParam
+     * @request POST:/api/ads/ad-param
+     * @response `200` `void` Create ad parameter
+     */
+    adsServiceCreateParam: (data: CreateAdParamDTO, params: RequestParams = {}) =>
+      this.http.request<void, any>({
+        path: `/api/ads/ad-param`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceGetAllParameters
+     * @request GET:/api/ads/ad-params
+     * @response `200` `(AdParamSchema)[]` Get all ad parameters
+     */
+    adsServiceGetAllParameters: (params: RequestParams = {}) =>
+      this.http.request<AdParamSchema[], any>({
+        path: `/api/ads/ad-params`,
+        method: "GET",
+        format: "json",
         ...params,
       }),
   };

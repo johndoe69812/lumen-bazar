@@ -11,6 +11,6 @@ export class CreateCategoryDTO {
 
   @IsOptional()
   @IsNumber()
-  @ApiProperty()
+  @ApiProperty({ required: false, nullable: true })
   parentId: number;
 }
