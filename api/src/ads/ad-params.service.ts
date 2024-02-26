@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { AdParam } from './entities/ad-parameter.entity';
-import { AdParamModel } from './interfaces/ad-params.model';
+import { CreateAdParamDTO } from './dto/create-ad-param.dto';
+import { isArray } from 'lodash';
+import { AdCategory } from './entities/category.entity';
 
 @Injectable()
 export class AdParamsService {
   constructor(
     @InjectRepository(AdParam)
     private adParamsRepository: Repository<AdParam>,
+    @InjectRepository(AdCategory)
+    private adCategories: Repository<AdCategory>,
   ) {}
 
-  async createParam(paramData: Partial<AdParamModel>) {
+  async createParam(paramData: CreateAdParamDTO) {
     const param = new AdParam();
     param.name = paramData.name;
+
+    if (isArray(paramData.categories)) {
+      const category = await this.adCategories.findBy({
+        id: In(paramData.categories),
+      });
+
+      param.category = category;
+    }
 
     const saved = await this.adParamsRepository.save(param);
     return saved.id;
   }
 
   async getAllParams() {
-    return this.adParamsRepository.find();
+    return this.adParamsRepository.find({ relations: ['category'] });
   }
 
   async deleteParam(paramId: number) {
@@ -35,16 +47,18 @@ export class AdParamsService {
     }
   }
 
-  // async assignParameterToAd(adId: string, paramId: string, value: string) {
-  /*
-        id SERIAL PRIMARY KEY,
-    ad_id INTEGER REFERENCES ad_items(id),
-    param_id INTEGER REFERENCES ad_params(id),
-    option_id INTEGER REFERENCES ad_params_options(id),
-    value VARCHAR(255),
-    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    */
-  // }
+  async updateParameter(paramId: number, updates: Partial<AdParam>) {
+    if (!paramId) {
+      throw Error('paramId not found');
+    }
+
+    const param = await this.adParamsRepository.findOne({
+      where: { id: paramId },
+    });
+    this.adParamsRepository.save({ ...param, ...updates });
+
+    return param;
+  }
 
   async deleteAttribute() {}
 }

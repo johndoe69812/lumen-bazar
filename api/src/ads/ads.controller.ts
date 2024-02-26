@@ -17,8 +17,8 @@ import { CreateCategoryDTO } from './dto/create-category.dto';
 import { UpdateCategoryDTO } from './dto/update-category.dto.';
 import { AdParamsService } from './ad-params.service';
 import { CreateAdParamDTO } from './dto/create-ad-param.dto';
-import { AdParam } from './entities/ad-parameter.entity';
 import { AdParamSchema } from './schemas/ad-param.schema';
+import { UpdateAdParamDTO } from './dto/update-ad-param.dto';
 
 @ApiTags('ads')
 @Controller('ads')
@@ -115,5 +115,18 @@ export class AdsController {
   })
   async getAllParameters() {
     return this.adParamsService.getAllParams();
+  }
+
+  @Patch('/ad-params/:paramId')
+  @ApiOkResponse({
+    description: 'Update ad parameters',
+    isArray: true,
+    type: AdParamSchema,
+  })
+  async updateAdParameter(
+    @Param('paramId', ParseIntPipe) paramId,
+    @Body() updateAdParamDTO: UpdateAdParamDTO,
+  ) {
+    return this.adParamsService.updateParameter(paramId, updateAdParamDTO);
   }
 }

@@ -56,6 +56,8 @@ export interface CreateAdParamDTO {
    * @max 50
    */
   name: string;
+  /** List of categories (ids) */
+  categories: number[];
 }
 
 export interface AdParamSchema {
@@ -64,6 +66,15 @@ export interface AdParamSchema {
   dataType: string;
   /** @format date-time */
   dateCreated: string;
+}
+
+export interface UpdateAdParamDTO {
+  /**
+   * @min 3
+   * @max 50
+   */
+  name: string;
+  categoryId: number;
 }
 
 export namespace Api {
@@ -241,6 +252,22 @@ export namespace Api {
     export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = AdParamSchema[];
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceUpdateAdParameter
+   * @request PATCH:/api/ads/ad-params/{paramId}
+   * @response `200` `(AdParamSchema)[]` Update ad parameters
+   */
+  export namespace AdsServiceUpdateAdParameter {
+    export type RequestParams = {
+      paramId: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = UpdateAdParamDTO;
     export type RequestHeaders = {};
     export type ResponseBody = AdParamSchema[];
   }
@@ -663,6 +690,24 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<AdParamSchema[], any>({
         path: `/api/ads/ad-params`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceUpdateAdParameter
+     * @request PATCH:/api/ads/ad-params/{paramId}
+     * @response `200` `(AdParamSchema)[]` Update ad parameters
+     */
+    adsServiceUpdateAdParameter: (paramId: string, data: UpdateAdParamDTO, params: RequestParams = {}) =>
+      this.http.request<AdParamSchema[], any>({
+        path: `/api/ads/ad-params/${paramId}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

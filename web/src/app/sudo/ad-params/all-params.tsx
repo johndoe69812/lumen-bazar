@@ -1,32 +1,59 @@
 "use client";
 
 import { AdParamSchema } from "@/api";
+import { AdCategorySchema } from "@/api/__generated__/generated-api";
 import APIService from "@/api/api-service";
-import { Form, Button, Input, Modal, Table } from "antd";
-import { useCallback, useEffect, useRef, useState } from "react";
+import useAllCategories from "@/shared/hooks/use-all-categories";
+import {
+  Form,
+  Button,
+  Input,
+  Modal,
+  Table,
+  Select,
+  TableColumnsType,
+} from "antd";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-const columns = [
-  {
-    title: "Id",
-    dataIndex: "id",
-    key: "id",
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Data Type",
-    dataIndex: "dataType",
-    key: "dataType",
-  },
-  {
-    title: "Data Created",
-    dataIndex: "dateCreated",
-    key: "dateCreated",
-  },
-];
+const getColumns = () => {
+  const columns: TableColumnsType<AdParamSchema> = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+
+      sorter: {
+        compare: (a, b) => a.id - b.id,
+        multiple: 1,
+      },
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
+      render: (categories: AdCategorySchema[]) => (
+        <>{categories.reduce((acc, { title }) => (acc += ", " + title), "")}</>
+      ),
+    },
+    {
+      title: "Data Type",
+      dataIndex: "dataType",
+      key: "dataType",
+    },
+    {
+      title: "Data Created",
+      dataIndex: "dateCreated",
+      key: "dateCreated",
+    },
+  ];
+
+  return columns;
+};
 
 const useAllParams = () => {
   const [data, setData] = useState<AdParamSchema[]>([]);
@@ -56,6 +83,7 @@ const useResetFormOnCloseModal = ({
   open: boolean;
 }) => {
   const prevOpenRef = useRef<boolean>();
+
   useEffect(() => {
     prevOpenRef.current = open;
   }, [open]);
@@ -75,6 +103,7 @@ interface ModalFormProps {
 
 const ModalForm: React.FC<ModalFormProps> = ({ open, onCancel }) => {
   const [form] = Form.useForm();
+  const { allCategories } = useAllCategories(false, true);
 
   useResetFormOnCloseModal({
     form,
@@ -84,6 +113,10 @@ const ModalForm: React.FC<ModalFormProps> = ({ open, onCancel }) => {
   const onOk = () => {
     form.submit();
   };
+
+  const catOptions = useMemo(() => {
+    return allCategories.map((cat) => ({ value: cat.id, label: cat.title }));
+  }, [allCategories]);
 
   return (
     <Modal
@@ -102,6 +135,15 @@ const ModalForm: React.FC<ModalFormProps> = ({ open, onCancel }) => {
         >
           <Input />
         </Form.Item>
+        <Form.Item
+          label="Category"
+          name="category"
+          rules={[
+            { required: true, message: "Name of parameter can't be empty" },
+          ]}
+        >
+          <Select options={catOptions} />
+        </Form.Item>
       </Form>
     </Modal>
   );
@@ -112,9 +154,14 @@ const AllParameters = () => {
 
   const { data, refetch } = useAllParams();
 
-  const handleAddParam = useCallback(async (name: string) => {
-    await APIService.api.adsServiceCreateParam({ name });
+  const handleAddParam = useCallback(async (name: string, category: number) => {
+    await APIService.api.adsServiceCreateParam({
+      name,
+      categories: [category],
+    });
   }, []);
+
+  const columns = useMemo(() => getColumns(), []);
 
   return (
     <div>
@@ -123,7 +170,7 @@ const AllParameters = () => {
           if (name !== "adParam") return;
 
           try {
-            await handleAddParam(values["name"]);
+            await handleAddParam(values["name"], values["category"]);
             setIsModalOpen(false);
             refetch();
           } catch (e) {
