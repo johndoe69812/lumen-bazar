@@ -2,7 +2,7 @@
 
 import { AdCategorySchema } from "@/api";
 import APIService from "@/api/api-service";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const ApiEndpoints = {
   general: {

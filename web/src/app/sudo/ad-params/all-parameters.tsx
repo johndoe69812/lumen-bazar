@@ -1,59 +1,11 @@
 "use client";
 
 import { AdParamSchema } from "@/api";
-import { AdCategorySchema } from "@/api/__generated__/generated-api";
 import APIService from "@/api/api-service";
 import useAllCategories from "@/shared/hooks/use-all-categories";
-import {
-  Form,
-  Button,
-  Input,
-  Modal,
-  Table,
-  Select,
-  TableColumnsType,
-} from "antd";
+import { Form, Button, Input, Modal, Table, Select } from "antd";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-
-const getColumns = () => {
-  const columns: TableColumnsType<AdParamSchema> = [
-    {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
-
-      sorter: {
-        compare: (a, b) => a.id - b.id,
-        multiple: 1,
-      },
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Category",
-      dataIndex: "category",
-      key: "category",
-      render: (categories: AdCategorySchema[]) => (
-        <>{categories.reduce((acc, { title }) => (acc += ", " + title), "")}</>
-      ),
-    },
-    {
-      title: "Data Type",
-      dataIndex: "dataType",
-      key: "dataType",
-    },
-    {
-      title: "Data Created",
-      dataIndex: "dateCreated",
-      key: "dateCreated",
-    },
-  ];
-
-  return columns;
-};
+import { getColumns } from "./get-columns";
 
 const useAllParams = () => {
   const [data, setData] = useState<AdParamSchema[]>([]);
@@ -105,6 +57,8 @@ const ModalForm: React.FC<ModalFormProps> = ({ open, onCancel }) => {
   const [form] = Form.useForm();
   const { allCategories } = useAllCategories(false, true);
 
+  console.log("allCategories", allCategories);
+
   useResetFormOnCloseModal({
     form,
     open,
@@ -117,6 +71,11 @@ const ModalForm: React.FC<ModalFormProps> = ({ open, onCancel }) => {
   const catOptions = useMemo(() => {
     return allCategories.map((cat) => ({ value: cat.id, label: cat.title }));
   }, [allCategories]);
+
+  const filterOption = (
+    input: string,
+    option?: { label: string; value: string }
+  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   return (
     <Modal
@@ -142,7 +101,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ open, onCancel }) => {
             { required: true, message: "Name of parameter can't be empty" },
           ]}
         >
-          <Select options={catOptions} />
+          <Select options={catOptions} showSearch filterOption={filterOption} />
         </Form.Item>
       </Form>
     </Modal>

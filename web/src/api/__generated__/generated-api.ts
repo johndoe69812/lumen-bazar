@@ -271,6 +271,22 @@ export namespace Api {
     export type RequestHeaders = {};
     export type ResponseBody = AdParamSchema[];
   }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceDeleteAdParameter
+   * @request DELETE:/api/ads/ad-params/{paramId}
+   * @response `200` `boolean` Delete ad parameters
+   */
+  export namespace AdsServiceDeleteAdParameter {
+    export type RequestParams = {
+      paramId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = boolean;
+  }
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -708,6 +724,22 @@ export class Api<SecurityDataType extends unknown> {
         method: "PATCH",
         body: data,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceDeleteAdParameter
+     * @request DELETE:/api/ads/ad-params/{paramId}
+     * @response `200` `boolean` Delete ad parameters
+     */
+    adsServiceDeleteAdParameter: (paramId: number, params: RequestParams = {}) =>
+      this.http.request<boolean, any>({
+        path: `/api/ads/ad-params/${paramId}`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),

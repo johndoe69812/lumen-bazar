@@ -1,6 +1,6 @@
 import APIService from "@/api/api-service";
 import Heading from "@/shared/components/heading";
-import AllParameters from "./all-params";
+import AllParameters from "./all-parameters";
 
 const getData = async () => {
   APIService.http.baseUrl = "http://nest-api:3000";

@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 import { AdsService } from './ads.service';
 import { CreateAdRequest } from './schemas/create-ad.request';
 import { AdsCategoriesService } from './categories.service';
@@ -128,5 +128,19 @@ export class AdsController {
     @Body() updateAdParamDTO: UpdateAdParamDTO,
   ) {
     return this.adParamsService.updateParameter(paramId, updateAdParamDTO);
+  }
+
+  @Delete('/ad-params/:paramId')
+  @ApiParam({
+    name: 'paramId',
+    required: true,
+    schema: { type: 'integer' },
+  })
+  @ApiOkResponse({
+    description: 'Delete ad parameters',
+    type: Boolean,
+  })
+  async deleteAdParameter(@Param('paramId', ParseIntPipe) paramId) {
+    return this.adParamsService.deleteParam(paramId);
   }
 }

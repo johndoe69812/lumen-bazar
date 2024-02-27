@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { AdParam } from './entities/ad-parameter.entity';
@@ -35,18 +35,6 @@ export class AdParamsService {
     return this.adParamsRepository.find({ relations: ['category'] });
   }
 
-  async deleteParam(paramId: number) {
-    try {
-      await this.adParamsRepository.delete({
-        id: paramId,
-      });
-
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
   async updateParameter(paramId: number, updates: Partial<AdParam>) {
     if (!paramId) {
       throw Error('paramId not found');
@@ -60,5 +48,16 @@ export class AdParamsService {
     return param;
   }
 
-  async deleteAttribute() {}
+  async deleteParam(id: number) {
+    try {
+      const param = await this.adParamsRepository.findOne({ where: { id } });
+      await this.adParamsRepository.remove(param);
+
+      return true;
+    } catch (err) {
+      Logger.error(err);
+
+      return false;
+    }
+  }
 }
