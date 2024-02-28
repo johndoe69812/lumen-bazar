@@ -5,6 +5,7 @@ import { AdParam } from './entities/ad-parameter.entity';
 import { CreateAdParamDTO } from './dto/create-ad-param.dto';
 import { isArray } from 'lodash';
 import { AdCategory } from './entities/category.entity';
+import { UpdateAdParamDTO } from './dto/update-ad-param.dto';
 
 @Injectable()
 export class AdParamsService {
@@ -35,7 +36,7 @@ export class AdParamsService {
     return this.adParamsRepository.find({ relations: ['category'] });
   }
 
-  async updateParameter(paramId: number, updates: Partial<AdParam>) {
+  async updateParameter(paramId: number, updates: UpdateAdParamDTO) {
     if (!paramId) {
       throw Error('paramId not found');
     }
@@ -43,6 +44,15 @@ export class AdParamsService {
     const param = await this.adParamsRepository.findOne({
       where: { id: paramId },
     });
+
+    if (updates.categoryId) {
+      const category = await this.adCategories.findOne({
+        where: { id: updates.categoryId },
+      });
+
+      param.category = [category];
+    }
+
     this.adParamsRepository.save({ ...param, ...updates });
 
     return param;

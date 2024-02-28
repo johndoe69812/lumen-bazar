@@ -66,6 +66,7 @@ export interface AdParamSchema {
   dataType: string;
   /** @format date-time */
   dateCreated: string;
+  category: AdCategorySchema[];
 }
 
 export interface UpdateAdParamDTO {
@@ -264,7 +265,7 @@ export namespace Api {
    */
   export namespace AdsServiceUpdateAdParameter {
     export type RequestParams = {
-      paramId: string;
+      paramId: number;
     };
     export type RequestQuery = {};
     export type RequestBody = UpdateAdParamDTO;
@@ -718,7 +719,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request PATCH:/api/ads/ad-params/{paramId}
      * @response `200` `(AdParamSchema)[]` Update ad parameters
      */
-    adsServiceUpdateAdParameter: (paramId: string, data: UpdateAdParamDTO, params: RequestParams = {}) =>
+    adsServiceUpdateAdParameter: (paramId: number, data: UpdateAdParamDTO, params: RequestParams = {}) =>
       this.http.request<AdParamSchema[], any>({
         path: `/api/ads/ad-params/${paramId}`,
         method: "PATCH",

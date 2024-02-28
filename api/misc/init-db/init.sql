@@ -42,6 +42,7 @@ CREATE TABLE public.ad_params_options (
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 CREATE TABLE public.ad_params_to_values (
     id SERIAL PRIMARY KEY,
     ad_id INTEGER REFERENCES ad_items(id),

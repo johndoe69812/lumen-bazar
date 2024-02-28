@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { AdCategorySchema } from './ad-category.schema';
 
 export class AdParamSchema {
   @ApiProperty()
@@ -12,4 +13,10 @@ export class AdParamSchema {
 
   @ApiProperty()
   dateCreated: Date;
+
+  @ApiProperty({
+    isArray: true,
+    type: AdCategorySchema,
+  })
+  category?: AdCategorySchema[];
 }

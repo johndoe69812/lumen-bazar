@@ -124,7 +124,7 @@ export class AdsController {
     type: AdParamSchema,
   })
   async updateAdParameter(
-    @Param('paramId', ParseIntPipe) paramId,
+    @Param('paramId', ParseIntPipe) paramId: number,
     @Body() updateAdParamDTO: UpdateAdParamDTO,
   ) {
     return this.adParamsService.updateParameter(paramId, updateAdParamDTO);

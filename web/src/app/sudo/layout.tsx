@@ -1,16 +1,34 @@
-import { PropsWithChildren } from "react";
+"use client";
+
+import { PropsWithChildren, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Sidebar from "./components/sidebar";
 
 import "./main.css";
 
-const AdminLayout = async (props: PropsWithChildren) => {
+const AdminLayout = (props: PropsWithChildren) => {
   const { children } = props;
 
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            // With SSR, we usually want to set some default staleTime
+            // above 0 to avoid refetching immediately on the client
+            staleTime: 60 * 1000,
+          },
+        },
+      })
+  );
+
   return (
-    <div className="w-full h-full grid grid-cols-[250px_1fr] bg-indigo-50">
-      <Sidebar />
-      <main className="py-2 px-6">{children}</main>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="w-full h-full grid grid-cols-[250px_1fr] bg-indigo-50">
+        <Sidebar />
+        <main className="py-2 px-6">{children}</main>
+      </div>
+    </QueryClientProvider>
   );
 };
 
