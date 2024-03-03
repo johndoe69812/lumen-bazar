@@ -11,9 +11,9 @@ import APIService from "@/api/api-service";
 const ParamOptions = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeId, setActiveId] = useState<number>();
-  const [selectedRows, setSelectedRows] = useState<Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
-  const { isLoading, error, data, refetch } = useAllOptions();
+  const { isLoading, data, refetch } = useAllOptions();
 
   const columns = useMemo(() => getColumns(), []);
 
@@ -45,14 +45,14 @@ const ParamOptions = () => {
   const handleDelete = useCallback(async () => {
     try {
       await APIService.api.adsServiceDeleteOptions({
-        ids: selectedRows as number[],
+        ids: selectedRowKeys as number[],
       });
       refetch();
-      setSelectedRows([]);
+      setSelectedRowKeys([]);
     } catch (e) {
       console.error(e);
     }
-  }, [selectedRows, refetch]);
+  }, [selectedRowKeys, refetch]);
 
   return (
     <Form.Provider onFormFinish={handleAddOptions}>
@@ -67,7 +67,7 @@ const ParamOptions = () => {
             description="Are you sure to delete selected options?"
             onConfirm={handleDelete}
           >
-            <Button disabled={selectedRows.length === 0}>
+            <Button disabled={selectedRowKeys.length === 0}>
               Delete selected
             </Button>
           </Popconfirm>
@@ -80,8 +80,8 @@ const ParamOptions = () => {
         <Table
           loading={isLoading}
           rowSelection={{
-            selectedRowKeys: selectedRows,
-            onChange: setSelectedRows,
+            selectedRowKeys: selectedRowKeys,
+            onChange: setSelectedRowKeys,
           }}
           dataSource={data}
           columns={columns}

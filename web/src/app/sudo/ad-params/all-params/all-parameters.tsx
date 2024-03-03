@@ -8,16 +8,10 @@ import { getColumns } from "./get-columns";
 import EditModal from "./modals/edit-modal/edit-modal";
 import { useAllParams } from "../../shared/queries/use-all-params";
 
-const rowSelection = {
-  getCheckboxProps: (record: AdParamSchema) => ({
-    disabled: false,
-    name: record.name,
-  }),
-};
-
 const AllParameters = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeId, setActiveId] = useState<number>();
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
   const { isLoading, data, refetch } = useAllParams();
 
@@ -91,8 +85,8 @@ const AllParameters = () => {
         <Table
           loading={isLoading}
           rowSelection={{
-            type: "checkbox",
-            ...rowSelection,
+            selectedRowKeys,
+            onChange: setSelectedRowKeys,
           }}
           dataSource={data}
           columns={columns}
