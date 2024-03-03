@@ -1,29 +1,11 @@
 import { Option } from "@/shared/components/form/select/types";
 import useAllCategories from "@/shared/hooks/use-all-categories";
-import { Form, Input, Modal, Select } from "antd";
-import { useEffect, useMemo, useRef } from "react";
-import { useAllParams } from "../use-all-params";
+import { Form, Input, Modal, Select, Tooltip } from "antd";
+import { useEffect, useMemo } from "react";
+import { useAllParams } from "../../../../shared/queries/use-all-params";
+import useResetFormOnCloseModal from "@/app/sudo/shared/hooks/use-reset-form-on-close-modal";
 
-const useResetFormOnCloseModal = ({
-  form,
-  open,
-}: {
-  form: any;
-  open: boolean;
-}) => {
-  const prevOpenRef = useRef<boolean>();
-
-  useEffect(() => {
-    prevOpenRef.current = open;
-  }, [open]);
-  const prevOpen = prevOpenRef.current;
-
-  useEffect(() => {
-    if (!open && prevOpen) {
-      form.resetFields();
-    }
-  }, [form, prevOpen, open]);
-};
+import ParamSettings from "./param-settings";
 
 interface Props {
   open: boolean;
@@ -34,12 +16,9 @@ interface Props {
 const EditModal: React.FC<Props> = (props: Props) => {
   const { id, open, onCancel } = props;
 
-  console.log("id", id);
-
-  const { data } = useAllParams();
-
-  const [form] = Form.useForm();
+  const { data: allParams } = useAllParams();
   const { allCategories } = useAllCategories(false, true);
+  const [form] = Form.useForm();
 
   useResetFormOnCloseModal({
     form,
@@ -58,13 +37,15 @@ const EditModal: React.FC<Props> = (props: Props) => {
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   useEffect(() => {
-    const activeItem = id ? data?.find((p) => p.id === id) : undefined;
+    const activeItem = id ? allParams?.find((p) => p.id === id) : undefined;
 
     form.setFieldsValue({
       ...activeItem,
-      category: activeItem?.category[0].id,
+      categoryId: activeItem?.category[0].id,
     });
-  }, [id, data, form]);
+  }, [id, allParams, form]);
+
+  const dataType = Form.useWatch((values) => values.dataType, form);
 
   return (
     <Modal
@@ -85,13 +66,29 @@ const EditModal: React.FC<Props> = (props: Props) => {
         </Form.Item>
         <Form.Item
           label="Category"
-          name="category"
+          name="categoryId"
           rules={[
             { required: true, message: "Name of parameter can't be empty" },
           ]}
         >
           <Select options={catOptions} filterOption={filterOption} showSearch />
         </Form.Item>
+        <Form.Item
+          label="Data type"
+          name="dataType"
+          rules={[
+            { required: true, message: "Name of parameter can't be empty" },
+          ]}
+        >
+          <Select
+            options={[
+              { label: "Options", value: "options" },
+              { label: "Number", value: "number" },
+              { label: "String", value: "string" },
+            ]}
+          />
+        </Form.Item>
+        <ParamSettings dataType={dataType} />
       </Form>
     </Modal>
   );

@@ -1,17 +1,94 @@
 "use client";
 
-import { Table } from "antd";
+import { Button, Divider, Flex, Form, Popconfirm, Space, Table } from "antd";
 import { getColumns } from "./get-columns";
-import { useMemo } from "react";
+import { Key, useCallback, useMemo, useState } from "react";
+import { useAllOptions } from "../../shared/queries/use-all-options";
+import { ParamOptionSchema } from "@/api/__generated__/generated-api";
+import EditModal from "./modals/edit-modal";
+import APIService from "@/api/api-service";
 
 const ParamOptions = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeId, setActiveId] = useState<number>();
+  const [selectedRows, setSelectedRows] = useState<Key[]>([]);
+
+  const { isLoading, error, data, refetch } = useAllOptions();
+
   const columns = useMemo(() => getColumns(), []);
-  const data = [];
+
+  const handleOpenModal = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+    setActiveId(undefined);
+  }, []);
+
+  const handleAddOptions = useCallback(
+    async (name: string, { values }: { values: unknown }) => {
+      try {
+        await APIService.api.adsServiceCreateOptions(
+          values as ParamOptionSchema
+        );
+
+        handleCloseModal();
+        refetch();
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [refetch, handleCloseModal]
+  );
+
+  const handleDelete = useCallback(async () => {
+    try {
+      await APIService.api.adsServiceDeleteOptions({
+        ids: selectedRows as number[],
+      });
+      refetch();
+      setSelectedRows([]);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [selectedRows, refetch]);
 
   return (
-    <div>
-      <Table dataSource={data} columns={columns} />
-    </div>
+    <Form.Provider onFormFinish={handleAddOptions}>
+      <Flex gap={10} vertical>
+        <Space>
+          <Button type="primary" onClick={handleOpenModal}>
+            Add new option
+          </Button>
+          <Divider type="vertical" />
+          <Popconfirm
+            title="Delete options"
+            description="Are you sure to delete selected options?"
+            onConfirm={handleDelete}
+          >
+            <Button disabled={selectedRows.length === 0}>
+              Delete selected
+            </Button>
+          </Popconfirm>
+        </Space>
+        <EditModal
+          id={activeId}
+          open={isModalOpen}
+          onCancel={handleCloseModal}
+        />
+        <Table
+          loading={isLoading}
+          rowSelection={{
+            selectedRowKeys: selectedRows,
+            onChange: setSelectedRows,
+          }}
+          dataSource={data}
+          columns={columns}
+          rowKey={(row) => row.id}
+        />
+      </Flex>
+    </Form.Provider>
   );
 };
 

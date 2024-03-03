@@ -6,6 +6,7 @@ import { Button, Checkbox, Flex, TableColumnsType } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import APIService from "@/api/api-service";
 import { useCallback } from "react";
+import { dateFromNow } from "../../shared/utils/date-from-now";
 
 type Handlers = {
   onEdit: (id: React.Key) => void;
@@ -61,14 +62,15 @@ export const getColumns = ({ onEdit, onDelete }: Handlers) => {
       ),
     },
     {
-      title: "Data Type",
+      title: "Data type",
       dataIndex: "dataType",
       key: "dataType",
     },
     {
-      title: "Data Created",
+      title: "Date created",
       dataIndex: "dateCreated",
       key: "dateCreated",
+      render: (_, record) => <>{dateFromNow(record.dateCreated)}</>,
     },
     {
       title: "Actions",

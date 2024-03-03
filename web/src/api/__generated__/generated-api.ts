@@ -56,8 +56,14 @@ export interface CreateAdParamDTO {
    * @max 50
    */
   name: string;
-  /** List of categories (ids) */
-  categories: number[];
+  /** Data type (one of: number, string or options) */
+  dataType: string;
+  /** Id of option (Number) */
+  optionId: number;
+  /** Id of category (Number) */
+  categoryId: number;
+  /** Meta information(constraints) for parameter */
+  meta: object;
 }
 
 export interface AdParamSchema {
@@ -69,13 +75,22 @@ export interface AdParamSchema {
   category: AdCategorySchema[];
 }
 
-export interface UpdateAdParamDTO {
-  /**
-   * @min 3
-   * @max 50
-   */
+export interface ParamOptionVariantSchema {
+  id: number;
   name: string;
-  categoryId: number;
+  value: string;
+}
+
+export interface ParamOptionSchema {
+  id: number;
+  name: string;
+  /** @format date-time */
+  dateCreated: string;
+  items: ParamOptionVariantSchema[];
+}
+
+export interface ArrayOfIdsDTO {
+  ids: number[];
 }
 
 export namespace Api {
@@ -268,7 +283,7 @@ export namespace Api {
       paramId: number;
     };
     export type RequestQuery = {};
-    export type RequestBody = UpdateAdParamDTO;
+    export type RequestBody = CreateAdParamDTO;
     export type RequestHeaders = {};
     export type ResponseBody = AdParamSchema[];
   }
@@ -287,6 +302,48 @@ export namespace Api {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = boolean;
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceGetAllParamOptions
+   * @request GET:/api/ads/ad-params/options
+   * @response `200` `(ParamOptionSchema)[]` Get ad options for parameter
+   */
+  export namespace AdsServiceGetAllParamOptions {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ParamOptionSchema[];
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceDeleteOptions
+   * @request DELETE:/api/ads/ad-params/options
+   * @response `200` `boolean` Delete ad options (array of ids)
+   */
+  export namespace AdsServiceDeleteOptions {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = ArrayOfIdsDTO;
+    export type RequestHeaders = {};
+    export type ResponseBody = boolean;
+  }
+  /**
+   * No description
+   * @tags ads
+   * @name AdsServiceCreateOptions
+   * @request POST:/api/ads/ad-params/option
+   * @response `200` `ParamOptionSchema` Create option
+   */
+  export namespace AdsServiceCreateOptions {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = ParamOptionSchema;
+    export type RequestHeaders = {};
+    export type ResponseBody = ParamOptionSchema;
   }
 }
 
@@ -719,7 +776,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request PATCH:/api/ads/ad-params/{paramId}
      * @response `200` `(AdParamSchema)[]` Update ad parameters
      */
-    adsServiceUpdateAdParameter: (paramId: number, data: UpdateAdParamDTO, params: RequestParams = {}) =>
+    adsServiceUpdateAdParameter: (paramId: number, data: CreateAdParamDTO, params: RequestParams = {}) =>
       this.http.request<AdParamSchema[], any>({
         path: `/api/ads/ad-params/${paramId}`,
         method: "PATCH",
@@ -741,6 +798,58 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<boolean, any>({
         path: `/api/ads/ad-params/${paramId}`,
         method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceGetAllParamOptions
+     * @request GET:/api/ads/ad-params/options
+     * @response `200` `(ParamOptionSchema)[]` Get ad options for parameter
+     */
+    adsServiceGetAllParamOptions: (params: RequestParams = {}) =>
+      this.http.request<ParamOptionSchema[], any>({
+        path: `/api/ads/ad-params/options`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceDeleteOptions
+     * @request DELETE:/api/ads/ad-params/options
+     * @response `200` `boolean` Delete ad options (array of ids)
+     */
+    adsServiceDeleteOptions: (data: ArrayOfIdsDTO, params: RequestParams = {}) =>
+      this.http.request<boolean, any>({
+        path: `/api/ads/ad-params/options`,
+        method: "DELETE",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ads
+     * @name AdsServiceCreateOptions
+     * @request POST:/api/ads/ad-params/option
+     * @response `200` `ParamOptionSchema` Create option
+     */
+    adsServiceCreateOptions: (data: ParamOptionSchema, params: RequestParams = {}) =>
+      this.http.request<ParamOptionSchema, any>({
+        path: `/api/ads/ad-params/option`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

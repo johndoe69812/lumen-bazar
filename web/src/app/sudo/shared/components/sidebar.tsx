@@ -51,7 +51,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="h-[100vh] bg-white shadow">
+    <aside className="sticky top-0 h-[100vh] bg-white shadow">
       <nav>
         <ul className="flex flex-col gap-2 py-4">
           {menuItems.map((item, index) => (

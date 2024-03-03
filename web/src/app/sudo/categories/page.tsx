@@ -1,5 +1,5 @@
 import APIService from "@/api/api-service";
-import { CategoryField } from "../components/category-field";
+import { CategoryField } from "../shared/components/category-field";
 import Heading from "@/shared/components/heading";
 
 async function getData() {

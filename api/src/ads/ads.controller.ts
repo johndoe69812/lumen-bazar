@@ -18,7 +18,8 @@ import { UpdateCategoryDTO } from './dto/update-category.dto.';
 import { AdParamsService } from './ad-params.service';
 import { CreateAdParamDTO } from './dto/create-ad-param.dto';
 import { AdParamSchema } from './schemas/ad-param.schema';
-import { UpdateAdParamDTO } from './dto/update-ad-param.dto';
+import { ParamOptionSchema } from './schemas/param-option.schema';
+import { ArrayOfIdsDTO } from 'src/shared/dto/array-of-ids.dto';
 
 @ApiTags('ads')
 @Controller('ads')
@@ -125,9 +126,37 @@ export class AdsController {
   })
   async updateAdParameter(
     @Param('paramId', ParseIntPipe) paramId: number,
-    @Body() updateAdParamDTO: UpdateAdParamDTO,
+    @Body() updateAdParamDTO: CreateAdParamDTO,
   ) {
     return this.adParamsService.updateParameter(paramId, updateAdParamDTO);
+  }
+
+  @Get('/ad-params/options')
+  @ApiOkResponse({
+    description: 'Get ad options for parameter',
+    isArray: true,
+    type: ParamOptionSchema,
+  })
+  async getAllParamOptions() {
+    return this.adParamsService.getAllOptions();
+  }
+
+  @Post('/ad-params/option')
+  @ApiOkResponse({
+    description: 'Create option',
+    type: ParamOptionSchema,
+  })
+  async createOptions(@Body() createOptionDTO: ParamOptionSchema) {
+    return this.adParamsService.createOption(createOptionDTO);
+  }
+
+  @Delete('/ad-params/options')
+  @ApiOkResponse({
+    description: 'Delete ad options (array of ids)',
+    type: Boolean,
+  })
+  async deleteOptions(@Body() optionIds: ArrayOfIdsDTO) {
+    return this.adParamsService.deleteOptions(optionIds);
   }
 
   @Delete('/ad-params/:paramId')

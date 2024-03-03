@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Sidebar from "./components/sidebar";
+import Sidebar from "./shared/components/sidebar";
 
 import "./main.css";
 
@@ -26,7 +26,7 @@ const AdminLayout = (props: PropsWithChildren) => {
     <QueryClientProvider client={queryClient}>
       <div className="w-full h-full grid grid-cols-[250px_1fr] bg-indigo-50">
         <Sidebar />
-        <main className="py-2 px-6">{children}</main>
+        <main className="pt-6 pb-2 px-6">{children}</main>
       </div>
     </QueryClientProvider>
   );

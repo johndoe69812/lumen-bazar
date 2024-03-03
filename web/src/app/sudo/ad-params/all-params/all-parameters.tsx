@@ -1,17 +1,16 @@
 "use client";
 
-import { AdParamSchema } from "@/api";
+import { AdParamSchema, CreateAdParamDTO } from "@/api";
 import APIService from "@/api/api-service";
 import { Form, Button, Table, Flex } from "antd";
 import { Key, useCallback, useMemo, useState } from "react";
 import { getColumns } from "./get-columns";
-import EditModal from "./modals/edit-modal";
-import { useAllParams } from "./use-all-params";
+import EditModal from "./modals/edit-modal/edit-modal";
+import { useAllParams } from "../../shared/queries/use-all-params";
 
 const rowSelection = {
-  onChange: (selectedRowKeys: React.Key[], selectedRows: AdParamSchema[]) => {},
   getCheckboxProps: (record: AdParamSchema) => ({
-    disabled: record.name === "Disabled User", // Column configuration not to be checked
+    disabled: false,
     name: record.name,
   }),
 };
@@ -20,20 +19,14 @@ const AllParameters = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeId, setActiveId] = useState<number>();
 
-  const { isLoading, error, data, refetch } = useAllParams();
+  const { isLoading, data, refetch } = useAllParams();
 
   const handleAddParam = useCallback(
-    async (name: string, category: number) => {
+    async (values: CreateAdParamDTO) => {
       if (activeId) {
-        await APIService.api.adsServiceUpdateAdParameter(activeId, {
-          name,
-          categoryId: category,
-        });
+        await APIService.api.adsServiceUpdateAdParameter(activeId, values);
       } else {
-        await APIService.api.adsServiceCreateParam({
-          name,
-          categories: [category],
-        });
+        await APIService.api.adsServiceCreateParam(values);
       }
 
       refetch();
@@ -75,11 +68,9 @@ const AllParameters = () => {
 
   return (
     <Form.Provider
-      onFormFinish={async (name, { values, forms }) => {
-        if (name !== "adParam") return;
-
+      onFormFinish={async (_, { values }) => {
         try {
-          await handleAddParam(values["name"], values["category"]);
+          await handleAddParam(values as CreateAdParamDTO);
           handleCloseModal();
         } catch (e) {
           console.error(e);

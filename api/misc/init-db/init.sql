@@ -22,7 +22,6 @@ CREATE TABLE public.ad_items (
 CREATE TABLE public.ad_param_groups (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255),
-    param_id INTEGER REFERENCES ad_params(id),
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -30,6 +29,8 @@ CREATE TABLE public.ad_params (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     data_type VARCHAR(255),
+    option_id INTEGER,
+    meta JSONB,
     parent_id INTEGER REFERENCES ad_params(id),
     group_id INTEGER REFERENCES ad_param_groups(id),
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -37,11 +38,18 @@ CREATE TABLE public.ad_params (
 
 CREATE TABLE public.ad_params_options (
     id SERIAL PRIMARY KEY,
-    param_id INTEGER REFERENCES ad_params(id),
+    name VARCHAR(255),
     value VARCHAR(255),
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE public.ad_params_option_item (
+    id SERIAL PRIMARY KEY,
+    option_id INTEGER REFERENCES ad_params_options(id),
+    name VARCHAR(255), 
+    value VARCHAR(255),
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE public.ad_params_to_values (
     id SERIAL PRIMARY KEY,

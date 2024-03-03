@@ -1,8 +1,9 @@
-import { AdParamSchema } from "@/api";
+import { ParamOptionSchema } from "@/api";
 import { TableColumnsType } from "antd";
+import { dateFromNow } from "../../shared/utils/date-from-now";
 
 export const getColumns = () => {
-  const columns: TableColumnsType<AdParamSchema> = [
+  const columns: TableColumnsType<ParamOptionSchema> = [
     {
       title: "Id",
       dataIndex: "id",
@@ -19,14 +20,16 @@ export const getColumns = () => {
       key: "name",
     },
     {
-      title: "Data Type",
-      dataIndex: "dataType",
-      key: "dataType",
+      title: "Total variants",
+      dataIndex: "total",
+      key: "total",
+      render: (_, record) => <>{record.items.length}</>,
     },
     {
-      title: "Data Created",
+      title: "Date created",
       dataIndex: "dateCreated",
       key: "dateCreated",
+      render: (_, record) => <>{dateFromNow(record.dateCreated)}</>,
     },
   ];
 

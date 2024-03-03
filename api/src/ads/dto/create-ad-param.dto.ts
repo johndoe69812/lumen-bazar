@@ -1,4 +1,4 @@
-import { Length, IsString, IsNumber, ArrayMaxSize } from 'class-validator';
+import { Length, IsString, IsNumber, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAdParamDTO {
@@ -9,12 +9,30 @@ export class CreateAdParamDTO {
   @ApiProperty({ minimum: 3, maximum: 50 })
   name: string;
 
-  @IsNumber({}, { each: true })
-  @ArrayMaxSize(10)
   @ApiProperty({
-    description: 'List of categories (ids)',
-    type: Number,
-    isArray: true,
+    description: 'Data type (one of: number, string or options)',
   })
-  categories: number[];
+  dataType: 'number' | 'options' | 'string';
+
+  @IsNumber()
+  @IsOptional()
+  @ApiProperty({
+    description: 'Id of option (Number)',
+    required: false,
+    type: Number,
+  })
+  optionId?: number;
+
+  @IsNumber()
+  @ApiProperty({
+    description: 'Id of category (Number)',
+    type: Number,
+  })
+  categoryId: number;
+
+  @ApiProperty({
+    description: 'Meta information(constraints) for parameter',
+    type: Object,
+  })
+  meta?: Record<string, unknown>;
 }
