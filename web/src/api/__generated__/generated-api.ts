@@ -59,7 +59,7 @@ export interface CreateAdParamDTO {
   /** Data type (one of: number, string or options) */
   dataType: string;
   /** Id of option (Number) */
-  optionId: number;
+  optionId?: number;
   /** Id of category (Number) */
   categoryId: number;
   /** Meta information(constraints) for parameter */

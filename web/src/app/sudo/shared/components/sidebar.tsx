@@ -32,10 +32,18 @@ const PageLink = (props: Props) => {
   );
 };
 
+type MenuItem = {
+  title: string;
+  href: string;
+  icon: ReactNode;
+  isActive?: boolean;
+  subItems?: MenuItem[];
+};
+
 const Sidebar = () => {
   const pathname = usePathname();
 
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { title: "Dashboard", href: "/sudo", icon: <CiGrid41 />, isActive: true },
     { title: "Categories", href: "/sudo/categories", icon: <BiCategory /> },
     {

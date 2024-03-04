@@ -1,6 +1,6 @@
 "use client";
 
-import { AdParamSchema, CreateAdParamDTO } from "@/api";
+import { CreateAdParamDTO } from "@/api";
 import APIService from "@/api/api-service";
 import { Form, Button, Table, Flex } from "antd";
 import { Key, useCallback, useMemo, useState } from "react";
