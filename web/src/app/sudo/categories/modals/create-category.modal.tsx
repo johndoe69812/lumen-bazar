@@ -1,7 +1,8 @@
-import { Form, FormInstance, Input, Modal, Select } from "antd";
-import { FC, useCallback, useEffect, useState } from "react";
+import { Form, FormInstance, Input, Modal, Select, TreeSelect } from "antd";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useFlatCategories } from "../../shared/queries/categories/use-flat-categories";
 import { CreateCategoryDTO } from "@/api";
+import buildCategoryTree from "../../shared/utils/build-category-tree";
 
 type CreateCategoryFormProps = {
   onFormInstanceReady: (instance: FormInstance<CreateCategoryDTO>) => void;
@@ -12,6 +13,12 @@ const CreateCategoryForm: FC<CreateCategoryFormProps> = (props) => {
 
   const { data } = useFlatCategories();
   const [form] = Form.useForm();
+
+  const treeData = useMemo(() => {
+    return (
+      data && [...buildCategoryTree(data), { title: "Unassigned", id: null }]
+    );
+  }, [data]);
 
   useEffect(() => {
     onFormInstanceReady(form);
@@ -32,7 +39,16 @@ const CreateCategoryForm: FC<CreateCategoryFormProps> = (props) => {
         name="parentId"
         rules={[{ required: true }]}
       >
-        <Select options={data} fieldNames={{ value: "id", label: "title" }} />
+        <TreeSelect
+          treeData={treeData}
+          fieldNames={{
+            value: "id",
+            label: "title",
+            children: "subCategories",
+          }}
+          treeNodeFilterProp="title"
+          showSearch
+        />
       </Form.Item>
     </Form>
   );

@@ -7,7 +7,6 @@ import CategoriesTree from "./categories-tree";
 import { Button, Card, Flex, Tree, TreeDataNode } from "antd";
 import CreateCategoryModal from "../modals/create-category.modal";
 import { useCreateCategory } from "../../shared/queries/categories/use-create-category";
-import { TreeNode } from "antd/es/tree-select";
 import APIService from "@/api/api-service";
 import { DeleteOutlined } from "@ant-design/icons";
 import { BasicDataNode } from "antd/es/tree";

@@ -1,26 +1,12 @@
-import APIService from "@/api/api-service";
+import PageHeadline from "../shared/components/page-headline";
 import { CategoryField } from "./components/categories-field";
-import Heading from "@/shared/components/heading";
 
-async function getData() {
-  APIService.http.baseUrl = "http://nest-api:3000";
-  const categories = await APIService.api.adsServiceGetFlatCategories();
-
-  return {
-    categories,
-  };
-}
-
-const CategoriesPage = async () => {
-  const { categories } = await getData();
-
+const CategoriesPage = () => {
   return (
-    <div>
-      <Heading variant="h2" className="text-indigo-900">
-        Categories
-      </Heading>
+    <>
+      <PageHeadline title="Categories" />
       <CategoryField />
-    </div>
+    </>
   );
 };
 
