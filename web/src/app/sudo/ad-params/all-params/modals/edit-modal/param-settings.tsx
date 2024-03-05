@@ -1,7 +1,5 @@
 import { useAllOptions } from "@/app/sudo/shared/queries/use-all-options";
 import { Checkbox, Form, InputNumber, Select } from "antd";
-import { normalizeOptions } from "./utils/normalize-options";
-import { useMemo } from "react";
 
 type Props = { dataType: "options" | "string" | "number" };
 
@@ -23,12 +21,14 @@ const ParamSettings = (props: Props) => {
 const OptionsConstraints = () => {
   const { data: allOptions } = useAllOptions();
 
-  const options = useMemo(() => normalizeOptions(allOptions), [allOptions]);
-
   return (
     <>
       <Form.Item name="optionId">
-        <Select options={options} showSearch />
+        <Select
+          fieldNames={{ label: "name", value: "id" }}
+          options={allOptions}
+          showSearch
+        />
       </Form.Item>
       <Form.Item
         tooltip="Can customer choose multiple options? I.e laptopType: for office, for game"

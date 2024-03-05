@@ -1,5 +1,5 @@
 import APIService from "@/api/api-service";
-import { CategoryField } from "../shared/components/category-field";
+import { CategoryField } from "./components/categories-field";
 import Heading from "@/shared/components/heading";
 
 async function getData() {
@@ -19,7 +19,7 @@ const CategoriesPage = async () => {
       <Heading variant="h2" className="text-indigo-900">
         Categories
       </Heading>
-      <CategoryField categories={categories} />
+      <CategoryField />
     </div>
   );
 };

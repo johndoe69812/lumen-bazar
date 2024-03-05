@@ -4,10 +4,10 @@ import clsx from "clsx";
 import Link from "next/link";
 import { ComponentProps, ReactNode } from "react";
 import { CiGrid41 } from "@react-icons/all-files/ci/CiGrid41";
-import { CiViewTable as ShowAllIcon } from "@react-icons/all-files/ci/CiViewTable";
 import { BiCategory } from "@react-icons/all-files/bi/BiCategory";
 import { VscTypeHierarchy } from "@react-icons/all-files/vsc/VscTypeHierarchy";
 import { usePathname } from "next/navigation";
+import { TableOutlined } from "@ant-design/icons";
 
 type Props = ComponentProps<typeof Link> & {
   icon: ReactNode;
@@ -54,7 +54,7 @@ const Sidebar = () => {
     {
       title: "All Advertisements",
       href: "/sudo/all-ads",
-      icon: <ShowAllIcon />,
+      icon: <TableOutlined />,
     },
   ];
 

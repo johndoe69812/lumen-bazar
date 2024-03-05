@@ -23,7 +23,6 @@ type Props = {
 const FormConstructorPage: FC<Props> = async (props) => {
   const { catId } = props.params;
 
-  console.log("props", catId);
   const { params } = await getData();
 
   return (

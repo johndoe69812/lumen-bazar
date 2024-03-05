@@ -6,6 +6,7 @@ import { useAllParams } from "../../../../shared/queries/use-all-params";
 import useResetFormOnCloseModal from "@/app/sudo/shared/hooks/use-reset-form-on-close-modal";
 
 import ParamSettings from "./param-settings";
+import { AdCategorySchema, AdParamSchema } from "@/api";
 
 interface Props {
   open: boolean;
@@ -29,12 +30,8 @@ const EditModal: React.FC<Props> = (props: Props) => {
     form.submit();
   };
 
-  const catOptions = useMemo(() => {
-    return allCategories.map((cat) => ({ value: cat.id, label: cat.title }));
-  }, [allCategories]);
-
-  const filterOption = (input: string, option?: Option): boolean =>
-    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+  const filterOption = (input: string, option?: AdCategorySchema): boolean =>
+    (option?.title ?? "").toLowerCase().includes(input.toLowerCase());
 
   useEffect(() => {
     const activeItem = id ? allParams?.find((p) => p.id === id) : undefined;
@@ -71,7 +68,12 @@ const EditModal: React.FC<Props> = (props: Props) => {
             { required: true, message: "Name of parameter can't be empty" },
           ]}
         >
-          <Select options={catOptions} filterOption={filterOption} showSearch />
+          <Select<any, AdCategorySchema>
+            fieldNames={{ value: "id", label: "title" }}
+            options={allCategories}
+            filterOption={filterOption}
+            showSearch
+          />
         </Form.Item>
         <Form.Item
           label="Data type"

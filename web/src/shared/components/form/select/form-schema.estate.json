@@ -1,0 +1,3208 @@
+{
+    "fields": [
+        {
+            "dataType": "integer",
+            "id": 201,
+            "label": "Тип объявления",
+            "slug": "offer_type",
+            "name": "params[201]",
+            "enabled": true,
+            "widget": {
+                "type": "hidden",
+                "config": {}
+            },
+            "stepId": 1014,
+            "sorting": 2,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Продам",
+                    "value": 1059
+                },
+                {
+                    "label": "Сдам",
+                    "value": 1060
+                },
+                {
+                    "label": "Куплю",
+                    "value": 1058
+                },
+                {
+                    "label": "Сниму",
+                    "value": 1061
+                }
+            ],
+            "value": 1059,
+            "updatesForm": true,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Выберите значение из списка",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false,
+            "displayTitle": "Продам"
+        },
+        {
+            "dataType": "integer",
+            "id": 499,
+            "label": "Вид объекта",
+            "slug": "type",
+            "name": "params[499]",
+            "enabled": true,
+            "widget": {
+                "type": "hidden",
+                "config": {}
+            },
+            "stepId": 1014,
+            "sorting": 5,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Вторичка",
+                    "value": 5254
+                },
+                {
+                    "label": "Новостройка",
+                    "value": 5255
+                }
+            ],
+            "value": 5254,
+            "updatesForm": true,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Выберите значение из списка",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false,
+            "displayTitle": "Вторичка"
+        },
+        {
+            "dataType": "integer",
+            "id": 138851,
+            "label": "Тариф: годовой лимит",
+            "slug": "tarif_godovoi_limit",
+            "name": "params[138851]",
+            "enabled": true,
+            "widget": {
+                "type": "hidden",
+                "config": {}
+            },
+            "stepId": 1014,
+            "sorting": 13,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Да",
+                    "value": 1
+                },
+                {
+                    "label": "Нет",
+                    "value": 0
+                }
+            ],
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 98287,
+            "label": "Выбор ЖК",
+            "widget": {
+                "type": "residentialComplex",
+                "config": {
+                    "size": "m",
+                    "slotFieldsToParams": {
+                        "developmentAddress": 494,
+                        "developmentBuildingId": 1384,
+                        "developmentBuildingQueue": 1702,
+                        "developmentId": 1383,
+                        "developmentSpec": 1385
+                    }
+                }
+            },
+            "stepId": 804,
+            "sorting": 15,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "string",
+            "help": "Точный адрес поможет привлечь заинтересованных покупателей",
+            "id": 494,
+            "label": "Адрес",
+            "slug": "address",
+            "name": "params[494]",
+            "placeholder": "Адрес",
+            "enabled": true,
+            "widget": {
+                "type": "address",
+                "config": {
+                    "help": false,
+                    "hidePinWhenAddressEmpty": true,
+                    "isUpdateParamsByChange": true,
+                    "layout": "wide",
+                    "mapHeight": 208,
+                    "placeholder": "Улица и номер дома",
+                    "size": "m",
+                    "width": 12
+                }
+            },
+            "stepId": 804,
+            "sorting": 20,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "regex",
+                    "message": "Неверный формат",
+                    "severity": "error",
+                    "regexPositive": "^[\\w\\sа-яёА-ЯЁ№\"«»\\.,_\\|\\/()\\-—]*$"
+                },
+                {
+                    "rule": "required",
+                    "message": "Введите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "string",
+            "id": 110045,
+            "label": "Номер квартиры",
+            "slug": "nomer_kvartiry",
+            "name": "params[110045]",
+            "enabled": true,
+            "widget": {
+                "type": "input",
+                "config": {
+                    "hint": {
+                        "text": "Номер никто не увидит"
+                    },
+                    "labelHelp": {
+                        "maxWidth": 328,
+                        "text": "Мы добавим в объявление данные из Росреестра: количество собственников, наличие ограничений. Если с квартирой всё в порядке, покупатели об этом узнают."
+                    },
+                    "layout": "wide",
+                    "size": "m",
+                    "width": 2
+                }
+            },
+            "stepId": 804,
+            "sorting": 24,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "regex",
+                    "message": "Непохоже на номер квартиры",
+                    "severity": "error",
+                    "regexPositive": "^(?:(?!^[0\\W])(?![0\\W]*$))(?!(^\\D+[\\W]+\\D$))[ivxlcdmIVXLCDMа-яА-я\\s\\d\\\\\\/\\.\\-\\,\\(\\*\\)]*[^\\\\\\/\\.\\-\\,_\\(\\*\\)]$"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 180802,
+            "label": "CPA блок",
+            "widget": {
+                "type": "realtyCpa",
+                "config": {
+                    "isBuildingFinishedValue": "3260383",
+                    "notificationVisibleValue": "798850",
+                    "ownerFormVisibleValue": "798849",
+                    "placesItemFieldId": 2708,
+                    "slotFieldsToParams": {
+                        "ownerFormId": 112880,
+                        "transactionTypeId": 112879
+                    }
+                }
+            },
+            "stepId": 804,
+            "sorting": 25,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "integer",
+            "id": 2707,
+            "label": "Размещает объявление",
+            "slug": "commission",
+            "name": "params[2707]",
+            "enabled": true,
+            "widget": {
+                "type": "radio",
+                "config": {
+                    "show_label": true,
+                    "size": "m"
+                }
+            },
+            "stepId": 58,
+            "sorting": 31,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Собственник",
+                    "value": 19748
+                },
+                {
+                    "label": "Посредник",
+                    "value": 19749
+                }
+            ],
+            "updatesForm": true,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Выберите право собственности",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "defaultValue": 446873,
+            "id": 110546,
+            "label": "Онлайн-показ",
+            "slug": "bezopasnyi_prosmotr",
+            "name": "params[110546]",
+            "enabled": true,
+            "widget": {
+                "type": "radio",
+                "config": {
+                    "labelHelp": {
+                        "maxWidth": 328,
+                        "text": "В объявлении появится отметка, что вы готовы показать квартиру дистанционно — по видеосвязи. Вы сможете назначить показ на удобное время, выбрав его вместе с покупателем."
+                    },
+                    "size": "m"
+                }
+            },
+            "stepId": 58,
+            "sorting": 33,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Проведу",
+                    "widget": {
+                        "config": {}
+                    },
+                    "value": 446873
+                },
+                {
+                    "label": "Не хочу",
+                    "value": 446874
+                }
+            ],
+            "value": 446873,
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false,
+            "displayTitle": "Проведу"
+        },
+        {
+            "id": 516400,
+            "label": "Контактная информация",
+            "widget": {
+                "type": "contactInfo",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 58,
+            "sorting": 34,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 494108,
+            "label": "Способ связи",
+            "widget": {
+                "type": "contactMethod",
+                "config": {
+                    "field": {
+                        "id": "contactMethod",
+                        "required": true,
+                        "title": "Способ связи",
+                        "type": "select",
+                        "values": [
+                            {
+                                "id": "any",
+                                "title": "Звонки и сообщения"
+                            },
+                            {
+                                "id": "phone",
+                                "title": "Только звонки"
+                            }
+                        ]
+                    }
+                }
+            },
+            "stepId": 58,
+            "sorting": 35,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 526634,
+            "label": "inAppCallsDevices",
+            "widget": {
+                "type": "inAppCallsDevices",
+                "config": {
+                    "iacDevices": [
+                        {
+                            "id": "2b55ed66cfafcdfc",
+                            "name": "samsung SM-G973F"
+                        }
+                    ],
+                    "iacForPro": false,
+                    "iacProUser": false
+                }
+            },
+            "stepId": 58,
+            "sorting": 36,
+            "entityType": "slot",
+            "value": {
+                "iacDevices": [
+                    "2b55ed66cfafcdfc"
+                ],
+                "iacProChosen": false
+            }
+        },
+        {
+            "dataType": "integer",
+            "id": 110688,
+            "label": "Тип жилья",
+            "slug": "status",
+            "name": "params[110688]",
+            "enabled": true,
+            "widget": {
+                "type": "radio",
+                "config": {
+                    "size": "m",
+                    "tooltip": {
+                        "maxWidth": 328,
+                        "text": "Апартаменты стоят дешевле, но имеют статус нежилого помещения. У них есть сложности с пропиской, налоги и коммунальные платежи выше, а получить налоговый вычет нельзя."
+                    }
+                }
+            },
+            "stepId": 7,
+            "sorting": 43,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Квартира",
+                    "value": 458589
+                },
+                {
+                    "label": "Апартаменты",
+                    "value": 458590
+                }
+            ],
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 496,
+            "label": "Этаж",
+            "slug": "floor",
+            "name": "params[496]",
+            "enabled": true,
+            "widget": {
+                "type": "suggestLocal",
+                "config": {
+                    "bare": false,
+                    "clearable": false,
+                    "maxLength": 2,
+                    "pattern": "^[1-9]{1}[0-9]?$",
+                    "size": "m",
+                    "validation": [
+                        {
+                            "fieldId": 497,
+                            "message": "Ваш этаж не может быть выше этажности дома",
+                            "rule": "lte"
+                        }
+                    ],
+                    "width": 2,
+                    "withoutBlur": false
+                }
+            },
+            "stepId": 7,
+            "sorting": 44,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "1",
+                    "value": 5120
+                },
+                {
+                    "label": "2",
+                    "value": 5121
+                },
+                {
+                    "label": "3",
+                    "value": 5122
+                },
+                {
+                    "label": "4",
+                    "value": 5123
+                },
+                {
+                    "label": "5",
+                    "value": 5124
+                },
+                {
+                    "label": "6",
+                    "value": 5125
+                },
+                {
+                    "label": "7",
+                    "value": 5126
+                },
+                {
+                    "label": "8",
+                    "value": 5127
+                },
+                {
+                    "label": "9",
+                    "value": 5128
+                },
+                {
+                    "label": "10",
+                    "value": 5129
+                },
+                {
+                    "label": "11",
+                    "value": 5130
+                },
+                {
+                    "label": "12",
+                    "value": 5131
+                },
+                {
+                    "label": "13",
+                    "value": 5132
+                },
+                {
+                    "label": "14",
+                    "value": 5133
+                },
+                {
+                    "label": "15",
+                    "value": 5134
+                },
+                {
+                    "label": "16",
+                    "value": 5135
+                },
+                {
+                    "label": "17",
+                    "value": 5136
+                },
+                {
+                    "label": "18",
+                    "value": 5137
+                },
+                {
+                    "label": "19",
+                    "value": 5138
+                },
+                {
+                    "label": "20",
+                    "value": 5139
+                },
+                {
+                    "label": "21",
+                    "value": 5140
+                },
+                {
+                    "label": "22",
+                    "value": 5141
+                },
+                {
+                    "label": "23",
+                    "value": 5142
+                },
+                {
+                    "label": "24",
+                    "value": 5143
+                },
+                {
+                    "label": "25",
+                    "value": 5144
+                },
+                {
+                    "label": "26",
+                    "value": 5145
+                },
+                {
+                    "label": "27",
+                    "value": 5146
+                },
+                {
+                    "label": "28",
+                    "value": 5147
+                },
+                {
+                    "label": "29",
+                    "value": 5148
+                },
+                {
+                    "label": "30",
+                    "value": 5149
+                },
+                {
+                    "label": "31",
+                    "value": 5150
+                },
+                {
+                    "label": "32",
+                    "value": 8861
+                },
+                {
+                    "label": "33",
+                    "value": 8862
+                },
+                {
+                    "label": "34",
+                    "value": 8863
+                },
+                {
+                    "label": "35",
+                    "value": 8864
+                },
+                {
+                    "label": "36",
+                    "value": 8865
+                },
+                {
+                    "label": "37",
+                    "value": 8866
+                },
+                {
+                    "label": "38",
+                    "value": 8867
+                },
+                {
+                    "label": "39",
+                    "value": 8868
+                },
+                {
+                    "label": "40",
+                    "value": 8869
+                },
+                {
+                    "label": "41",
+                    "value": 8870
+                },
+                {
+                    "label": "42",
+                    "value": 8871
+                },
+                {
+                    "label": "43",
+                    "value": 8872
+                },
+                {
+                    "label": "44",
+                    "value": 8873
+                },
+                {
+                    "label": "45",
+                    "value": 8874
+                },
+                {
+                    "label": "46",
+                    "value": 8875
+                },
+                {
+                    "label": "47",
+                    "value": 8876
+                },
+                {
+                    "label": "48",
+                    "value": 8877
+                },
+                {
+                    "label": "49",
+                    "value": 8878
+                },
+                {
+                    "label": "50",
+                    "value": 8879
+                },
+                {
+                    "label": "51",
+                    "value": 8880
+                },
+                {
+                    "label": "52",
+                    "value": 8881
+                },
+                {
+                    "label": "53",
+                    "value": 8882
+                },
+                {
+                    "label": "54",
+                    "value": 8883
+                },
+                {
+                    "label": "55",
+                    "value": 8884
+                },
+                {
+                    "label": "56",
+                    "value": 8885
+                },
+                {
+                    "label": "57",
+                    "value": 8886
+                },
+                {
+                    "label": "58",
+                    "value": 8887
+                },
+                {
+                    "label": "59",
+                    "value": 8888
+                },
+                {
+                    "label": "60",
+                    "value": 8889
+                },
+                {
+                    "label": "61",
+                    "value": 8890
+                },
+                {
+                    "label": "62",
+                    "value": 8891
+                },
+                {
+                    "label": "63",
+                    "value": 8892
+                },
+                {
+                    "label": "64",
+                    "value": 8893
+                },
+                {
+                    "label": "65",
+                    "value": 8894
+                },
+                {
+                    "label": "66",
+                    "value": 8895
+                },
+                {
+                    "label": "67",
+                    "value": 8896
+                },
+                {
+                    "label": "68",
+                    "value": 8897
+                },
+                {
+                    "label": "69",
+                    "value": 8898
+                },
+                {
+                    "label": "70",
+                    "value": 8899
+                },
+                {
+                    "label": "71",
+                    "value": 8900
+                },
+                {
+                    "label": "72",
+                    "value": 8901
+                },
+                {
+                    "label": "73",
+                    "value": 8902
+                },
+                {
+                    "label": "74",
+                    "value": 8903
+                },
+                {
+                    "label": "75",
+                    "value": 8904
+                },
+                {
+                    "label": "76",
+                    "value": 8905
+                },
+                {
+                    "label": "77",
+                    "value": 8906
+                },
+                {
+                    "label": "78",
+                    "value": 8907
+                },
+                {
+                    "label": "79",
+                    "value": 8908
+                },
+                {
+                    "label": "80",
+                    "value": 8909
+                },
+                {
+                    "label": "81",
+                    "value": 8910
+                },
+                {
+                    "label": "82",
+                    "value": 8911
+                },
+                {
+                    "label": "83",
+                    "value": 8912
+                },
+                {
+                    "label": "84",
+                    "value": 8913
+                },
+                {
+                    "label": "85",
+                    "value": 8914
+                },
+                {
+                    "label": "86",
+                    "value": 8915
+                },
+                {
+                    "label": "87",
+                    "value": 8916
+                },
+                {
+                    "label": "88",
+                    "value": 8917
+                },
+                {
+                    "label": "89",
+                    "value": 8918
+                },
+                {
+                    "label": "90",
+                    "value": 8919
+                },
+                {
+                    "label": "91",
+                    "value": 8920
+                },
+                {
+                    "label": "92",
+                    "value": 8921
+                },
+                {
+                    "label": "93",
+                    "value": 8922
+                },
+                {
+                    "label": "94",
+                    "value": 8923
+                },
+                {
+                    "label": "95",
+                    "value": 8924
+                },
+                {
+                    "label": "96",
+                    "value": 8925
+                },
+                {
+                    "label": "97",
+                    "value": 8926
+                },
+                {
+                    "label": "98",
+                    "value": 8927
+                },
+                {
+                    "label": "99",
+                    "value": 8928
+                }
+            ],
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите этаж",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 549,
+            "label": "Количество комнат",
+            "slug": "rooms",
+            "name": "params[549]",
+            "enabled": true,
+            "widget": {
+                "type": "select",
+                "config": {
+                    "size": "m",
+                    "width": 6
+                }
+            },
+            "stepId": 7,
+            "sorting": 46,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Студия",
+                    "value": 5695
+                },
+                {
+                    "label": "1",
+                    "value": 5696
+                },
+                {
+                    "label": "2",
+                    "value": 5697
+                },
+                {
+                    "label": "3",
+                    "value": 5698
+                },
+                {
+                    "label": "4",
+                    "value": 5699
+                },
+                {
+                    "label": "5",
+                    "value": 5700
+                },
+                {
+                    "label": "6",
+                    "value": 11018
+                },
+                {
+                    "label": "7",
+                    "value": 11019
+                },
+                {
+                    "label": "8",
+                    "value": 11020
+                },
+                {
+                    "label": "9",
+                    "value": 11021
+                },
+                {
+                    "label": "10 комнат и больше",
+                    "widget": {
+                        "config": {}
+                    },
+                    "value": 5701
+                },
+                {
+                    "label": "Своб. планировка",
+                    "value": 414718
+                }
+            ],
+            "updatesForm": true,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Выберите значение из списка",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 118593,
+            "label": "Балкон или лоджия",
+            "slug": "balkon_ili_lodzhiya_multi",
+            "name": "params[118593][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "offsets": {
+                        "pb": 0,
+                        "pt": 0
+                    },
+                    "showLabel": false,
+                    "size": "m"
+                }
+            },
+            "stepId": 7,
+            "sorting": 50,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Балкон",
+                    "widget": {
+                        "config": {
+                            "labelHelp": {
+                                "maxWidth": 328,
+                                "text": "Навесная конструкция — есть собственные стены и пол"
+                            }
+                        }
+                    },
+                    "value": 1714472
+                },
+                {
+                    "label": "Лоджия",
+                    "widget": {
+                        "config": {
+                            "labelHelp": {
+                                "maxWidth": 328,
+                                "text": "Отличается от балкона тем, что встроена в дом"
+                            }
+                        }
+                    },
+                    "value": 1714473
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 110836,
+            "label": "Дополнительно",
+            "slug": "udobstva_novostroiki",
+            "name": "params[110836][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "offsets": {
+                        "withoutTopPadding": true
+                    },
+                    "showLabel": false,
+                    "size": "m"
+                }
+            },
+            "stepId": 7,
+            "sorting": 54,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Гардеробная",
+                    "widget": {
+                        "config": {}
+                    },
+                    "value": 473673
+                },
+                {
+                    "label": "Панорамные окна",
+                    "value": 481896
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "float",
+            "id": 578,
+            "label": "Площадь",
+            "slug": "area",
+            "name": "params[578]",
+            "placeholder": "0,0",
+            "enabled": true,
+            "widget": {
+                "type": "input",
+                "config": {
+                    "after": "м²",
+                    "hint": {
+                        "placement": "top",
+                        "text": "Общая",
+                        "tooltip": {
+                            "maxWidth": 328,
+                            "text": "Все помещения в квартире, кроме балконов, лоджий или террас"
+                        }
+                    },
+                    "size": "m",
+                    "type": "number",
+                    "validation": [
+                        {
+                            "fieldId": 2710,
+                            "message": "Общая площадь не должна быть меньше площади кухни",
+                            "rule": "gte"
+                        },
+                        {
+                            "fieldId": 2714,
+                            "message": "Общая площадь не должна быть меньше жилой площади",
+                            "rule": "gte"
+                        },
+                        {
+                            "fieldIds": [
+                                2710,
+                                2714
+                            ],
+                            "message": "Общая площадь не должна быть меньше суммы жилой площади и площади кухни",
+                            "rule": "gte_sum"
+                        }
+                    ],
+                    "width": 2
+                }
+            },
+            "stepId": 7,
+            "sorting": 56,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "range",
+                    "message": "Значение должно быть от 10 до 5000",
+                    "severity": "error",
+                    "maxValue": 5000,
+                    "minValue": 10
+                },
+                {
+                    "rule": "required",
+                    "message": "Укажите общую площадь",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "float",
+            "help": "Пользователи, указавшие жилую площадь, продают быстрее",
+            "id": 2714,
+            "label": "Жилая площадь",
+            "slug": "area_live",
+            "name": "params[2714]",
+            "placeholder": "0,0",
+            "enabled": true,
+            "widget": {
+                "type": "input",
+                "config": {
+                    "after": "м²",
+                    "hint": {
+                        "placement": "top",
+                        "text": "Жилая",
+                        "tooltip": {
+                            "maxWidth": 328,
+                            "text": "Площадь всех жилых комнат. Не учитывайте кухню, санузел, коридор, гардеробную и другие нежилые помещения."
+                        }
+                    },
+                    "showLabel": false,
+                    "size": "m",
+                    "type": "number",
+                    "width": 2
+                }
+            },
+            "stepId": 7,
+            "sorting": 60,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "range",
+                    "message": "Значение должно быть от 5 до 5000",
+                    "severity": "error",
+                    "maxValue": 5000,
+                    "minValue": 5
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "float",
+            "id": 110718,
+            "label": "Высота потолков",
+            "slug": "vysota_potolkov",
+            "name": "params[110718]",
+            "placeholder": "0,0",
+            "enabled": true,
+            "widget": {
+                "type": "input",
+                "config": {
+                    "after": "м",
+                    "size": "m",
+                    "type": "number",
+                    "width": 2
+                }
+            },
+            "stepId": 7,
+            "sorting": 62,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 118594,
+            "label": "Санузел",
+            "slug": "sanuzel_multiple",
+            "name": "params[118594][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "size": "m",
+                    "width": 5
+                }
+            },
+            "stepId": 7,
+            "sorting": 63,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Совмещённый",
+                    "value": 1714474
+                },
+                {
+                    "label": "Раздельный",
+                    "value": 1714475
+                }
+            ],
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 110687,
+            "label": "Окна",
+            "slug": "vid_iz_okon",
+            "name": "params[110687][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 7,
+            "sorting": 64,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Во двор",
+                    "value": 458588
+                },
+                {
+                    "label": "На улицу",
+                    "value": 458587
+                },
+                {
+                    "label": "На солнечную сторону",
+                    "value": 2262849
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 110710,
+            "label": "Ремонт",
+            "slug": "remont",
+            "name": "params[110710]",
+            "enabled": true,
+            "widget": {
+                "type": "radio",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 7,
+            "sorting": 66,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Требуется",
+                    "value": 472004
+                },
+                {
+                    "label": "Косметический",
+                    "widget": {
+                        "config": {}
+                    },
+                    "value": 472001
+                },
+                {
+                    "label": "Евро",
+                    "value": 472002
+                },
+                {
+                    "label": "Дизайнерский",
+                    "value": 472003
+                }
+            ],
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 118595,
+            "label": "Ремонт. Доп. Опции",
+            "slug": "remont_dop_opcii",
+            "name": "params[118595][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "showLabel": false,
+                    "size": "m"
+                }
+            },
+            "stepId": 7,
+            "sorting": 67,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Тёплый пол",
+                    "value": 1714478
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 118596,
+            "label": "Мебель",
+            "slug": "mebel",
+            "name": "params[118596][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 7,
+            "sorting": 68,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Кухня",
+                    "value": 1714479
+                },
+                {
+                    "label": "Хранение одежды",
+                    "widget": {
+                        "config": {}
+                    },
+                    "value": 1714480
+                },
+                {
+                    "label": "Спальные места",
+                    "value": 1714481
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 1355,
+            "label": "Техника",
+            "slug": "bytovaya_tekhnika",
+            "name": "params[1355][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "columns": 2,
+                    "layout": "wide",
+                    "size": "m"
+                }
+            },
+            "stepId": 7,
+            "sorting": 69,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Кондиционер",
+                    "value": 2262850
+                },
+                {
+                    "label": "Холодильник",
+                    "value": 15269
+                },
+                {
+                    "label": "Стиральная машина",
+                    "value": 15270
+                },
+                {
+                    "label": "Посудомоечная машина",
+                    "value": 2262851
+                },
+                {
+                    "label": "Водонагреватель",
+                    "value": 2262852
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "defaultValue": 3265832,
+            "id": 165437,
+            "label": "Тип жилья",
+            "slug": "tip_zhilya",
+            "name": "params[165437]",
+            "enabled": true,
+            "widget": {
+                "type": "hidden",
+                "config": {}
+            },
+            "stepId": 7,
+            "sorting": 77,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Квартира",
+                    "value": 3265832
+                },
+                {
+                    "label": "Апарт-отель",
+                    "value": 3265833
+                }
+            ],
+            "value": 3265832,
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false,
+            "displayTitle": "Квартира"
+        },
+        {
+            "dataType": "integer",
+            "id": 498,
+            "label": "Тип дома",
+            "slug": "house_type",
+            "name": "params[498]",
+            "enabled": true,
+            "widget": {
+                "type": "select",
+                "config": {
+                    "size": "m",
+                    "width": 6
+                }
+            },
+            "stepId": 10804,
+            "sorting": 79,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Кирпичный",
+                    "value": 5244
+                },
+                {
+                    "label": "Панельный",
+                    "value": 5245
+                },
+                {
+                    "label": "Блочный",
+                    "value": 5246
+                },
+                {
+                    "label": "Монолитный",
+                    "value": 5247
+                },
+                {
+                    "label": "Монолитно-кирпичный",
+                    "value": 2308811
+                },
+                {
+                    "label": "Деревянный",
+                    "value": 5248
+                }
+            ],
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Выберите тип дома",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 110729,
+            "label": "В доме",
+            "slug": "v_podezde",
+            "name": "params[110729][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "showLabel": false,
+                    "size": "m"
+                }
+            },
+            "stepId": 10804,
+            "sorting": 81,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Консьерж",
+                    "value": 472048
+                },
+                {
+                    "label": "Мусоропровод",
+                    "value": 477104
+                },
+                {
+                    "label": "Газ",
+                    "widget": {
+                        "config": {}
+                    },
+                    "value": 477105
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 110499,
+            "label": "Год постройки",
+            "slug": "god_postroiki",
+            "name": "params[110499]",
+            "enabled": true,
+            "widget": {
+                "type": "input",
+                "config": {
+                    "mask": "year",
+                    "size": "m",
+                    "type": "number",
+                    "width": 2
+                }
+            },
+            "stepId": 10804,
+            "sorting": 82,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 118969,
+            "label": "Реновация",
+            "slug": "renovaciya",
+            "name": "params[118969][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "showLabel": false,
+                    "size": "m"
+                }
+            },
+            "stepId": 10804,
+            "sorting": 83,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Запланирован снос",
+                    "value": 2308916
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 497,
+            "label": "Этажей в доме",
+            "slug": "floors_count",
+            "name": "params[497]",
+            "enabled": true,
+            "widget": {
+                "type": "suggestLocal",
+                "config": {
+                    "bare": false,
+                    "clearable": false,
+                    "fromSlot": false,
+                    "maxLength": 2,
+                    "pattern": "^[1-9]{1}[0-9]?$",
+                    "size": "m",
+                    "width": 2,
+                    "withoutBlur": false
+                }
+            },
+            "stepId": 10804,
+            "sorting": 84,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "1",
+                    "value": 5182
+                },
+                {
+                    "label": "2",
+                    "value": 5183
+                },
+                {
+                    "label": "3",
+                    "value": 5184
+                },
+                {
+                    "label": "4",
+                    "value": 5185
+                },
+                {
+                    "label": "5",
+                    "value": 5186
+                },
+                {
+                    "label": "6",
+                    "value": 5187
+                },
+                {
+                    "label": "7",
+                    "value": 5188
+                },
+                {
+                    "label": "8",
+                    "value": 5189
+                },
+                {
+                    "label": "9",
+                    "value": 5190
+                },
+                {
+                    "label": "10",
+                    "value": 5191
+                },
+                {
+                    "label": "11",
+                    "value": 5192
+                },
+                {
+                    "label": "12",
+                    "value": 5193
+                },
+                {
+                    "label": "13",
+                    "value": 5194
+                },
+                {
+                    "label": "14",
+                    "value": 5195
+                },
+                {
+                    "label": "15",
+                    "value": 5196
+                },
+                {
+                    "label": "16",
+                    "value": 5197
+                },
+                {
+                    "label": "17",
+                    "value": 5198
+                },
+                {
+                    "label": "18",
+                    "value": 5199
+                },
+                {
+                    "label": "19",
+                    "value": 5200
+                },
+                {
+                    "label": "20",
+                    "value": 5201
+                },
+                {
+                    "label": "21",
+                    "value": 5202
+                },
+                {
+                    "label": "22",
+                    "value": 5203
+                },
+                {
+                    "label": "23",
+                    "value": 5204
+                },
+                {
+                    "label": "24",
+                    "value": 5205
+                },
+                {
+                    "label": "25",
+                    "value": 5206
+                },
+                {
+                    "label": "26",
+                    "value": 5207
+                },
+                {
+                    "label": "27",
+                    "value": 5208
+                },
+                {
+                    "label": "28",
+                    "value": 5209
+                },
+                {
+                    "label": "29",
+                    "value": 5210
+                },
+                {
+                    "label": "30",
+                    "value": 5211
+                },
+                {
+                    "label": "31",
+                    "value": 5212
+                },
+                {
+                    "label": "32",
+                    "value": 8929
+                },
+                {
+                    "label": "33",
+                    "value": 8930
+                },
+                {
+                    "label": "34",
+                    "value": 8931
+                },
+                {
+                    "label": "35",
+                    "value": 8932
+                },
+                {
+                    "label": "36",
+                    "value": 8933
+                },
+                {
+                    "label": "37",
+                    "value": 8934
+                },
+                {
+                    "label": "38",
+                    "value": 8935
+                },
+                {
+                    "label": "39",
+                    "value": 8936
+                },
+                {
+                    "label": "40",
+                    "value": 8937
+                },
+                {
+                    "label": "41",
+                    "value": 8938
+                },
+                {
+                    "label": "42",
+                    "value": 8939
+                },
+                {
+                    "label": "43",
+                    "value": 8940
+                },
+                {
+                    "label": "44",
+                    "value": 8941
+                },
+                {
+                    "label": "45",
+                    "value": 8942
+                },
+                {
+                    "label": "46",
+                    "value": 8943
+                },
+                {
+                    "label": "47",
+                    "value": 8944
+                },
+                {
+                    "label": "48",
+                    "value": 8945
+                },
+                {
+                    "label": "49",
+                    "value": 8946
+                },
+                {
+                    "label": "50",
+                    "value": 8947
+                },
+                {
+                    "label": "51",
+                    "value": 8948
+                },
+                {
+                    "label": "52",
+                    "value": 8949
+                },
+                {
+                    "label": "53",
+                    "value": 8950
+                },
+                {
+                    "label": "54",
+                    "value": 8951
+                },
+                {
+                    "label": "55",
+                    "value": 8952
+                },
+                {
+                    "label": "56",
+                    "value": 8953
+                },
+                {
+                    "label": "57",
+                    "value": 8954
+                },
+                {
+                    "label": "58",
+                    "value": 8955
+                },
+                {
+                    "label": "59",
+                    "value": 8956
+                },
+                {
+                    "label": "60",
+                    "value": 8957
+                },
+                {
+                    "label": "61",
+                    "value": 8958
+                },
+                {
+                    "label": "62",
+                    "value": 8959
+                },
+                {
+                    "label": "63",
+                    "value": 8960
+                },
+                {
+                    "label": "64",
+                    "value": 8961
+                },
+                {
+                    "label": "65",
+                    "value": 8962
+                },
+                {
+                    "label": "66",
+                    "value": 8963
+                },
+                {
+                    "label": "67",
+                    "value": 8964
+                },
+                {
+                    "label": "68",
+                    "value": 8965
+                },
+                {
+                    "label": "69",
+                    "value": 8966
+                },
+                {
+                    "label": "70",
+                    "value": 8967
+                },
+                {
+                    "label": "71",
+                    "value": 8968
+                },
+                {
+                    "label": "72",
+                    "value": 8969
+                },
+                {
+                    "label": "73",
+                    "value": 8970
+                },
+                {
+                    "label": "74",
+                    "value": 8971
+                },
+                {
+                    "label": "75",
+                    "value": 8972
+                },
+                {
+                    "label": "76",
+                    "value": 8973
+                },
+                {
+                    "label": "77",
+                    "value": 8974
+                },
+                {
+                    "label": "78",
+                    "value": 8975
+                },
+                {
+                    "label": "79",
+                    "value": 8976
+                },
+                {
+                    "label": "80",
+                    "value": 8977
+                },
+                {
+                    "label": "81",
+                    "value": 8978
+                },
+                {
+                    "label": "82",
+                    "value": 8979
+                },
+                {
+                    "label": "83",
+                    "value": 8980
+                },
+                {
+                    "label": "84",
+                    "value": 8981
+                },
+                {
+                    "label": "85",
+                    "value": 8982
+                },
+                {
+                    "label": "86",
+                    "value": 8983
+                },
+                {
+                    "label": "87",
+                    "value": 8984
+                },
+                {
+                    "label": "88",
+                    "value": 8985
+                },
+                {
+                    "label": "89",
+                    "value": 8986
+                },
+                {
+                    "label": "90",
+                    "value": 8987
+                },
+                {
+                    "label": "91",
+                    "value": 8988
+                },
+                {
+                    "label": "92",
+                    "value": 8989
+                },
+                {
+                    "label": "93",
+                    "value": 8990
+                },
+                {
+                    "label": "94",
+                    "value": 8991
+                },
+                {
+                    "label": "95",
+                    "value": 8992
+                },
+                {
+                    "label": "96",
+                    "value": 8993
+                },
+                {
+                    "label": "97",
+                    "value": 8994
+                },
+                {
+                    "label": "98",
+                    "value": 8995
+                },
+                {
+                    "label": "99",
+                    "value": 8996
+                }
+            ],
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите этаж",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "help": "Пассажирский",
+            "id": 110891,
+            "label": "Лифт",
+            "slug": "passazhirskii_lift",
+            "name": "params[110891]",
+            "enabled": true,
+            "widget": {
+                "type": "radio",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 10804,
+            "sorting": 86,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Нет",
+                    "value": 477107
+                },
+                {
+                    "label": "1",
+                    "value": 477108
+                },
+                {
+                    "label": "2",
+                    "value": 477109
+                },
+                {
+                    "label": "3",
+                    "value": 477110
+                },
+                {
+                    "label": "4",
+                    "value": 477111
+                }
+            ],
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "help": "Грузовой",
+            "id": 110892,
+            "label": "Грузовой лифт",
+            "slug": "gruzovoi_lift",
+            "name": "params[110892]",
+            "enabled": true,
+            "widget": {
+                "type": "radio",
+                "config": {
+                    "showLabel": false,
+                    "size": "m"
+                }
+            },
+            "stepId": 10804,
+            "sorting": 87,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Нет",
+                    "value": 477112
+                },
+                {
+                    "label": "1",
+                    "value": 477113
+                },
+                {
+                    "label": "2",
+                    "value": 477114
+                },
+                {
+                    "label": "3",
+                    "value": 477115
+                },
+                {
+                    "label": "4",
+                    "value": 477116
+                }
+            ],
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 110717,
+            "label": "Двор",
+            "slug": "vo_dvore",
+            "name": "params[110717][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 10804,
+            "sorting": 88,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Закрытая территория",
+                    "value": 472022
+                },
+                {
+                    "label": "Детская площадка",
+                    "value": 472020
+                },
+                {
+                    "label": "Спортивная площадка",
+                    "value": 477106
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 110919,
+            "label": "Парковка",
+            "slug": "parkovka",
+            "name": "params[110919][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "size": "m",
+                    "width": 5
+                }
+            },
+            "stepId": 10804,
+            "sorting": 89,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Подземная",
+                    "value": 481732
+                },
+                {
+                    "label": "Наземная многоуровневая",
+                    "value": 481733
+                },
+                {
+                    "label": "Открытая во дворе",
+                    "value": 481735
+                },
+                {
+                    "label": "За шлагбаумом во дворе",
+                    "value": 481895
+                }
+            ],
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "string",
+            "id": 100004,
+            "label": "Фотографии",
+            "slug": "images",
+            "name": "images",
+            "enabled": true,
+            "widget": {
+                "type": "uploader",
+                "config": {
+                    "disclaimer": {
+                        "image": "house",
+                        "text": "Покажите все комнаты и нежилые помещения, вид из окна, подъезд и фасад здания. Добавьте планировки, чтобы покупателям было проще сориентироваться.",
+                        "title": "С фото звонят и пишут в 2 раза чаще"
+                    },
+                    "max": 40,
+                    "maxFileSize": 26214400,
+                    "min": 0,
+                    "newDisclaimer": true,
+                    "photoMaxText": "Не больше",
+                    "size": "m"
+                }
+            },
+            "stepId": 8347774,
+            "sorting": 116,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "string",
+            "id": 124938,
+            "label": "Видео",
+            "slug": "videos",
+            "name": "params[124938][]",
+            "enabled": true,
+            "widget": {
+                "type": "videoUploader",
+                "config": {
+                    "max": 1,
+                    "maxDurationInSeconds": 180,
+                    "maxFileSize": 524288000,
+                    "min": 1,
+                    "minDurationInSeconds": 5,
+                    "required": true,
+                    "size": "m"
+                }
+            },
+            "stepId": 8347774,
+            "sorting": 117,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "string",
+            "id": 100005,
+            "label": "Видео с YouTube или Rutube",
+            "slug": "videoUrl",
+            "name": "videoUrl",
+            "placeholder": "Ссылка на видео",
+            "enabled": true,
+            "widget": {
+                "type": "video",
+                "config": {}
+            },
+            "stepId": 8347774,
+            "sorting": 118,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "regex",
+                    "message": "Невозможно загрузить видео по указанной ссылке",
+                    "severity": "error",
+                    "regexPositive": "^(.*(\\s|^)(https?\\:\\/\\/)?(((www|m)\\.)?youtube\\.com|youtu\\.be|rutube\\.ru\\/video)\\/.+(\\s|$)).*$"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "string",
+            "id": 100001,
+            "label": "Название объявления",
+            "slug": "title",
+            "name": "title",
+            "enabled": true,
+            "widget": {
+                "type": "empty",
+                "config": {
+                    "constraints": [
+                        {
+                            "type": "length",
+                            "value": {
+                                "max": 50,
+                                "message": "Длина названия не может превышать 50 символов"
+                            }
+                        }
+                    ]
+                }
+            },
+            "stepId": 8347773,
+            "sorting": 120,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Введите название объявления",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "string",
+            "id": 100002,
+            "label": "Описание объявления",
+            "slug": "description",
+            "name": "description",
+            "enabled": true,
+            "widget": {
+                "type": "description",
+                "config": {
+                    "layout": "narrow",
+                    "placeholder": "Расскажите, что есть в квартире и рядом с домом, в каком состоянии жильё. Покупателям интересно, сколько идти до магазинов и остановок транспорта, есть ли рядом торговые центры, парки и другая инфраструктура.",
+                    "rows": 10,
+                    "size": "m",
+                    "tags": [],
+                    "validation": [
+                        {
+                            "message": "Пожалуйста, заполните описание",
+                            "rule": "required",
+                            "severity": "error"
+                        }
+                    ],
+                    "width": 9
+                }
+            },
+            "stepId": 8347773,
+            "sorting": 121,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "max",
+                    "message": "Длина описания не может быть менее 1 символа или превышать 7500 символов",
+                    "severity": "error",
+                    "maxValue": 7500
+                },
+                {
+                    "rule": "required",
+                    "message": "Пожалуйста, заполните описание",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "defaultValue": 471999,
+            "id": 110709,
+            "label": "Способ продажи",
+            "slug": "tip_sdelki",
+            "name": "params[110709]",
+            "enabled": true,
+            "widget": {
+                "type": "radio",
+                "config": {
+                    "show_label": true,
+                    "size": "m",
+                    "tooltip": {
+                        "maxWidth": 328,
+                        "text": "В свободной — или прямой — продаже участвуете только вы и покупатель. Альтернативными называются сделки с покупкой нового жилья и одновременной продажей старого: обычно обе проходят в один день."
+                    }
+                }
+            },
+            "stepId": 8347775,
+            "sorting": 123,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Свободная",
+                    "widget": {
+                        "config": {}
+                    },
+                    "value": 471999
+                },
+                {
+                    "label": "Альтернативная",
+                    "value": 472000
+                }
+            ],
+            "value": 471999,
+            "updatesForm": true,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false,
+            "displayTitle": "Свободная"
+        },
+        {
+            "dataType": "integer",
+            "id": 118608,
+            "label": "Способ продажи",
+            "slug": "sposob_prodazhi_dop",
+            "name": "params[118608][]",
+            "enabled": true,
+            "widget": {
+                "type": "checkbox",
+                "config": {
+                    "showLabel": false,
+                    "size": "m"
+                }
+            },
+            "stepId": 8347775,
+            "sorting": 127,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Можно в ипотеку",
+                    "widget": {
+                        "config": {
+                            "labelHelp": {
+                                "maxWidth": 328,
+                                "text": "Поставьте отметку, если готовы общаться с банком, в квартире нет незаконных перепланировок или серьёзных обременений"
+                            }
+                        }
+                    },
+                    "value": 2125485
+                },
+                {
+                    "label": "Продажа доли",
+                    "widget": {
+                        "config": {
+                            "labelHelp": {
+                                "maxWidth": 328,
+                                "text": "Выберите, если продаёте только часть квартиры"
+                            }
+                        }
+                    },
+                    "value": 2125486
+                },
+                {
+                    "label": "Аукцион",
+                    "widget": {
+                        "config": {
+                            "labelHelp": {
+                                "maxWidth": 328,
+                                "text": "Торги от государственных структур, банков и предприятий"
+                            }
+                        }
+                    },
+                    "value": 2125487
+                }
+            ],
+            "updatesForm": true,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 100003,
+            "label": "Цена",
+            "slug": "price",
+            "name": "price",
+            "enabled": true,
+            "widget": {
+                "type": "price",
+                "config": {
+                    "layout": "wide",
+                    "postfix": null,
+                    "size": "m",
+                    "validation": [
+                        {
+                            "dependencies": [
+                                {
+                                    "fieldId": 201,
+                                    "values": [
+                                        "1059",
+                                        "1060"
+                                    ]
+                                }
+                            ],
+                            "message": "Введите цену",
+                            "rule": "required",
+                            "severity": "error"
+                        }
+                    ],
+                    "width": 8
+                }
+            },
+            "stepId": 8347775,
+            "sorting": 130,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 194044,
+            "label": "Рыночная цена",
+            "widget": {
+                "type": "instantMarketValue",
+                "config": {
+                    "dataAttributeIds": [
+                        201,
+                        493,
+                        494,
+                        496,
+                        497,
+                        498,
+                        499,
+                        500,
+                        501,
+                        502,
+                        503,
+                        504,
+                        549,
+                        550,
+                        551,
+                        552,
+                        578,
+                        765,
+                        1306,
+                        1307,
+                        1308,
+                        1309,
+                        1310,
+                        1311,
+                        1312,
+                        1313,
+                        1314,
+                        1315,
+                        1316,
+                        1350,
+                        1351,
+                        1353,
+                        1355,
+                        1357,
+                        1358,
+                        1359,
+                        1383,
+                        1384,
+                        1385,
+                        1387,
+                        1388,
+                        1495,
+                        1499,
+                        1501,
+                        1515,
+                        1573,
+                        1574,
+                        1575,
+                        1633,
+                        1634,
+                        1638,
+                        1702,
+                        2707,
+                        2708,
+                        2710,
+                        2711,
+                        2714,
+                        2715,
+                        2900,
+                        2901,
+                        2902,
+                        2918,
+                        2919,
+                        2954,
+                        100068,
+                        110045,
+                        110499,
+                        110669,
+                        110686,
+                        110687,
+                        110688,
+                        110709,
+                        110710,
+                        110711,
+                        110713,
+                        110714,
+                        110715,
+                        110717,
+                        110718,
+                        110729,
+                        110730,
+                        110836,
+                        110891,
+                        110892,
+                        110893,
+                        110919,
+                        112879,
+                        112880,
+                        118592,
+                        118593,
+                        118594,
+                        118595,
+                        118596,
+                        118608,
+                        118609,
+                        118628,
+                        118648,
+                        118969,
+                        118973,
+                        118974,
+                        118975,
+                        122135,
+                        122387,
+                        122388,
+                        122391,
+                        122601,
+                        123779,
+                        127522,
+                        149587,
+                        149588,
+                        150183,
+                        152695
+                    ],
+                    "triggerAttributeIds": [
+                        201,
+                        493,
+                        494,
+                        496,
+                        497,
+                        498,
+                        499,
+                        500,
+                        501,
+                        502,
+                        503,
+                        504,
+                        549,
+                        550,
+                        551,
+                        552,
+                        578,
+                        765,
+                        1306,
+                        1307,
+                        1308,
+                        1309,
+                        1310,
+                        1311,
+                        1312,
+                        1313,
+                        1314,
+                        1315,
+                        1316,
+                        1350,
+                        1351,
+                        1353,
+                        1355,
+                        1357,
+                        1358,
+                        1359,
+                        1383,
+                        1384,
+                        1385,
+                        1387,
+                        1388,
+                        1495,
+                        1499,
+                        1501,
+                        1515,
+                        1573,
+                        1574,
+                        1575,
+                        1633,
+                        1634,
+                        1638,
+                        1702,
+                        2707,
+                        2708,
+                        2710,
+                        2711,
+                        2714,
+                        2715,
+                        2900,
+                        2901,
+                        2902,
+                        2918,
+                        2919,
+                        2954,
+                        100068,
+                        110045,
+                        110499,
+                        110669,
+                        110686,
+                        110687,
+                        110688,
+                        110709,
+                        110710,
+                        110711,
+                        110713,
+                        110714,
+                        110715,
+                        110717,
+                        110718,
+                        110729,
+                        110730,
+                        110836,
+                        110891,
+                        110892,
+                        110893,
+                        110919,
+                        112879,
+                        112880,
+                        118592,
+                        118593,
+                        118594,
+                        118595,
+                        118596,
+                        118608,
+                        118609,
+                        118628,
+                        118648,
+                        118969,
+                        118973,
+                        118974,
+                        118975,
+                        122135,
+                        122387,
+                        122388,
+                        122391,
+                        122601,
+                        123779,
+                        127522,
+                        149587,
+                        149588,
+                        150183,
+                        152695
+                    ]
+                }
+            },
+            "stepId": 8347775,
+            "sorting": 138,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 174503,
+            "label": "Автопубликация",
+            "widget": {
+                "type": "autoPublish"
+            },
+            "stepId": 11339,
+            "sorting": 143,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "integer",
+            "id": 100006,
+            "label": "Местоположение (locationId)",
+            "slug": "locationId",
+            "name": "locationId",
+            "enabled": true,
+            "widget": {
+                "type": "locationId",
+                "config": {
+                    "contactWays": [
+                        "phoneAndMessenger",
+                        "onlyPhone"
+                    ]
+                }
+            },
+            "sorting": 144,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 187769,
+            "label": "Слот лимитов публикаций",
+            "widget": {
+                "type": "publishLimits",
+                "config": {}
+            },
+            "stepId": 12678,
+            "sorting": 146,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 448780,
+            "label": "Коммерческий статус",
+            "widget": {
+                "type": "commercialStatus",
+                "config": {}
+            },
+            "sorting": 147,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 187532,
+            "label": "Listing Fees",
+            "widget": {
+                "type": "listingFees"
+            },
+            "stepId": 8347701,
+            "sorting": 149,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 8609,
+            "label": "VAS",
+            "widget": {
+                "type": "vas"
+            },
+            "stepId": 8347701,
+            "sorting": 150,
+            "entityType": "slot",
+            "value": {}
+        }
+    ],
+    "steps": [
+        {
+            "id": 1014,
+            "sorting": 1,
+            "entityType": "step",
+            "config": {
+                "hideTitle": true,
+                "screen": 0
+            },
+            "children": [
+                {
+                    "id": 201,
+                    "entityType": "field"
+                },
+                {
+                    "id": 499,
+                    "entityType": "field"
+                },
+                {
+                    "id": 138851,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Скрытые параметры"
+        },
+        {
+            "id": 804,
+            "sorting": 14,
+            "entityType": "step",
+            "config": {
+                "backArrow": true,
+                "required": true,
+                "screen": 1,
+                "screenTitle": "Категория, расположение, контакты"
+            },
+            "children": [
+                {
+                    "id": 98287,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 494,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110045,
+                    "entityType": "field"
+                },
+                {
+                    "id": 180802,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Расположение"
+        },
+        {
+            "id": 8347733,
+            "sorting": 26,
+            "entityType": "step",
+            "config": {
+                "backArrow": true,
+                "hideOnCpaRequired": true,
+                "required": true,
+                "screen": 1
+            },
+            "title": "Желаемый район"
+        },
+        {
+            "id": 58,
+            "sorting": 29,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "hideTitle": false,
+                "screen": 1
+            },
+            "children": [
+                {
+                    "id": 2707,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110546,
+                    "entityType": "field"
+                },
+                {
+                    "id": 516400,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 494108,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 526634,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Контакты"
+        },
+        {
+            "id": 7,
+            "sorting": 42,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "screen": 2,
+                "screenTitleConcat": true
+            },
+            "children": [
+                {
+                    "id": 110688,
+                    "entityType": "field"
+                },
+                {
+                    "id": 496,
+                    "entityType": "field"
+                },
+                {
+                    "id": 549,
+                    "entityType": "field"
+                },
+                {
+                    "id": 118593,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110836,
+                    "entityType": "field"
+                },
+                {
+                    "id": 578,
+                    "entityType": "field"
+                },
+                {
+                    "id": 2714,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110718,
+                    "entityType": "field"
+                },
+                {
+                    "id": 118594,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110687,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110710,
+                    "entityType": "field"
+                },
+                {
+                    "id": 118595,
+                    "entityType": "field"
+                },
+                {
+                    "id": 118596,
+                    "entityType": "field"
+                },
+                {
+                    "id": 1355,
+                    "entityType": "field"
+                },
+                {
+                    "id": 165437,
+                    "entityType": "field"
+                }
+            ],
+            "title": "О квартире"
+        },
+        {
+            "id": 10804,
+            "sorting": 78,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "screen": 2
+            },
+            "children": [
+                {
+                    "id": 498,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110729,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110499,
+                    "entityType": "field"
+                },
+                {
+                    "id": 118969,
+                    "entityType": "field"
+                },
+                {
+                    "id": 497,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110891,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110892,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110717,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110919,
+                    "entityType": "field"
+                }
+            ],
+            "title": "О доме"
+        },
+        {
+            "id": 10712,
+            "sorting": 92,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "screen": 2
+            },
+            "title": "Правила заселения"
+        },
+        {
+            "id": 8,
+            "sorting": 100,
+            "entityType": "step",
+            "config": {
+                "columns": 2,
+                "hideOnCpaRequired": true,
+                "screen": 2
+            },
+            "title": "Дополнительные параметры"
+        },
+        {
+            "id": 11199,
+            "sorting": 113,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "hideTitle": true,
+                "screen": 2
+            },
+            "title": "Календарь"
+        },
+        {
+            "id": 8347774,
+            "sorting": 115,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "screen": 3,
+                "screenTitleConcat": true
+            },
+            "children": [
+                {
+                    "id": 100004,
+                    "entityType": "field"
+                },
+                {
+                    "id": 124938,
+                    "entityType": "field"
+                },
+                {
+                    "id": 100005,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Фотографии"
+        },
+        {
+            "id": 8347773,
+            "sorting": 119,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "required": true,
+                "screen": 3
+            },
+            "children": [
+                {
+                    "id": 100001,
+                    "entityType": "field"
+                },
+                {
+                    "id": 100002,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Описание"
+        },
+        {
+            "id": 8347775,
+            "sorting": 122,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "screen": 3
+            },
+            "children": [
+                {
+                    "id": 110709,
+                    "entityType": "field"
+                },
+                {
+                    "id": 118608,
+                    "entityType": "field"
+                },
+                {
+                    "id": 100003,
+                    "entityType": "field"
+                },
+                {
+                    "id": 194044,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Условия сделки"
+        },
+        {
+            "id": 11339,
+            "sorting": 141,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "hideTitle": true,
+                "screen": 5
+            },
+            "children": [
+                {
+                    "id": 174503,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Тип размещения"
+        },
+        {
+            "id": 12678,
+            "sorting": 145,
+            "entityType": "step",
+            "config": {
+                "hideTitle": true,
+                "screen": 5
+            },
+            "children": [
+                {
+                    "id": 187769,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Лимиты публикаций"
+        },
+        {
+            "id": 8347701,
+            "sorting": 148,
+            "entityType": "step",
+            "config": {
+                "hideOnCpaRequired": true,
+                "hideTitle": true,
+                "screen": 5,
+                "skipMargin": true
+            },
+            "children": [
+                {
+                    "id": 187532,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 8609,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Продвижение"
+        }
+    ],
+    "infmVersion": "CMG-899-kafedorov"
+}
