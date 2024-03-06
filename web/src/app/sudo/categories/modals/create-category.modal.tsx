@@ -15,9 +15,7 @@ const CreateCategoryForm: FC<CreateCategoryFormProps> = (props) => {
   const [form] = Form.useForm();
 
   const treeData = useMemo(() => {
-    return (
-      data && [...buildCategoryTree(data), { title: "Unassigned", id: null }]
-    );
+    return data && [...buildCategoryTree(data), { title: "Unassigned", id: 0 }];
   }, [data]);
 
   useEffect(() => {
@@ -28,6 +26,8 @@ const CreateCategoryForm: FC<CreateCategoryFormProps> = (props) => {
   return (
     <Form form={form}>
       <Form.Item
+        labelCol={{ span: 8 }}
+        labelAlign="left"
         label="Name of category"
         name="title"
         rules={[{ required: true }]}
@@ -35,6 +35,8 @@ const CreateCategoryForm: FC<CreateCategoryFormProps> = (props) => {
         <Input placeholder="I.e cars" />
       </Form.Item>
       <Form.Item
+        labelCol={{ span: 8 }}
+        labelAlign="left"
         label="Parent category"
         name="parentId"
         rules={[{ required: true }]}

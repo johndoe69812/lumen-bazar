@@ -1,0 +1,17 @@
+$itemHeight: 50px;
+
+.root {
+  :global(.ant-tree-treenode) {
+    height: $itemHeight;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+
+  :global(.ant-tree-switcher) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,6 +1,6 @@
 import { AdCategorySchema } from "@/api";
 import APIService from "@/api/api-service";
-import { queryOptions, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export const queryKey = "all-flat-categories";
 

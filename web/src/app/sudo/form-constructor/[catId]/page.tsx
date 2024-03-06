@@ -1,48 +1,35 @@
-import APIService from "@/api/api-service";
+"use client";
+
 import Heading from "@/shared/components/heading";
-import { PlusOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Flex, Row, Tag } from "antd";
-import type { NextPage } from "next";
-import { FC } from "react";
+import { Flex, Result } from "antd";
+import { FC, useMemo } from "react";
 import Constructor from "./components/constructor/constructor";
-
-async function getData() {
-  APIService.http.baseUrl = "http://nest-api:3000";
-  const params = await APIService.api.adsServiceGetAllParameters();
-
-  console.log("ad-params", params);
-
-  return {
-    params,
-  };
-}
+import { useFlatCategories } from "../../shared/queries";
+import PageHeadline from "../../shared/components/page-headline";
 
 type Props = {
   params: { catId: string };
 };
-const FormConstructorPage: FC<Props> = async (props) => {
+const FormConstructorPage: FC<Props> = (props) => {
   const { catId } = props.params;
 
-  const { params } = await getData();
+  const { isFetched, data } = useFlatCategories();
+
+  const targetCategory = useMemo(() => {
+    return data?.find((cat) => cat.id === parseInt(catId, 10));
+  }, [data, catId]);
+
+  if (isFetched && !targetCategory) {
+    return <Result status="error" title="Category not found" />;
+  }
 
   return (
-    <div>
-      <Heading variant="h2" className="text-indigo-900">
-        Form Constructor
-      </Heading>
+    <>
+      <PageHeadline title={`Form Constructor (${targetCategory?.title})`} />
       <Flex vertical gap={16}>
-        <Card>
-          <Flex gap="small" wrap="wrap">
-            {params.map((param) => (
-              <Tag key={param.id}>
-                {param.id} {param.name}
-              </Tag>
-            ))}
-          </Flex>
-        </Card>
         <Constructor />
       </Flex>
-    </div>
+    </>
   );
 };
 

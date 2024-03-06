@@ -6,7 +6,7 @@ import Sidebar from "./shared/components/sidebar";
 
 import "./main.css";
 
-const AdminLayout = (props: PropsWithChildren) => {
+const SudoLayout = (props: PropsWithChildren) => {
   const { children } = props;
 
   const [queryClient] = useState(
@@ -32,4 +32,4 @@ const AdminLayout = (props: PropsWithChildren) => {
   );
 };
 
-export default AdminLayout;
+export default SudoLayout;

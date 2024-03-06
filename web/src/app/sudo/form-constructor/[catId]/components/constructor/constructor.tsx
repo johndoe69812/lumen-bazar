@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Form, Input, Row } from "antd";
+import { Button, Card, Col, Form, Input, Row, Segmented, Tabs } from "antd";
 import useSectionsStore from "../../../store/store";
 import SectionEditor from "./section-editor";
 
@@ -24,9 +24,10 @@ const Constructor = () => {
         ],
       }}
     >
-      <Row gutter={16}>
+      <Row gutter={16} style={{ alignItems: "stretch" }}>
         <Col span={6}>
-          <Card title="Sections" bordered>
+          <Card className="shadow border">
+            <Segmented options={["sections", "widgets"]} size="large" block />
             <Form.List name="sections">
               {(fields, { add }) => (
                 <div>

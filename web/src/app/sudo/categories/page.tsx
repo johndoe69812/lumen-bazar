@@ -1,11 +1,11 @@
 import PageHeadline from "../shared/components/page-headline";
-import { CategoryField } from "./components/categories-field";
+import CategoriesTree from "./components/categories-tree/categories-tree";
 
 const CategoriesPage = () => {
   return (
     <>
       <PageHeadline title="Categories" />
-      <CategoryField />
+      <CategoriesTree />
     </>
   );
 };
