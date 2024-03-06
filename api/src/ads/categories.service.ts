@@ -15,7 +15,10 @@ export class AdsCategoriesService {
   async createCategory(candidate: Partial<AdCategory>) {
     const cat = new AdCategory();
     cat.title = candidate.title;
-    cat.parentId = candidate.parentId;
+
+    if (candidate.parentId) {
+      cat.parentId = candidate.parentId;
+    }
 
     const saved = await this.categoriesRepository.save(cat);
     saved.alias = generateAdSlug(cat.title, saved.id);
