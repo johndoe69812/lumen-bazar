@@ -1,6 +1,7 @@
 "use client";
 
-import { Card, Col, Form, Row, Segmented } from "antd";
+import { motion, AnimatePresence } from "framer-motion";
+import { Col, Form, Row, Segmented } from "antd";
 import useSectionsStore from "../../../store/store";
 import SectionEditor from "./section-editor";
 import SectionsList from "./sections-list";
@@ -32,7 +33,7 @@ const Constructor = () => {
     >
       <Row>
         <Col flex="350px" className="shadow border bg-white h-[100vh]">
-          <div className="px-6 pt-8">
+          <div className="px-6 pt-8 overflow-hidden">
             <Segmented
               options={[
                 { label: "Sections", value: "sections" },
@@ -43,12 +44,32 @@ const Constructor = () => {
               block
             />
             <div className="mt-8 w-full">
-              {activeSection === "sections" && <SectionsList />}
-              {activeSection === "widgets" && <WidgetsList />}
+              {activeSection === "sections" && (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ x: -300 }}
+                    animate={{ x: 0 }}
+                    exit={{ x: 300 }}
+                  >
+                    <SectionsList />
+                  </motion.div>
+                </AnimatePresence>
+              )}
+              {activeSection === "widgets" && (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ x: 300 }}
+                    animate={{ x: 0 }}
+                    exit={{ x: -300 }}
+                  >
+                    <WidgetsList />
+                  </motion.div>
+                </AnimatePresence>
+              )}
             </div>
           </div>
         </Col>
-        <Col flex="auto">
+        <Col flex="auto" className="p-8">
           <SectionEditor />
         </Col>
       </Row>

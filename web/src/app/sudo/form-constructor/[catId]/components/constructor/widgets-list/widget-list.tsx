@@ -10,7 +10,7 @@ const WidgetList = () => {
       renderItem={(item) => (
         <List.Item
           draggable
-          className="aspect-square rounded-lg transition select-none cursor-grab bg-indigo-50 hover:drop-shadow-lg"
+          className="aspect-square rounded-lg transition select-none cursor-grab bg-indigo-100/40 hover:drop-shadow-lg"
         >
           <Flex
             vertical
@@ -21,7 +21,7 @@ const WidgetList = () => {
           >
             <span
               style={{ fontSize: 24, marginTop: 10, height: 30 }}
-              className="text-indigo-500"
+              className="text-indigo-400"
             >
               {item.icon ?? <SettingOutlined />}
             </span>
