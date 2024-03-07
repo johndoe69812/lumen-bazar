@@ -1,11 +1,10 @@
 import Heading from "@/shared/components/heading";
+import PageHeadline from "./shared/components/page-headline";
 
 const DashboardPage = () => {
   return (
-    <div>
-      <Heading variant="h2" className="text-indigo-900">
-        Dashboard
-      </Heading>
+    <div className="pt-6 pb-2 px-6">
+      <PageHeadline title="Dashboard" />
     </div>
   );
 };

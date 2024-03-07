@@ -39,6 +39,8 @@ const CategoriesTree = () => {
             defaultExpandedKeys={[]}
             disabled={isFetching}
             treeData={categoriesTree}
+            itemHeight={50}
+            height={500}
             titleRender={(data) => <CategoryTreeItem {...data} />}
             onDrop={async (data) => {
               const src = data.dragNode.id;

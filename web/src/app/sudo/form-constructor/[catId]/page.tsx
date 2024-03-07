@@ -25,7 +25,7 @@ const FormConstructorPage: FC<Props> = (props) => {
 
   return (
     <>
-      <PageHeadline title={`Form Constructor (${targetCategory?.title})`} />
+      {/* <PageHeadline title={`Form Constructor (${targetCategory?.title})`} /> */}
       <Flex vertical gap={16}>
         <Constructor />
       </Flex>

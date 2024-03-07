@@ -26,7 +26,7 @@ const SudoLayout = (props: PropsWithChildren) => {
     <QueryClientProvider client={queryClient}>
       <div className="w-full h-full grid grid-cols-[250px_1fr] bg-indigo-50">
         <Sidebar />
-        <main className="pt-6 pb-2 px-6">{children}</main>
+        <main>{children}</main>
       </div>
     </QueryClientProvider>
   );

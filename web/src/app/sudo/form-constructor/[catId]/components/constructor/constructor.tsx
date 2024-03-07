@@ -1,14 +1,20 @@
 "use client";
 
-import { PlusOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Form, Input, Row, Segmented, Tabs } from "antd";
+import { Card, Col, Form, Row, Segmented } from "antd";
 import useSectionsStore from "../../../store/store";
 import SectionEditor from "./section-editor";
+import SectionsList from "./sections-list";
+import { useState } from "react";
+import WidgetsList from "./widgets-list";
+
+type Section = "sections" | "widgets";
 
 const Constructor = () => {
   const setSelectedSection = useSectionsStore(
     (state) => state.setSelectedSection
   );
+
+  const [activeSection, setActiveSection] = useState<Section>("sections");
 
   const [form] = Form.useForm();
 
@@ -24,38 +30,25 @@ const Constructor = () => {
         ],
       }}
     >
-      <Row gutter={16} style={{ alignItems: "stretch" }}>
-        <Col span={6}>
-          <Card className="shadow border">
-            <Segmented options={["sections", "widgets"]} size="large" block />
-            <Form.List name="sections">
-              {(fields, { add }) => (
-                <div>
-                  {fields.map(({ key }, index) => (
-                    <Form.Item key={key} name={[index, "title"]}>
-                      <Input
-                        className="border-0 font-medium focus:ring focus:font-normal"
-                        onClick={() => {
-                          setSelectedSection(index);
-                        }}
-                        onDoubleClick={(e) =>
-                          (e.target as HTMLInputElement).focus()
-                        }
-                      />
-                    </Form.Item>
-                  ))}
-                  <Button
-                    icon={<PlusOutlined />}
-                    onClick={() => add({ title: "New section" })}
-                  >
-                    Add section
-                  </Button>
-                </div>
-              )}
-            </Form.List>
-          </Card>
+      <Row>
+        <Col flex="350px" className="shadow border bg-white h-[100vh]">
+          <div className="px-6 pt-8">
+            <Segmented
+              options={[
+                { label: "Sections", value: "sections" },
+                { label: "Widgets", value: "widgets" },
+              ]}
+              size="large"
+              onChange={setActiveSection}
+              block
+            />
+            <div className="mt-8 w-full">
+              {activeSection === "sections" && <SectionsList />}
+              {activeSection === "widgets" && <WidgetsList />}
+            </div>
+          </div>
         </Col>
-        <Col span={18}>
+        <Col flex="auto">
           <SectionEditor />
         </Col>
       </Row>

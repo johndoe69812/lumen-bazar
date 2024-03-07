@@ -8,7 +8,7 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 
 const AdParamsPage = () => {
   return (
-    <>
+    <div className="pt-6 pb-2 px-6">
       <Space direction="vertical" size={0}>
         <PageHeadline
           title="Ad attributes"
@@ -33,7 +33,7 @@ const AdParamsPage = () => {
           <ParamOptions />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

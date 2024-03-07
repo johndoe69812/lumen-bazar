@@ -11,7 +11,7 @@ const PageHeadline = (props: Props) => {
   const { title, subTitle } = props;
 
   return (
-    <Space direction="vertical">
+    <Space direction="vertical" style={{ marginBottom: 24 }}>
       <Typography.Title
         level={1}
         style={{ margin: 0 }}
