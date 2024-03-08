@@ -8,6 +8,7 @@ import { BiCategory } from "@react-icons/all-files/bi/BiCategory";
 import { VscTypeHierarchy } from "@react-icons/all-files/vsc/VscTypeHierarchy";
 import { usePathname } from "next/navigation";
 import { TableOutlined } from "@ant-design/icons";
+import Image from "next/image";
 
 type Props = ComponentProps<typeof Link> & {
   icon: ReactNode;
@@ -60,15 +61,25 @@ const Sidebar = () => {
 
   return (
     <aside className="sticky top-0 h-[100vh] bg-white shadow">
-      <nav>
-        <ul className="flex flex-col gap-2 py-4">
-          {menuItems.map((item, index) => (
-            <li key={index}>
-              <PageLink {...item} isActive={pathname === item.href} />
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className="pt-8">
+        <Image
+          className="mx-auto"
+          src="/logo.svg"
+          alt="Lumen Bazar Logo"
+          width={200}
+          height={45}
+          priority
+        />
+        <nav>
+          <ul className="flex flex-col gap-2 py-4">
+            {menuItems.map((item, index) => (
+              <li key={index}>
+                <PageLink {...item} isActive={pathname === item.href} />
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </aside>
   );
 };

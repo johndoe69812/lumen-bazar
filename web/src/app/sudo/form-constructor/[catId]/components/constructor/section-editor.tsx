@@ -1,6 +1,15 @@
-import { Button, Card, Flex, Form, Input, List, Select } from "antd";
+import {
+  Button,
+  Card,
+  Flex,
+  Form,
+  Input,
+  List,
+  Select,
+  Typography,
+} from "antd";
 import { FormValues } from "./types";
-import useSectionsStore from "../../../store/store";
+import useSectionsStore from "../../../store/sections";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAllParams } from "@/app/sudo/shared/queries/use-all-params";
 import { OptionProps } from "antd/es/select";
@@ -30,7 +39,7 @@ const SectionEditor = () => {
   return (
     <Flex vertical gap={16}>
       <Card className="shadow border">
-        <Input placeholder="Category title" />
+        <Typography.Title>{title}</Typography.Title>
       </Card>
       <Flex vertical gap={8}>
         <List

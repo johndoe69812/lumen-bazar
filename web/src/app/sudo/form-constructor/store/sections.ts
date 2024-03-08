@@ -1,7 +1,5 @@
 import { create } from "zustand";
 
-type Section = { title: string; id?: number };
-
 type State = {
   selectedSection?: number;
 };

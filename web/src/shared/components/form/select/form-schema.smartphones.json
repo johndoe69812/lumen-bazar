@@ -1,0 +1,3273 @@
+{
+    "fields": [
+        {
+            "dataType": "integer",
+            "id": 110680,
+            "label": "Тип телефона",
+            "slug": "tip_telefona",
+            "name": "params[110680]",
+            "enabled": true,
+            "widget": {
+                "type": "hidden",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 8308074,
+            "sorting": 2,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Мобильные телефоны",
+                    "value": 458500
+                },
+                {
+                    "label": "Рации",
+                    "value": 458501
+                },
+                {
+                    "label": "Стационарные телефоны",
+                    "value": 458502
+                },
+                {
+                    "label": "Аксессуары",
+                    "value": 458503
+                }
+            ],
+            "value": 458500,
+            "updatesForm": true,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false,
+            "displayTitle": "Мобильные телефоны"
+        },
+        {
+            "id": 256568,
+            "label": "Оставить запрос на добавление характеристик",
+            "widget": {
+                "type": "sffView",
+                "config": {
+                    "categoryId": 84,
+                    "entityType": "phone",
+                    "problemId": 768
+                }
+            },
+            "stepId": 8308074,
+            "sorting": 3,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "string",
+            "help": "Например, «iPhone 6S Plus серый космос 32 гб» или «Фотоаппарат Canon 700D Kit 18-55»",
+            "id": 100001,
+            "label": "Название объявления",
+            "slug": "title",
+            "name": "title",
+            "enabled": true,
+            "widget": {
+                "type": "title",
+                "config": {
+                    "constraints": [
+                        {
+                            "type": "length",
+                            "value": {
+                                "max": 50,
+                                "message": "Длина названия не может превышать 50 символов"
+                            }
+                        }
+                    ],
+                    "size": "m",
+                    "suggestType": "bubbles",
+                    "suggestUrl": "/web/1/publish/title/suggest"
+                }
+            },
+            "stepId": 38,
+            "sorting": 5,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Введите название объявления",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 121588,
+            "label": "Состояние",
+            "slug": "rasshirennoe_sostoyanie",
+            "name": "params[121588]",
+            "enabled": true,
+            "widget": {
+                "type": "radio",
+                "config": {
+                    "design": "default",
+                    "isBlock": true,
+                    "size": "m"
+                }
+            },
+            "stepId": 38,
+            "sorting": 7,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Новое",
+                    "widget": {
+                        "config": {
+                            "subtitle": "Телефон в запечатанной упаковке."
+                        }
+                    },
+                    "value": 2850684
+                },
+                {
+                    "label": "Отличное",
+                    "widget": {
+                        "config": {
+                            "subtitle": "Нет царапин, вмятин и других дефектов."
+                        }
+                    },
+                    "value": 2850685
+                },
+                {
+                    "label": "Хорошее",
+                    "widget": {
+                        "config": {
+                            "subtitle": "Есть небольшие дефекты."
+                        }
+                    },
+                    "value": 2850686
+                },
+                {
+                    "label": "Удовлетворительное",
+                    "widget": {
+                        "config": {
+                            "subtitle": "Рабочий телефон со значительными дефектами."
+                        }
+                    },
+                    "value": 2850687
+                },
+                {
+                    "label": "Требуется ремонт",
+                    "widget": {
+                        "config": {
+                            "subtitle": "Нерабочий телефон, который можно починить или пустить на запчасти."
+                        }
+                    },
+                    "value": 2850688
+                }
+            ],
+            "value": 2850684,
+            "updatesForm": true,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false,
+            "displayTitle": "Новое"
+        },
+        {
+            "dataType": "integer",
+            "id": 110395,
+            "label": "Состояние",
+            "slug": "sostoyanie",
+            "name": "params[110395]",
+            "enabled": true,
+            "widget": {
+                "type": "hidden",
+                "config": {
+                    "advice": {
+                        "text": "Если вы не пользовались вещью, у вас сохранилась упаковка и бирки, можете указать, что продаёте новый товар. Предмет, которым пользовались хотя бы раз, уже нельзя назвать новым.",
+                        "title": "Какую вещь можно считать новой"
+                    },
+                    "size": "m"
+                }
+            },
+            "stepId": 38,
+            "sorting": 8,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Новое",
+                    "value": 431241
+                },
+                {
+                    "label": "Б/у",
+                    "value": 431242
+                }
+            ],
+            "value": 431241,
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false,
+            "displayTitle": "Новое"
+        },
+        {
+            "dataType": "integer",
+            "id": 2822,
+            "label": "Вид объявления",
+            "slug": "type_of_trade",
+            "name": "params[2822]",
+            "enabled": true,
+            "widget": {
+                "type": "select",
+                "config": {
+                    "hasSearch": false,
+                    "newDesign": true,
+                    "size": "m",
+                    "width": "7"
+                }
+            },
+            "stepId": 38,
+            "sorting": 9,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Продаю своё",
+                    "value": 20018
+                },
+                {
+                    "label": "Товар приобретён на продажу",
+                    "value": 20019
+                }
+            ],
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Выберите значение из списка",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 243815,
+            "label": "Укажите уникальный номер",
+            "widget": {
+                "type": "text",
+                "config": {}
+            },
+            "stepId": 15716,
+            "sorting": 11,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "string",
+            "help": "Покажем только 5 последних цифр",
+            "id": 120713,
+            "label": "IMEI или IMEI1",
+            "slug": "imei",
+            "name": "params[120713]",
+            "placeholder": "15-ти значный номер",
+            "enabled": true,
+            "widget": {
+                "type": "imei",
+                "config": {
+                    "labelHelp": {
+                        "maxWidth": 340,
+                        "text": "— Набрать *#06# на телефоне, номер появится на экране.\n— Посмотреть в настройках, в разделе «Об этом устройстве», «О телефоне» или похожем.\n—  Найти на корпусе: обычно IMEI пишут на лотке сим-карты, на задней панели, под ней или под аккумулятором.\n— Посмотреть на коробке.",
+                        "title": "Как узнать IMEI"
+                    },
+                    "mask": "imei",
+                    "size": "m"
+                }
+            },
+            "stepId": 15716,
+            "sorting": 12,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "regex",
+                    "message": "Введите 15 цифр — без букв, пробелов и других знаков",
+                    "severity": "error",
+                    "regexPositive": "^(?=\\d*[1-9])(\\d{15})$"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 197574,
+            "label": "Укажите характеристики",
+            "widget": {
+                "type": "text",
+                "config": {
+                    "size": "m",
+                    "text": "Укажите их, чтобы покупателям было проще находить объявления.",
+                    "textProps": {
+                        "size": "m"
+                    }
+                }
+            },
+            "stepId": 12131,
+            "sorting": 14,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "integer",
+            "id": 110618,
+            "label": "Производитель",
+            "slug": "vendor",
+            "name": "params[110618]",
+            "enabled": true,
+            "widget": {
+                "type": "catalogSuggest",
+                "config": {
+                    "size": "m",
+                    "weightTag": "weight",
+                    "width": 6
+                }
+            },
+            "stepId": 12131,
+            "sorting": 15,
+            "type": "enumerable",
+            "entityType": "field",
+            "values": [
+                {
+                    "label": "Apple",
+                    "value": 469735
+                },
+                {
+                    "label": "Apple",
+                    "value": 469735
+                },
+                {
+                    "label": "Samsung",
+                    "value": 469966
+                },
+                {
+                    "label": "Samsung",
+                    "value": 469966
+                },
+                {
+                    "label": "HUAWEI",
+                    "value": 469944
+                },
+                {
+                    "label": "HUAWEI",
+                    "value": 469944
+                },
+                {
+                    "label": "Xiaomi",
+                    "value": 469935
+                },
+                {
+                    "label": "Xiaomi",
+                    "value": 469935
+                },
+                {
+                    "label": "HONOR",
+                    "value": 491447
+                },
+                {
+                    "label": "HONOR",
+                    "value": 491447
+                },
+                {
+                    "label": " Posh Mobile",
+                    "value": 18707638
+                },
+                {
+                    "label": "3Q",
+                    "value": 469940
+                },
+                {
+                    "label": "4Good",
+                    "value": 469922
+                },
+                {
+                    "label": "A1",
+                    "value": 491446
+                },
+                {
+                    "label": "AEG",
+                    "value": 469626
+                },
+                {
+                    "label": "AGGRESSOR",
+                    "value": 469898
+                },
+                {
+                    "label": "AGM",
+                    "value": 469640
+                },
+                {
+                    "label": "AGmobile",
+                    "value": 2911364
+                },
+                {
+                    "label": "AIEK",
+                    "value": 469650
+                },
+                {
+                    "label": "AKMobile",
+                    "value": 469668
+                },
+                {
+                    "label": "AMOI",
+                    "value": 469610
+                },
+                {
+                    "label": "ASSISTANT",
+                    "value": 469868
+                },
+                {
+                    "label": "ASTRO",
+                    "value": 469912
+                },
+                {
+                    "label": "ASUS",
+                    "value": 469621
+                },
+                {
+                    "label": "AWAX",
+                    "value": 469839
+                },
+                {
+                    "label": "AYYA",
+                    "value": 17068194
+                },
+                {
+                    "label": "Aceline",
+                    "value": 17132222
+                },
+                {
+                    "label": "Acer",
+                    "value": 469872
+                },
+                {
+                    "label": "Aimoto",
+                    "value": 491448
+                },
+                {
+                    "label": "AirOn",
+                    "value": 469696
+                },
+                {
+                    "label": "Alcatel",
+                    "value": 469959
+                },
+                {
+                    "label": "AllCall",
+                    "value": 469783
+                },
+                {
+                    "label": "AllView",
+                    "value": 469595
+                },
+                {
+                    "label": "Amazon",
+                    "value": 469958
+                },
+                {
+                    "label": "AnexTEK",
+                    "value": 469715
+                },
+                {
+                    "label": "AnyDATA",
+                    "value": 469884
+                },
+                {
+                    "label": "Anycool",
+                    "value": 469961
+                },
+                {
+                    "label": "Archos",
+                    "value": 469651
+                },
+                {
+                    "label": "Ark",
+                    "value": 469971
+                },
+                {
+                    "label": "Atel",
+                    "value": 469660
+                },
+                {
+                    "label": "Atomic",
+                    "value": 18744357
+                },
+                {
+                    "label": "Audiovox",
+                    "value": 469664
+                },
+                {
+                    "label": "BB",
+                    "value": 469832
+                },
+                {
+                    "label": "BBK",
+                    "value": 469824
+                },
+                {
+                    "label": "BELLFORT",
+                    "value": 469915
+                },
+                {
+                    "label": "BELLPERRE",
+                    "value": 469709
+                },
+                {
+                    "label": "BEZKAM",
+                    "value": 2911358
+                },
+                {
+                    "label": "BLU",
+                    "value": 469628
+                },
+                {
+                    "label": "BQ",
+                    "value": 469816
+                },
+                {
+                    "label": "BRAVIS",
+                    "value": 469642
+                },
+                {
+                    "label": "BURG",
+                    "value": 469949
+                },
+                {
+                    "label": "Balmuda",
+                    "value": 18569075
+                },
+                {
+                    "label": "Bedove",
+                    "value": 469791
+                },
+                {
+                    "label": "BenQ",
+                    "value": 469828
+                },
+                {
+                    "label": "BenQ-Siemens",
+                    "value": 469764
+                },
+                {
+                    "label": "Benco",
+                    "value": 18724630
+                },
+                {
+                    "label": "Benefon",
+                    "value": 469687
+                },
+                {
+                    "label": "Bird",
+                    "value": 469805
+                },
+                {
+                    "label": "Black Fox",
+                    "value": 469721
+                },
+                {
+                    "label": "Black Shark",
+                    "value": 469622
+                },
+                {
+                    "label": "BlackBerry",
+                    "value": 469775
+                },
+                {
+                    "label": "Blackview",
+                    "value": 469938
+                },
+                {
+                    "label": "BlindShell",
+                    "value": 17068045
+                },
+                {
+                    "label": "Bliss",
+                    "value": 469678
+                },
+                {
+                    "label": "Bluboo",
+                    "value": 469729
+                },
+                {
+                    "label": "Bosch",
+                    "value": 469967
+                },
+                {
+                    "label": "CASIO",
+                    "value": 469822
+                },
+                {
+                    "label": "CORN",
+                    "value": 18484341
+                },
+                {
+                    "label": "CUBOT",
+                    "value": 469606
+                },
+                {
+                    "label": "Cagabi",
+                    "value": 469965
+                },
+                {
+                    "label": "Carbon 1",
+                    "value": 17481233
+                },
+                {
+                    "label": "Cat",
+                    "value": 18179037
+                },
+                {
+                    "label": "Caterpillar",
+                    "value": 469727
+                },
+                {
+                    "label": "Celkon",
+                    "value": 18329950
+                },
+                {
+                    "label": "Changjiang",
+                    "value": 469806
+                },
+                {
+                    "label": "Chigon",
+                    "value": 17468421
+                },
+                {
+                    "label": "China Mobile",
+                    "value": 17327003
+                },
+                {
+                    "label": "CloudFone",
+                    "value": 469792
+                },
+                {
+                    "label": "Conquest",
+                    "value": 469710
+                },
+                {
+                    "label": "Coolpad",
+                    "value": 469907
+                },
+                {
+                    "label": "Cruiser",
+                    "value": 469894
+                },
+                {
+                    "label": "D-JET",
+                    "value": 469831
+                },
+                {
+                    "label": "DELL",
+                    "value": 469875
+                },
+                {
+                    "label": "DEXP",
+                    "value": 469918
+                },
+                {
+                    "label": "DIGMA",
+                    "value": 469692
+                },
+                {
+                    "label": "DNS",
+                    "value": 469609
+                },
+                {
+                    "label": "DOOGEE",
+                    "value": 469945
+                },
+                {
+                    "label": "Daewoo",
+                    "value": 469662
+                },
+                {
+                    "label": "Dex",
+                    "value": 469703
+                },
+                {
+                    "label": "Discovery",
+                    "value": 469785
+                },
+                {
+                    "label": "Dizo",
+                    "value": 18154250
+                },
+                {
+                    "label": "Dluck",
+                    "value": 469625
+                },
+                {
+                    "label": "Dmobo",
+                    "value": 469772
+                },
+                {
+                    "label": "Donod",
+                    "value": 469629
+                },
+                {
+                    "label": "Doopro",
+                    "value": 17069957
+                },
+                {
+                    "label": "Dopod",
+                    "value": 469795
+                },
+                {
+                    "label": "Doro",
+                    "value": 469893
+                },
+                {
+                    "label": "E\u0026L",
+                    "value": 469866
+                },
+                {
+                    "label": "ECOO",
+                    "value": 469947
+                },
+                {
+                    "label": "ELARI",
+                    "value": 469647
+                },
+                {
+                    "label": "EVOLVEO",
+                    "value": 469927
+                },
+                {
+                    "label": "EZRA",
+                    "value": 17991118
+                },
+                {
+                    "label": "Elephone",
+                    "value": 469913
+                },
+                {
+                    "label": "Emol",
+                    "value": 469702
+                },
+                {
+                    "label": "Energizer",
+                    "value": 469917
+                },
+                {
+                    "label": "Energy Sistem",
+                    "value": 469737
+                },
+                {
+                    "label": "Ergo",
+                    "value": 469865
+                },
+                {
+                    "label": "Ericsson",
+                    "value": 469825
+                },
+                {
+                    "label": "Essential",
+                    "value": 469861
+                },
+                {
+                    "label": "Eten",
+                    "value": 469951
+                },
+                {
+                    "label": "Etuline",
+                    "value": 469644
+                },
+                {
+                    "label": "Evelatus",
+                    "value": 491445
+                },
+                {
+                    "label": "Explay",
+                    "value": 469817
+                },
+                {
+                    "label": "F+",
+                    "value": 469925
+                },
+                {
+                    "label": "FLYCAT",
+                    "value": 469836
+                },
+                {
+                    "label": "FOSSiBOT",
+                    "value": 18723068
+                },
+                {
+                    "label": "FREETEL",
+                    "value": 469811
+                },
+                {
+                    "label": "Fairphone",
+                    "value": 18615987
+                },
+                {
+                    "label": "Fashion",
+                    "value": 469659
+                },
+                {
+                    "label": "Figi",
+                    "value": 2911368
+                },
+                {
+                    "label": "FinePower",
+                    "value": 469809
+                },
+                {
+                    "label": "Flipkart Billion",
+                    "value": 18603565
+                },
+                {
+                    "label": "Fly",
+                    "value": 469882
+                },
+                {
+                    "label": "Fontel",
+                    "value": 18575057
+                },
+                {
+                    "label": "FreeYond",
+                    "value": 18615928
+                },
+                {
+                    "label": "Fujitsu",
+                    "value": 469955
+                },
+                {
+                    "label": "Fujitsu-Siemens",
+                    "value": 469670
+                },
+                {
+                    "label": "G-Plus",
+                    "value": 469904
+                },
+                {
+                    "label": "GEO-MOBILE",
+                    "value": 469888
+                },
+                {
+                    "label": "GIGABYTE",
+                    "value": 469910
+                },
+                {
+                    "label": "GOCLEVER",
+                    "value": 469698
+                },
+                {
+                    "label": "GSMK CRYPTOPHONE",
+                    "value": 18426098
+                },
+                {
+                    "label": "GSmart",
+                    "value": 469953
+                },
+                {
+                    "label": "GTStar",
+                    "value": 17068526
+                },
+                {
+                    "label": "Garmin",
+                    "value": 469716
+                },
+                {
+                    "label": "Garmin-Asus",
+                    "value": 469732
+                },
+                {
+                    "label": "GeeksPhone",
+                    "value": 469838
+                },
+                {
+                    "label": "General Mobile",
+                    "value": 469802
+                },
+                {
+                    "label": "Geotel",
+                    "value": 469796
+                },
+                {
+                    "label": "Gerffins",
+                    "value": 2914537
+                },
+                {
+                    "label": "Getac",
+                    "value": 469954
+                },
+                {
+                    "label": "Giga",
+                    "value": 469908
+                },
+                {
+                    "label": "Gigaset",
+                    "value": 469889
+                },
+                {
+                    "label": "Ginza",
+                    "value": 469657
+                },
+                {
+                    "label": "Ginzzu",
+                    "value": 469856
+                },
+                {
+                    "label": "Gionee",
+                    "value": 469826
+                },
+                {
+                    "label": "Globex",
+                    "value": 469834
+                },
+                {
+                    "label": "GlobusGPS",
+                    "value": 469763
+                },
+                {
+                    "label": "GoldStar",
+                    "value": 469677
+                },
+                {
+                    "label": "GoldVish",
+                    "value": 469598
+                },
+                {
+                    "label": "Gome",
+                    "value": 2359755
+                },
+                {
+                    "label": "Google",
+                    "value": 469756
+                },
+                {
+                    "label": "Goophone",
+                    "value": 18487635
+                },
+                {
+                    "label": "Gooweel",
+                    "value": 469635
+                },
+                {
+                    "label": "Gresso",
+                    "value": 469641
+                },
+                {
+                    "label": "Gretel",
+                    "value": 469827
+                },
+                {
+                    "label": "Grundig",
+                    "value": 469623
+                },
+                {
+                    "label": "Gspda",
+                    "value": 469859
+                },
+                {
+                    "label": "Gtran",
+                    "value": 469808
+                },
+                {
+                    "label": "H-mobile",
+                    "value": 17333160
+                },
+                {
+                    "label": "HAMMER",
+                    "value": 469901
+                },
+                {
+                    "label": "HEDY",
+                    "value": 469902
+                },
+                {
+                    "label": "HIPER",
+                    "value": 469654
+                },
+                {
+                    "label": "HOLLEY COMMUNICATIONS",
+                    "value": 469777
+                },
+                {
+                    "label": "HOMTOM",
+                    "value": 469759
+                },
+                {
+                    "label": "HONPhone",
+                    "value": 469751
+                },
+                {
+                    "label": "HP",
+                    "value": 469798
+                },
+                {
+                    "label": "HTC",
+                    "value": 469890
+                },
+                {
+                    "label": "Haier",
+                    "value": 469849
+                },
+                {
+                    "label": "Handheld",
+                    "value": 469855
+                },
+                {
+                    "label": "Handyuhr",
+                    "value": 469800
+                },
+                {
+                    "label": "Highscreen",
+                    "value": 469789
+                },
+                {
+                    "label": "Hisense",
+                    "value": 469850
+                },
+                {
+                    "label": "Hitachi",
+                    "value": 469829
+                },
+                {
+                    "label": "HongKang",
+                    "value": 469601
+                },
+                {
+                    "label": "Hotwav",
+                    "value": 17069803
+                },
+                {
+                    "label": "Hyundai",
+                    "value": 469669
+                },
+                {
+                    "label": "IIIF150",
+                    "value": 17486066
+                },
+                {
+                    "label": "INOI",
+                    "value": 469923
+                },
+                {
+                    "label": "INTEX",
+                    "value": 469633
+                },
+                {
+                    "label": "IQM",
+                    "value": 469611
+                },
+                {
+                    "label": "IUNI",
+                    "value": 469788
+                },
+                {
+                    "label": "Impression",
+                    "value": 469672
+                },
+                {
+                    "label": "InFocus",
+                    "value": 469963
+                },
+                {
+                    "label": "Infinix",
+                    "value": 2359754
+                },
+                {
+                    "label": "Innos",
+                    "value": 469691
+                },
+                {
+                    "label": "Innostream",
+                    "value": 469674
+                },
+                {
+                    "label": "Irbis",
+                    "value": 469845
+                },
+                {
+                    "label": "Irulu",
+                    "value": 469708
+                },
+                {
+                    "label": "Itel",
+                    "value": 469815
+                },
+                {
+                    "label": "JESY",
+                    "value": 469762
+                },
+                {
+                    "label": "JOA Telecom",
+                    "value": 469645
+                },
+                {
+                    "label": "JOY'S",
+                    "value": 469603
+                },
+                {
+                    "label": "Jeep",
+                    "value": 2911359
+                },
+                {
+                    "label": "Jiayu",
+                    "value": 469833
+                },
+                {
+                    "label": "Jinga",
+                    "value": 469671
+                },
+                {
+                    "label": "Jivi",
+                    "value": 469722
+                },
+                {
+                    "label": "Jolla",
+                    "value": 469896
+                },
+                {
+                    "label": "Joy",
+                    "value": 18304211
+                },
+                {
+                    "label": "Just5",
+                    "value": 469920
+                },
+                {
+                    "label": "KECHAODA",
+                    "value": 17068111
+                },
+                {
+                    "label": "KENEKSI",
+                    "value": 469919
+                },
+                {
+                    "label": "KENXINDA",
+                    "value": 469841
+                },
+                {
+                    "label": "KGTEL",
+                    "value": 18145935
+                },
+                {
+                    "label": "KINGZONE",
+                    "value": 469779
+                },
+                {
+                    "label": "KOOLNEE",
+                    "value": 17069536
+                },
+                {
+                    "label": "KREZ",
+                    "value": 469675
+                },
+                {
+                    "label": "KUH",
+                    "value": 17042410
+                },
+                {
+                    "label": "KYOCERA",
+                    "value": 469781
+                },
+                {
+                    "label": "Karbonn",
+                    "value": 469695
+                },
+                {
+                    "label": "Kazam",
+                    "value": 469602
+                },
+                {
+                    "label": "Kenned",
+                    "value": 469820
+                },
+                {
+                    "label": "Kiano",
+                    "value": 469881
+                },
+                {
+                    "label": "KingSing",
+                    "value": 469932
+                },
+                {
+                    "label": "Kismo",
+                    "value": 469734
+                },
+                {
+                    "label": "Kodak",
+                    "value": 469688
+                },
+                {
+                    "label": "Konka",
+                    "value": 469682
+                },
+                {
+                    "label": "Krome",
+                    "value": 469733
+                },
+                {
+                    "label": "Kruger\u0026Matz",
+                    "value": 469636
+                },
+                {
+                    "label": "L8star",
+                    "value": 17042053
+                },
+                {
+                    "label": "LEXAND",
+                    "value": 469892
+                },
+                {
+                    "label": "LG",
+                    "value": 469679
+                },
+                {
+                    "label": "LUXian",
+                    "value": 469705
+                },
+                {
+                    "label": "Land Rover",
+                    "value": 469726
+                },
+                {
+                    "label": "Lark",
+                    "value": 469941
+                },
+                {
+                    "label": "LeEco",
+                    "value": 469744
+                },
+                {
+                    "label": "LeRee",
+                    "value": 17041369
+                },
+                {
+                    "label": "LeTV",
+                    "value": 18781495
+                },
+                {
+                    "label": "Leagoo",
+                    "value": 469665
+                },
+                {
+                    "label": "Leitz",
+                    "value": 17996303
+                },
+                {
+                    "label": "Lenovo",
+                    "value": 469914
+                },
+                {
+                    "label": "Lumigon",
+                    "value": 469632
+                },
+                {
+                    "label": "Lumus",
+                    "value": 469614
+                },
+                {
+                    "label": "M-Horse",
+                    "value": 17301950
+                },
+                {
+                    "label": "M-Net",
+                    "value": 17466912
+                },
+                {
+                    "label": "MANN",
+                    "value": 17354400
+                },
+                {
+                    "label": "MAXVI",
+                    "value": 469900
+                },
+                {
+                    "label": "MELROSE",
+                    "value": 17069585
+                },
+                {
+                    "label": "MIG",
+                    "value": 469689
+                },
+                {
+                    "label": "MIJUE",
+                    "value": 469897
+                },
+                {
+                    "label": "MYSAGA",
+                    "value": 469812
+                },
+                {
+                    "label": "Magic",
+                    "value": 469713
+                },
+                {
+                    "label": "Manta",
+                    "value": 469905
+                },
+                {
+                    "label": "Marshall",
+                    "value": 469793
+                },
+                {
+                    "label": "MaxCom",
+                    "value": 469883
+                },
+                {
+                    "label": "Maxon",
+                    "value": 469909
+                },
+                {
+                    "label": "Maze",
+                    "value": 18745306
+                },
+                {
+                    "label": "Media-Droid",
+                    "value": 469952
+                },
+                {
+                    "label": "Mediacom",
+                    "value": 469929
+                },
+                {
+                    "label": "Meiigoo",
+                    "value": 17473354
+                },
+                {
+                    "label": "Meizu",
+                    "value": 469946
+                },
+                {
+                    "label": "Merlin",
+                    "value": 469608
+                },
+                {
+                    "label": "Micromax",
+                    "value": 469797
+                },
+                {
+                    "label": "Microsoft",
+                    "value": 469741
+                },
+                {
+                    "label": "Mitac",
+                    "value": 469962
+                },
+                {
+                    "label": "Mito",
+                    "value": 469957
+                },
+                {
+                    "label": "Mitsubishi Electric",
+                    "value": 469694
+                },
+                {
+                    "label": "Mlais",
+                    "value": 469748
+                },
+                {
+                    "label": "Mobiado",
+                    "value": 469867
+                },
+                {
+                    "label": "Mode1",
+                    "value": 2911360
+                },
+                {
+                    "label": "Motorola",
+                    "value": 469862
+                },
+                {
+                    "label": "MyPhone",
+                    "value": 469813
+                },
+                {
+                    "label": "MyWigo",
+                    "value": 469942
+                },
+                {
+                    "label": "NEC",
+                    "value": 469767
+                },
+                {
+                    "label": "NIO",
+                    "value": 18739346
+                },
+                {
+                    "label": "NO.1",
+                    "value": 469911
+                },
+                {
+                    "label": "NOA",
+                    "value": 469719
+                },
+                {
+                    "label": "NOUS",
+                    "value": 469873
+                },
+                {
+                    "label": "Neken",
+                    "value": 18090757
+                },
+                {
+                    "label": "NeoNode",
+                    "value": 469742
+                },
+                {
+                    "label": "Newgen",
+                    "value": 469613
+                },
+                {
+                    "label": "Newman",
+                    "value": 469886
+                },
+                {
+                    "label": "Ninefive",
+                    "value": 469784
+                },
+                {
+                    "label": "Nobby",
+                    "value": 469885
+                },
+                {
+                    "label": "Nokia",
+                    "value": 469840
+                },
+                {
+                    "label": "Nomi",
+                    "value": 469743
+                },
+                {
+                    "label": "Nomu",
+                    "value": 469765
+                },
+                {
+                    "label": "Nothing",
+                    "value": 17468137
+                },
+                {
+                    "label": "NoviSea",
+                    "value": 18721158
+                },
+                {
+                    "label": "NuAns",
+                    "value": 17173444
+                },
+                {
+                    "label": "Nubia",
+                    "value": 469801
+                },
+                {
+                    "label": "O2",
+                    "value": 469712
+                },
+                {
+                    "label": "OINOM",
+                    "value": 469848
+                },
+                {
+                    "label": "OLMIO",
+                    "value": 469770
+                },
+                {
+                    "label": "OMLOOK",
+                    "value": 469810
+                },
+                {
+                    "label": "ONEXT",
+                    "value": 469936
+                },
+                {
+                    "label": "ONYX BOOX",
+                    "value": 491449
+                },
+                {
+                    "label": "OPPO",
+                    "value": 469685
+                },
+                {
+                    "label": "OPRIX",
+                    "value": 469803
+                },
+                {
+                    "label": "ORRO",
+                    "value": 469924
+                },
+                {
+                    "label": "ORSiO",
+                    "value": 469843
+                },
+                {
+                    "label": "OSCAL",
+                    "value": 18303968
+                },
+                {
+                    "label": "OUKITEL",
+                    "value": 469619
+                },
+                {
+                    "label": "OnePlus",
+                    "value": 469782
+                },
+                {
+                    "label": "Outfone",
+                    "value": 469970
+                },
+                {
+                    "label": "Overmax",
+                    "value": 469605
+                },
+                {
+                    "label": "Oysters",
+                    "value": 469757
+                },
+                {
+                    "label": "PORSCHE",
+                    "value": 469842
+                },
+                {
+                    "label": "PPTV",
+                    "value": 2849816
+                },
+                {
+                    "label": "Palm",
+                    "value": 469728
+                },
+                {
+                    "label": "Panasonic",
+                    "value": 469680
+                },
+                {
+                    "label": "Pantech-Curitel",
+                    "value": 469663
+                },
+                {
+                    "label": "Perfeo",
+                    "value": 469620
+                },
+                {
+                    "label": "Phicomm",
+                    "value": 469969
+                },
+                {
+                    "label": "Philips",
+                    "value": 469871
+                },
+                {
+                    "label": "Phonemax",
+                    "value": 18334488
+                },
+                {
+                    "label": "Pine64",
+                    "value": 18723931
+                },
+                {
+                    "label": "Pixelphone",
+                    "value": 469750
+                },
+                {
+                    "label": "Pixus",
+                    "value": 469972
+                },
+                {
+                    "label": "Poptel",
+                    "value": 469683
+                },
+                {
+                    "label": "Premier",
+                    "value": 469699
+                },
+                {
+                    "label": "Prestigio",
+                    "value": 469823
+                },
+                {
+                    "label": "Punkt",
+                    "value": 17470526
+                },
+                {
+                    "label": "Qtek",
+                    "value": 469667
+                },
+                {
+                    "label": "Qumo",
+                    "value": 469618
+                },
+                {
+                    "label": "RED",
+                    "value": 17855349
+                },
+                {
+                    "label": "RITZVIVA",
+                    "value": 469799
+                },
+                {
+                    "label": "RYTE",
+                    "value": 469931
+                },
+                {
+                    "label": "Rakuten",
+                    "value": 18575205
+                },
+                {
+                    "label": "Ramos",
+                    "value": 17627291
+                },
+                {
+                    "label": "RangerFone",
+                    "value": 469821
+                },
+                {
+                    "label": "Raydget",
+                    "value": 469738
+                },
+                {
+                    "label": "Razer",
+                    "value": 469933
+                },
+                {
+                    "label": "Reeder",
+                    "value": 17991916
+                },
+                {
+                    "label": "Rezone",
+                    "value": 469723
+                },
+                {
+                    "label": "Ritmix",
+                    "value": 469673
+                },
+                {
+                    "label": "Rivotek",
+                    "value": 469746
+                },
+                {
+                    "label": "Rolsen",
+                    "value": 469869
+                },
+                {
+                    "label": "Rombica",
+                    "value": 18694562
+                },
+                {
+                    "label": "Ross\u0026Moor",
+                    "value": 469653
+                },
+                {
+                    "label": "Rover PC",
+                    "value": 469676
+                },
+                {
+                    "label": "RugGear",
+                    "value": 469631
+                },
+                {
+                    "label": "RuiTel",
+                    "value": 17905225
+                },
+                {
+                    "label": "Runbo",
+                    "value": 469596
+                },
+                {
+                    "label": "Runfast",
+                    "value": 469895
+                },
+                {
+                    "label": "S Mobile",
+                    "value": 18575565
+                },
+                {
+                    "label": "S-TELL",
+                    "value": 469701
+                },
+                {
+                    "label": "SANTIN",
+                    "value": 2849817
+                },
+                {
+                    "label": "SATREND",
+                    "value": 2911362
+                },
+                {
+                    "label": "SENSEIT",
+                    "value": 469876
+                },
+                {
+                    "label": "SHTURMANN",
+                    "value": 469740
+                },
+                {
+                    "label": "SK",
+                    "value": 469681
+                },
+                {
+                    "label": "SMS Technology Australia",
+                    "value": 469787
+                },
+                {
+                    "label": "SNAMI",
+                    "value": 469818
+                },
+                {
+                    "label": "SUGAR",
+                    "value": 469903
+                },
+                {
+                    "label": "Sagem",
+                    "value": 469768
+                },
+                {
+                    "label": "Sanyo",
+                    "value": 469648
+                },
+                {
+                    "label": "Seals",
+                    "value": 469661
+                },
+                {
+                    "label": "SeeMax",
+                    "value": 469600
+                },
+                {
+                    "label": "Seekwood",
+                    "value": 469684
+                },
+                {
+                    "label": "Sencor",
+                    "value": 469956
+                },
+                {
+                    "label": "Sendo",
+                    "value": 469649
+                },
+                {
+                    "label": "SerteC",
+                    "value": 469704
+                },
+                {
+                    "label": "Servo",
+                    "value": 2911370
+                },
+                {
+                    "label": "Sewon",
+                    "value": 469731
+                },
+                {
+                    "label": "Sharp",
+                    "value": 469857
+                },
+                {
+                    "label": "Siemens",
+                    "value": 469921
+                },
+                {
+                    "label": "Sierra Wireless",
+                    "value": 18432433
+                },
+                {
+                    "label": "Sigma mobile",
+                    "value": 469627
+                },
+                {
+                    "label": "Siswoo",
+                    "value": 469786
+                },
+                {
+                    "label": "Sitronics",
+                    "value": 469745
+                },
+                {
+                    "label": "Skylink",
+                    "value": 469814
+                },
+                {
+                    "label": "Skyvox",
+                    "value": 469760
+                },
+                {
+                    "label": "Smartisan",
+                    "value": 469846
+                },
+                {
+                    "label": "Smarty",
+                    "value": 469594
+                },
+                {
+                    "label": "Snail",
+                    "value": 2914539
+                },
+                {
+                    "label": "Snopow",
+                    "value": 469761
+                },
+                {
+                    "label": "SoftBank",
+                    "value": 469753
+                },
+                {
+                    "label": "Song",
+                    "value": 469758
+                },
+                {
+                    "label": "Sonim",
+                    "value": 469858
+                },
+                {
+                    "label": "Sony",
+                    "value": 469697
+                },
+                {
+                    "label": "Sony Ericsson",
+                    "value": 469906
+                },
+                {
+                    "label": "Soutec",
+                    "value": 469690
+                },
+                {
+                    "label": "Soyes",
+                    "value": 2911369
+                },
+                {
+                    "label": "Stark",
+                    "value": 469615
+                },
+                {
+                    "label": "Starway",
+                    "value": 469837
+                },
+                {
+                    "label": "Strike",
+                    "value": 469879
+                },
+                {
+                    "label": "Sunwind",
+                    "value": 2911363
+                },
+                {
+                    "label": "Synertek",
+                    "value": 469730
+                },
+                {
+                    "label": "T-Mobile",
+                    "value": 469847
+                },
+                {
+                    "label": "TAG Heuer",
+                    "value": 469637
+                },
+                {
+                    "label": "TCL",
+                    "value": 469646
+                },
+                {
+                    "label": "TECNO",
+                    "value": 469916
+                },
+                {
+                    "label": "TELEFUNKEN",
+                    "value": 469950
+                },
+                {
+                    "label": "TP-LINK",
+                    "value": 469725
+                },
+                {
+                    "label": "TWINSCOM",
+                    "value": 469778
+                },
+                {
+                    "label": "TechnoPhone",
+                    "value": 17083468
+                },
+                {
+                    "label": "Tel.me.",
+                    "value": 469844
+                },
+                {
+                    "label": "Tele2",
+                    "value": 469638
+                },
+                {
+                    "label": "Tengda",
+                    "value": 469948
+                },
+                {
+                    "label": "Teracube",
+                    "value": 17042477
+                },
+                {
+                    "label": "Tesla",
+                    "value": 469766
+                },
+                {
+                    "label": "ThL",
+                    "value": 469835
+                },
+                {
+                    "label": "The Q",
+                    "value": 469874
+                },
+                {
+                    "label": "Tonino Lamborghini",
+                    "value": 469853
+                },
+                {
+                    "label": "Toplux",
+                    "value": 469752
+                },
+                {
+                    "label": "Torex",
+                    "value": 469877
+                },
+                {
+                    "label": "Torson",
+                    "value": 469804
+                },
+                {
+                    "label": "Toshi",
+                    "value": 469707
+                },
+                {
+                    "label": "Toshiba",
+                    "value": 469720
+                },
+                {
+                    "label": "Treelogic",
+                    "value": 469643
+                },
+                {
+                    "label": "Turbo",
+                    "value": 469612
+                },
+                {
+                    "label": "TurboPad",
+                    "value": 469597
+                },
+                {
+                    "label": "TwinMOS",
+                    "value": 469666
+                },
+                {
+                    "label": "Typhoon",
+                    "value": 469780
+                },
+                {
+                    "label": "ULCOOL",
+                    "value": 17062044
+                },
+                {
+                    "label": "UMIDIGI",
+                    "value": 469706
+                },
+                {
+                    "label": "UMi",
+                    "value": 17042703
+                },
+                {
+                    "label": "UNIWA",
+                    "value": 2911365
+                },
+                {
+                    "label": "Ubiquam",
+                    "value": 469652
+                },
+                {
+                    "label": "Uhans",
+                    "value": 469930
+                },
+                {
+                    "label": "Uhappy",
+                    "value": 17068992
+                },
+                {
+                    "label": "Ulefone",
+                    "value": 469960
+                },
+                {
+                    "label": "Ulysse Nardin",
+                    "value": 469774
+                },
+                {
+                    "label": "Umiio",
+                    "value": 18768630
+                },
+                {
+                    "label": "Unihertz",
+                    "value": 2911366
+                },
+                {
+                    "label": "Upnone",
+                    "value": 469686
+                },
+                {
+                    "label": "VEON",
+                    "value": 469616
+                },
+                {
+                    "label": "VERTEX",
+                    "value": 469807
+                },
+                {
+                    "label": "VIWA",
+                    "value": 2372021
+                },
+                {
+                    "label": "VK Corporation",
+                    "value": 469771
+                },
+                {
+                    "label": "Vargo",
+                    "value": 17486698
+                },
+                {
+                    "label": "Venso",
+                    "value": 469851
+                },
+                {
+                    "label": "Versace",
+                    "value": 469630
+                },
+                {
+                    "label": "Vertu",
+                    "value": 469604
+                },
+                {
+                    "label": "Viewsonic",
+                    "value": 469658
+                },
+                {
+                    "label": "Viking",
+                    "value": 469794
+                },
+                {
+                    "label": "Vkworld",
+                    "value": 469639
+                },
+                {
+                    "label": "Vodafone",
+                    "value": 18334485
+                },
+                {
+                    "label": "Voxtel",
+                    "value": 469776
+                },
+                {
+                    "label": "Vsmart",
+                    "value": 469790
+                },
+                {
+                    "label": "WEXLER",
+                    "value": 469863
+                },
+                {
+                    "label": "Watch Mobile",
+                    "value": 469656
+                },
+                {
+                    "label": "Watchtech",
+                    "value": 469830
+                },
+                {
+                    "label": "Wieppo",
+                    "value": 469899
+                },
+                {
+                    "label": "Wigor",
+                    "value": 469852
+                },
+                {
+                    "label": "Wiko",
+                    "value": 469693
+                },
+                {
+                    "label": "Wileyfox",
+                    "value": 469937
+                },
+                {
+                    "label": "Wings",
+                    "value": 17854777
+                },
+                {
+                    "label": "Withus",
+                    "value": 469624
+                },
+                {
+                    "label": "X-TIGI",
+                    "value": 2914536
+                },
+                {
+                    "label": "XGODY",
+                    "value": 2911361
+                },
+                {
+                    "label": "Xcute",
+                    "value": 469714
+                },
+                {
+                    "label": "YEZZ",
+                    "value": 469717
+                },
+                {
+                    "label": "Yeemi",
+                    "value": 2914538
+                },
+                {
+                    "label": "Yota",
+                    "value": 469599
+                },
+                {
+                    "label": "ZIFRO",
+                    "value": 469870
+                },
+                {
+                    "label": "ZOIJA",
+                    "value": 469887
+                },
+                {
+                    "label": "ZTE",
+                    "value": 469755
+                },
+                {
+                    "label": "ZUK",
+                    "value": 469749
+                },
+                {
+                    "label": "Zakang",
+                    "value": 469880
+                },
+                {
+                    "label": "Zeeker",
+                    "value": 17041937
+                },
+                {
+                    "label": "Zetta",
+                    "value": 469854
+                },
+                {
+                    "label": "Zoji",
+                    "value": 469926
+                },
+                {
+                    "label": "Zopo",
+                    "value": 469864
+                },
+                {
+                    "label": "babyPhone",
+                    "value": 469724
+                },
+                {
+                    "label": "bb-mobile",
+                    "value": 469617
+                },
+                {
+                    "label": "eNOL",
+                    "value": 469891
+                },
+                {
+                    "label": "effire",
+                    "value": 469968
+                },
+                {
+                    "label": "i-Mate",
+                    "value": 469711
+                },
+                {
+                    "label": "i-Mobile",
+                    "value": 469943
+                },
+                {
+                    "label": "iFcane",
+                    "value": 17173434
+                },
+                {
+                    "label": "iLA",
+                    "value": 17865150
+                },
+                {
+                    "label": "iMAN",
+                    "value": 469964
+                },
+                {
+                    "label": "iNew",
+                    "value": 469747
+                },
+                {
+                    "label": "iOcean",
+                    "value": 469939
+                },
+                {
+                    "label": "iRu",
+                    "value": 469773
+                },
+                {
+                    "label": "iTravel",
+                    "value": 469928
+                },
+                {
+                    "label": "iconBIT",
+                    "value": 469878
+                },
+                {
+                    "label": "realme",
+                    "value": 469736
+                },
+                {
+                    "label": "teXet",
+                    "value": 469769
+                },
+                {
+                    "label": "tokky",
+                    "value": 17525081
+                },
+                {
+                    "label": "vernee",
+                    "value": 469934
+                },
+                {
+                    "label": "vivo",
+                    "value": 469607
+                },
+                {
+                    "label": "xDevice",
+                    "value": 469655
+                },
+                {
+                    "label": "Билайн",
+                    "value": 469860
+                },
+                {
+                    "label": "Другое",
+                    "value": 470110
+                },
+                {
+                    "label": "Кнопка жизни",
+                    "value": 469634
+                },
+                {
+                    "label": "МТС",
+                    "value": 469718
+                },
+                {
+                    "label": "МегаФон",
+                    "value": 469819
+                },
+                {
+                    "label": "Мотив",
+                    "value": 2911367
+                },
+                {
+                    "label": "Яндекс",
+                    "value": 469700
+                }
+            ],
+            "updatesForm": true,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Укажите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": true
+        },
+        {
+            "dataType": "string",
+            "help": "Не указывайте в описании телефон и e-mail — для этого есть отдельные поля",
+            "id": 100002,
+            "label": "Описание объявления",
+            "slug": "description",
+            "name": "description",
+            "enabled": true,
+            "widget": {
+                "type": "description",
+                "config": {
+                    "size": "m",
+                    "tags": [
+                        {
+                            "postfix": ":",
+                            "value": "Полный комплект"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Зарядное устройство"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Наушники"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Коробка"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "В отличном состоянии"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "На гарантии"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Ростест"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Есть чек"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Отвязан от всех аккаунтов"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Чехол в подарок"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Использовался с защитным стеклом"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Все детали в рабочем состоянии"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Любые проверки на месте"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Не вскрывался"
+                        },
+                        {
+                            "postfix": ".",
+                            "value": "Без сколов и дефектов"
+                        }
+                    ]
+                }
+            },
+            "stepId": 13231,
+            "sorting": 23,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "max",
+                    "message": "Длина описания не может быть менее 1 символа или превышать 7500 символов",
+                    "severity": "error",
+                    "maxValue": 7500
+                },
+                {
+                    "rule": "required",
+                    "message": "Пожалуйста, заполните описание",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "string",
+            "id": 100004,
+            "label": "Фотографии",
+            "slug": "images",
+            "name": "images",
+            "enabled": true,
+            "widget": {
+                "type": "uploader",
+                "config": {
+                    "max": 10,
+                    "maxFileSize": 26214400,
+                    "min": 1,
+                    "required": true,
+                    "size": "m"
+                }
+            },
+            "stepId": 13231,
+            "sorting": 24,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "required",
+                    "message": "Загрузите хотя бы 1 фотографию",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "string",
+            "id": 100005,
+            "label": "Видео с YouTube или Rutube",
+            "slug": "videoUrl",
+            "name": "videoUrl",
+            "placeholder": "Ссылка на видео",
+            "enabled": true,
+            "widget": {
+                "type": "video",
+                "config": {}
+            },
+            "stepId": 13231,
+            "sorting": 25,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "regex",
+                    "message": "Невозможно загрузить видео по указанной ссылке",
+                    "severity": "error",
+                    "regexPositive": "^(.*(\\s|^)(https?\\:\\/\\/)?(((www|m)\\.)?youtube\\.com|youtu\\.be|rutube\\.ru\\/video)\\/.+(\\s|$)).*$"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "dataType": "integer",
+            "id": 100006,
+            "label": "Местоположение (locationId)",
+            "slug": "locationId",
+            "name": "locationId",
+            "enabled": true,
+            "widget": {
+                "type": "locationId",
+                "config": {
+                    "contactWays": [
+                        "phoneAndMessenger",
+                        "onlyPhone",
+                        "onlyMessenger"
+                    ],
+                    "size": "m"
+                }
+            },
+            "stepId": 13231,
+            "sorting": 26,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 174514,
+            "label": "Автопубликация",
+            "widget": {
+                "type": "autoPublish",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 11350,
+            "sorting": 28,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "string",
+            "help": "Точный адрес поможет привлечь заинтересованных покупателей",
+            "id": 2868,
+            "label": "Место сделки",
+            "slug": "address",
+            "name": "params[2868]",
+            "placeholder": "Начните вводить адрес, а потом выберите из списка",
+            "enabled": true,
+            "widget": {
+                "type": "address",
+                "config": {
+                    "flowType": "historicalSuggest",
+                    "hidePinWhenAddressEmpty": true,
+                    "hintHelp": {
+                        "content": "Объявление смогут найти покупатели, которые ищут товары в конкретном радиусе или районе.\nТочный адрес не помешает вашему предложению появиться в результатах поиска по городу, региону или всей России.",
+                        "header": "Зачем указывать точный адрес"
+                    },
+                    "layout": "narrow",
+                    "size": "m",
+                    "width": 9
+                }
+            },
+            "stepId": 8308095,
+            "sorting": 30,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "validation": [
+                {
+                    "rule": "range",
+                    "message": "Значение должно быть до 256 символов",
+                    "severity": "error",
+                    "maxValue": 256,
+                    "minValue": 0
+                },
+                {
+                    "rule": "required",
+                    "message": "Введите значение параметра",
+                    "severity": "error"
+                }
+            ],
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 178620,
+            "label": "Цена до скидки",
+            "widget": {
+                "type": "oldPrice",
+                "config": {
+                    "label": "Цена до скидки",
+                    "layout": "wide",
+                    "size": "s",
+                    "width": "4"
+                }
+            },
+            "stepId": 15733,
+            "sorting": 32,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "integer",
+            "id": 100003,
+            "label": "Цена",
+            "slug": "price",
+            "name": "price",
+            "enabled": true,
+            "widget": {
+                "type": "price",
+                "config": {
+                    "required": false,
+                    "size": "m"
+                }
+            },
+            "stepId": 15733,
+            "sorting": 33,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": false,
+            "hasSuggest": false
+        },
+        {
+            "id": 359168,
+            "label": "Комиссия за доставку на редактировании",
+            "widget": {
+                "type": "deliverySummaryEdit",
+                "config": {
+                    "cptEnabled": true
+                }
+            },
+            "stepId": 15733,
+            "sorting": 34,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 519109,
+            "label": "Рыночная цена",
+            "widget": {
+                "type": "imvGoods",
+                "config": {
+                    "linkedAttributeIds": [
+                        100003
+                    ]
+                }
+            },
+            "stepId": 15733,
+            "sorting": 35,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 458411,
+            "label": "Несколько штук в наличии",
+            "widget": {
+                "type": "stockManagement",
+                "config": {
+                    "advice": "Можно не указывать",
+                    "inputField": {
+                        "constraints": {
+                            "max": {
+                                "message": "Укажите число до 1 000 000",
+                                "value": 999999
+                            },
+                            "min": {
+                                "message": "Укажите число больше 1",
+                                "value": 1
+                            }
+                        },
+                        "label": "Количество"
+                    },
+                    "sign": "шт",
+                    "size": "m",
+                    "tooltip": {
+                        "attributes": {
+                            "link": {
+                                "type": "deepLink",
+                                "value": {
+                                    "title": "Как это работает",
+                                    "uri": "ru.avito://1/detailssheet/show?contentJson=%7B%0A%20%20%22description%22%3A%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22text%22%3A%22%7B%7Bfirst%7D%7D%22%2C%0A%20%20%20%20%20%20%22attributes%22%3A%7B%0A%20%20%20%20%20%20%20%20%22first%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22type%22%3A%22text%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22value%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22text%22%3A%22%D0%92%20%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8%20%D0%BF%D0%BE%D1%8F%D0%B2%D0%B8%D1%82%D1%81%D1%8F%20%D0%BE%D1%82%D0%BC%D0%B5%D1%82%D0%BA%D0%B0%20%D0%BE%5Cu00A0%D0%BA%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%B5%22%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%22options%22%3A%7B%0A%20%20%20%20%20%20%20%20%22textProps%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22mb%22%3A8%2C%0A%20%20%20%20%20%20%20%20%20%20%22bold%22%3Atrue%2C%0A%20%20%20%20%20%20%20%20%20%20%22size%22%3A%2016%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22text%22%3A%22%7B%7Bsecond%7D%7D%22%2C%0A%20%20%20%20%20%20%22attributes%22%3A%7B%0A%20%20%20%20%20%20%20%20%22second%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22type%22%3A%22text%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22value%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22text%22%3A%22%D0%9F%D0%BE%D0%BA%D1%83%D0%BF%D0%B0%D1%82%D0%B5%D0%BB%D0%B8%20%D1%83%D0%B2%D0%B8%D0%B4%D1%8F%D1%82%2C%20%D1%87%D1%82%D0%BE%20%D0%B2%D1%8B%5Cu00A0%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D1%91%D1%82%D0%B5%20%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D1%88%D1%82%D1%83%D0%BA%2C%20%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D0%BE%D0%BA%20%D0%B8%D0%BB%D0%B8%20%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D1%85%20%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%B0%5Cu00A0%E2%80%94%20%D0%B8%5Cu00A0%D1%81%D0%BC%D0%BE%D0%B3%D1%83%D1%82%20%D0%BA%D1%83%D0%BF%D0%B8%D1%82%D1%8C%20%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%B5%20%D0%BE%D0%B4%D0%BD%D0%BE%D0%B9.%22%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%22options%22%3A%7B%0A%20%20%20%20%20%20%20%20%22textProps%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22mb%22%3A8%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22text%22%3A%22%7B%7Bp11%7D%7D%22%2C%0A%20%20%20%20%20%20%22attributes%22%3A%7B%0A%20%20%20%20%20%20%20%20%22p11%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22type%22%3A%22text%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22value%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22text%22%3A%22%D0%9A%D0%B0%D0%BA%20%D1%8D%D1%82%D0%BE%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82%20%D1%81%5Cu00A0%D0%90%D0%B2%D0%B8%D1%82%D0%BE%20%D0%94%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%BE%D0%B9%22%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%22options%22%3A%7B%0A%20%20%20%20%20%20%20%20%22textProps%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22mb%22%3A8%2C%0A%20%20%20%20%20%20%20%20%20%20%22bold%22%3Atrue%2C%0A%20%20%20%20%20%20%20%20%20%20%22size%22%3A%2016%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22text%22%3A%22%7B%7Bp12%7D%7D%22%2C%0A%20%20%20%20%20%20%22attributes%22%3A%7B%0A%20%20%20%20%20%20%20%20%22p12%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22type%22%3A%22text%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22value%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22text%22%3A%22%D0%95%D1%81%D0%BB%D0%B8%20%D0%BE%D0%BD%D0%B0%20%D0%B1%D1%83%D0%B4%D0%B5%D1%82%20%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%B0%20%D0%B8%5Cu00A0%D0%B2%D1%8B%20%D0%B5%D1%91%5Cu00A0%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D0%B5%2C%20%D1%82%D0%BE%5Cu00A0%D1%81%D1%80%D0%B0%D0%B7%D1%83%20%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA%20%D1%81%D0%BC%D0%BE%D0%B3%D1%83%D1%82%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%B8%D1%82%D1%8C%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7.%22%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%22options%22%3A%7B%0A%20%20%20%20%20%20%20%20%22textProps%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22mb%22%3A8%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22text%22%3A%22%7B%7Bp21%7D%7D%22%2C%0A%20%20%20%20%20%20%22attributes%22%3A%7B%0A%20%20%20%20%20%20%20%20%22p21%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%22type%22%3A%22text%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22value%22%3A%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22text%22%3A%22%D0%90%5Cu00A0%D0%B5%D1%81%D0%BB%D0%B8%20%D1%83%D0%BA%D0%B0%D0%B6%D0%B5%D1%82%D0%B5%20%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D0%B5%20%D0%BA%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D0%B0%2C%20%D0%BC%D1%8B%20%D0%BF%D0%BE%D0%BC%D0%BE%D0%B6%D0%B5%D0%BC%20%D0%BD%D0%B5%5Cu00A0%D0%BD%D0%B0%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D0%BB%D0%B8%D1%88%D0%BD%D0%B8%D1%85%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%BE%D0%B2%3A%20%D0%BA%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%B7%D0%B0%D0%BF%D0%B0%D1%81%D1%8B%20%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD%D1%87%D0%B0%D1%82%D1%81%D1%8F%2C%20%D1%81%D0%BD%D0%B8%D0%BC%D0%B5%D0%BC%20%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%81%5Cu00A0%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%D0%BB%D0%B8%20%D1%83%D0%B1%D0%B5%D1%80%D1%91%D0%BC%20%D0%B8%D0%B7%5Cu00A0%D0%BD%D0%B5%D0%B3%D0%BE%20%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B8%20%C2%AB%D0%9A%D1%83%D0%BF%D0%B8%D1%82%D1%8C%5Cu00A0%D1%81%5Cu00A0%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%BE%D0%B9%C2%BB%20%D0%B8%5Cu00A0%C2%AB%D0%94%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%5Cu00A0%D0%B2%5Cu00A0%D0%BA%D0%BE%D1%80%D0%B7%D0%B8%D0%BD%D1%83%C2%BB.%22%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%5D%0A%7D%0A"
+                                }
+                            }
+                        },
+                        "text": "{{link}}"
+                    },
+                    "type": "number",
+                    "width": 4
+                }
+            },
+            "stepId": 15733,
+            "sorting": 36,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 5178913,
+            "label": "Промоакция на комиссию за доставку",
+            "widget": {
+                "type": "cptPromotion",
+                "config": {}
+            },
+            "stepId": 12768,
+            "sorting": 38,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 188196,
+            "label": "Авито Доставка",
+            "widget": {
+                "type": "deliveryToggles",
+                "config": {
+                    "size": "m",
+                    "text": {
+                        "attributes": {},
+                        "text": "Выберите, как покупатели смогут заказать ваш товар. Это безопасно: вам не нужно платить за отправку, а если с посылкой что-то случится в пути, мы возместим ущерб.",
+                        "type": "attributed_text"
+                    },
+                    "title": "Доставка партнёрами Авито",
+                    "toggles": {
+                        "courier": {
+                            "changeEvent": {
+                                "eid": 5163,
+                                "version": 1
+                            },
+                            "submitKey": "deliveryCourier",
+                            "subtitle": "Яндекс Доставка, Достависта",
+                            "title": "Курьером"
+                        },
+                        "postamat": {
+                            "changeEvent": {
+                                "eid": 5555,
+                                "version": 0
+                            },
+                            "submitKey": "deliveryPostamat",
+                            "subtitle": "5Post",
+                            "title": "В постамат"
+                        },
+                        "pvz": {
+                            "changeEvent": {
+                                "eid": 5152,
+                                "version": 1
+                            },
+                            "submitKey": "deliveryPvz",
+                            "subtitle": "Почта России, Boxberry, СДЭК, Авито x EXMAIL, Пункты-партнёры Авито, DPD",
+                            "title": "В пункт выдачи"
+                        }
+                    }
+                }
+            },
+            "stepId": 12768,
+            "sorting": 39,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 6889266,
+            "label": "Субсидирование доставки",
+            "widget": {
+                "type": "deliverySubsidies",
+                "config": {}
+            },
+            "stepId": 12768,
+            "sorting": 40,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 478415,
+            "label": "Условия возврата",
+            "widget": {
+                "type": "deliveryReturnPolicy",
+                "config": {
+                    "deliveryReturnPolicy": {
+                        "badge": {
+                            "bgColor": "#FF6163",
+                            "color": "#FFFFFF",
+                            "text": "Новое"
+                        },
+                        "link": {
+                            "text": "Подробнее",
+                            "url": "https://support.avito.ru/articles/2671"
+                        },
+                        "texts": [
+                            "Покупатель сможет отказаться от посылки при получении — деньги вернутся ему, а товар отправят вам Авито Доставкой.",
+                            "Чтобы дать покупателю больше времени, включите «14 дней на возврат». Покупатель сможет вернуть заказ в товарном виде — но уже не Авито Доставкой. О способе возврата нужно будет договориться самим."
+                        ],
+                        "title": "Условия возврата",
+                        "toggle": {
+                            "disabledSubtitle": "Сначала включите Авито Доставку в пункт выдачи",
+                            "name": "returnPolicyToggle",
+                            "subtitle": "В результатах поиска у ваших объявлений появится значок",
+                            "title": "14 дней на возврат"
+                        }
+                    },
+                    "size": "m"
+                }
+            },
+            "stepId": 12768,
+            "sorting": 41,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 309775,
+            "label": "Комиссия за доставку",
+            "widget": {
+                "type": "deliverySummaryCreate",
+                "config": {
+                    "cptEnabled": true,
+                    "itemSnippet": true
+                }
+            },
+            "stepId": 12768,
+            "sorting": 42,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 229749,
+            "label": "DBS",
+            "widget": {
+                "type": "deliveryToggles",
+                "config": {
+                    "size": "m",
+                    "text": {
+                        "attributes": {
+                            "link": {
+                                "type": "link",
+                                "value": {
+                                    "title": "Подробнее",
+                                    "url": "https://support.avito.ru/articles/2491"
+                                }
+                            }
+                        },
+                        "text": "Вам нужно будет оплатить пересылку в пункте приёма или по договору со службой доставки — деньги за это придут в конце сделки. Об условиях возврата товара договариваетесь с покупателем. {{link}}",
+                        "type": "attributed_text"
+                    },
+                    "title": "Доставка силами продавца",
+                    "toggles": {
+                        "dbs": {
+                            "changeEvent": {
+                                "eid": 6868,
+                                "version": 2
+                            },
+                            "submitKey": "deliveryDbs",
+                            "subtitle": "СДЭК, Почта России",
+                            "title": "В пункт выдачи"
+                        }
+                    }
+                }
+            },
+            "stepId": 13922,
+            "sorting": 44,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 506269,
+            "label": "Комиссия за DBS",
+            "widget": {
+                "type": "deliverySummaryCreate",
+                "config": {
+                    "cptEnabled": true,
+                    "isDbs": true,
+                    "itemSnippet": false
+                }
+            },
+            "stepId": 13922,
+            "sorting": 45,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "dataType": "string",
+            "id": 124938,
+            "label": "Видео",
+            "slug": "videos",
+            "name": "params[124938][]",
+            "enabled": true,
+            "widget": {
+                "type": "videoUploader",
+                "config": {
+                    "bare": true,
+                    "delivery": {
+                        "condition": "Загрузка доступна, когда Авито Доставка включена.",
+                        "conditionForEditing": "Включите Авито Доставку, чтобы видео стало видно покупателям.",
+                        "link": {
+                            "title": "Настроить способы отправки",
+                            "uri": "ru.avito://1/item/publish/focus?targetSlotId=deliveryToggles"
+                        }
+                    },
+                    "max": 1,
+                    "maxDurationInSeconds": 180,
+                    "maxFileSize": 524288000,
+                    "min": 1,
+                    "minDurationInSeconds": 5,
+                    "required": true,
+                    "size": "m"
+                }
+            },
+            "stepId": 20228,
+            "sorting": 47,
+            "type": "text",
+            "entityType": "field",
+            "updatesForm": false,
+            "multiple": true,
+            "hasSuggest": false
+        },
+        {
+            "id": 516392,
+            "label": "Контактная информация",
+            "widget": {
+                "type": "contactInfo",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 91,
+            "sorting": 49,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 494138,
+            "label": "Способ связи",
+            "widget": {
+                "type": "contactMethod",
+                "config": {
+                    "field": {
+                        "id": "contactMethod",
+                        "required": true,
+                        "title": "Способ связи",
+                        "type": "select",
+                        "values": [
+                            {
+                                "id": "any",
+                                "title": "Звонки и сообщения"
+                            },
+                            {
+                                "id": "phone",
+                                "title": "Только звонки"
+                            },
+                            {
+                                "id": "messenger",
+                                "title": "Только сообщения"
+                            }
+                        ]
+                    }
+                }
+            },
+            "stepId": 91,
+            "sorting": 50,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 526640,
+            "label": "inAppCallsDevices",
+            "widget": {
+                "type": "inAppCallsDevices",
+                "config": {
+                    "iacDevices": [
+                        {
+                            "id": "2b55ed66cfafcdfc",
+                            "name": "samsung SM-G973F"
+                        }
+                    ],
+                    "iacForPro": false,
+                    "iacProUser": false
+                }
+            },
+            "stepId": 91,
+            "sorting": 51,
+            "entityType": "slot",
+            "value": {
+                "iacDevices": [
+                    "2b55ed66cfafcdfc"
+                ],
+                "iacProChosen": false
+            }
+        },
+        {
+            "id": 187799,
+            "label": "Слот лимитов публикаций",
+            "widget": {
+                "type": "publishLimits",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 12705,
+            "sorting": 58,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 8568,
+            "label": "Listing fees",
+            "widget": {
+                "type": "listingFees",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 8308039,
+            "sorting": 60,
+            "entityType": "slot",
+            "value": {}
+        },
+        {
+            "id": 8636,
+            "label": "VAS",
+            "widget": {
+                "type": "vas",
+                "config": {
+                    "size": "m"
+                }
+            },
+            "stepId": 8308039,
+            "sorting": 61,
+            "entityType": "slot",
+            "value": {}
+        }
+    ],
+    "steps": [
+        {
+            "id": 8308074,
+            "sorting": 1,
+            "entityType": "step",
+            "config": {
+                "hideTitle": true,
+                "screen": 0
+            },
+            "children": [
+                {
+                    "id": 110680,
+                    "entityType": "field"
+                },
+                {
+                    "id": 256568,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Скрытые параметры"
+        },
+        {
+            "id": 38,
+            "sorting": 4,
+            "entityType": "step",
+            "config": {},
+            "children": [
+                {
+                    "id": 100001,
+                    "entityType": "field"
+                },
+                {
+                    "id": 121588,
+                    "entityType": "field"
+                },
+                {
+                    "id": 110395,
+                    "entityType": "field"
+                },
+                {
+                    "id": 2822,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Параметры"
+        },
+        {
+            "id": 15716,
+            "sorting": 10,
+            "entityType": "step",
+            "config": {
+                "type": "params"
+            },
+            "children": [
+                {
+                    "id": 243815,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 120713,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Уникальный номер устройства"
+        },
+        {
+            "id": 12131,
+            "sorting": 13,
+            "entityType": "step",
+            "config": {},
+            "children": [
+                {
+                    "id": 197574,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 110618,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Характеристики"
+        },
+        {
+            "id": 13231,
+            "sorting": 22,
+            "entityType": "step",
+            "config": {},
+            "children": [
+                {
+                    "id": 100002,
+                    "entityType": "field"
+                },
+                {
+                    "id": 100004,
+                    "entityType": "field"
+                },
+                {
+                    "id": 100005,
+                    "entityType": "field"
+                },
+                {
+                    "id": 100006,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Подробности"
+        },
+        {
+            "id": 11350,
+            "sorting": 27,
+            "entityType": "step",
+            "config": {
+                "hideTitle": true
+            },
+            "children": [
+                {
+                    "id": 174514,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Тип размещения"
+        },
+        {
+            "id": 8308095,
+            "sorting": 29,
+            "entityType": "step",
+            "config": {
+                "required": true
+            },
+            "children": [
+                {
+                    "id": 2868,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Место сделки"
+        },
+        {
+            "id": 15733,
+            "sorting": 31,
+            "entityType": "step",
+            "config": {},
+            "children": [
+                {
+                    "id": 178620,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 100003,
+                    "entityType": "field"
+                },
+                {
+                    "id": 359168,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 519109,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 458411,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Условия продажи"
+        },
+        {
+            "id": 12768,
+            "sorting": 37,
+            "entityType": "step",
+            "config": {
+                "hideTitle": true
+            },
+            "children": [
+                {
+                    "id": 5178913,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 188196,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 6889266,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 478415,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 309775,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Авито Доставка"
+        },
+        {
+            "id": 13922,
+            "sorting": 43,
+            "entityType": "step",
+            "config": {
+                "hideTitle": true
+            },
+            "children": [
+                {
+                    "id": 229749,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 506269,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Самостоятельная доставка"
+        },
+        {
+            "id": 20228,
+            "sorting": 46,
+            "entityType": "step",
+            "config": {},
+            "children": [
+                {
+                    "id": 124938,
+                    "entityType": "field"
+                }
+            ],
+            "title": "Видео"
+        },
+        {
+            "id": 91,
+            "sorting": 48,
+            "entityType": "step",
+            "config": {
+                "collapsible": false,
+                "hideTitle": false,
+                "lineBefore": true
+            },
+            "children": [
+                {
+                    "id": 516392,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 494138,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 526640,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Контакты"
+        },
+        {
+            "id": 12705,
+            "sorting": 57,
+            "entityType": "step",
+            "config": {
+                "hideTitle": true
+            },
+            "children": [
+                {
+                    "id": 187799,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Лимиты публикаций"
+        },
+        {
+            "id": 8308039,
+            "sorting": 59,
+            "entityType": "step",
+            "config": {
+                "hideTitle": true
+            },
+            "children": [
+                {
+                    "id": 8568,
+                    "entityType": "slot"
+                },
+                {
+                    "id": 8636,
+                    "entityType": "slot"
+                }
+            ],
+            "title": "Продвижение"
+        }
+    ],
+    "infmVersion": "CMG-912"
+}

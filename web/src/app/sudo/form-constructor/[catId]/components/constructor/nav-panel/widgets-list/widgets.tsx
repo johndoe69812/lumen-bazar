@@ -13,14 +13,14 @@ import { ReactNode } from "react";
 
 // Primitive: Custom: -Salary - Price;
 
-type WidgetLI = {
+export type Widget = {
   label: string;
   id: number;
   group?: string;
   icon?: ReactNode;
 };
 
-export const AllWidgets: WidgetLI[] = [
+export const AllWidgets: Widget[] = [
   {
     label: "TextField",
     id: 1,

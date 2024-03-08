@@ -1,21 +1,16 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { Col, Form, Row, Segmented } from "antd";
-import useSectionsStore from "../../../store/store";
+import { Col, Flex, Form, Row, Typography } from "antd";
+import useSectionsStore from "../../../store/sections";
 import SectionEditor from "./section-editor";
-import SectionsList from "./sections-list";
-import { useState } from "react";
-import WidgetsList from "./widgets-list";
-
-type Section = "sections" | "widgets";
+import NavPanel from "./nav-panel/nav-panel";
+import ScenePanel from "./scene-panel";
+import { DndContext } from "@dnd-kit/core";
+import { useCallback } from "react";
+import useFieldsState from "../../../store/fields";
 
 const Constructor = () => {
-  const setSelectedSection = useSectionsStore(
-    (state) => state.setSelectedSection
-  );
-
-  const [activeSection, setActiveSection] = useState<Section>("sections");
+  const createField = useFieldsState((state) => state.create);
 
   const [form] = Form.useForm();
 
@@ -31,48 +26,27 @@ const Constructor = () => {
         ],
       }}
     >
-      <Row>
-        <Col flex="350px" className="shadow border bg-white h-[100vh]">
-          <div className="px-6 pt-8 overflow-hidden">
-            <Segmented
-              options={[
-                { label: "Sections", value: "sections" },
-                { label: "Widgets", value: "widgets" },
-              ]}
-              size="large"
-              onChange={setActiveSection}
-              block
-            />
-            <div className="mt-8 w-full">
-              {activeSection === "sections" && (
-                <AnimatePresence>
-                  <motion.div
-                    initial={{ x: -300 }}
-                    animate={{ x: 0 }}
-                    exit={{ x: 300 }}
-                  >
-                    <SectionsList />
-                  </motion.div>
-                </AnimatePresence>
-              )}
-              {activeSection === "widgets" && (
-                <AnimatePresence>
-                  <motion.div
-                    initial={{ x: 300 }}
-                    animate={{ x: 0 }}
-                    exit={{ x: -300 }}
-                  >
-                    <WidgetsList />
-                  </motion.div>
-                </AnimatePresence>
-              )}
+      <DndContext onDragEnd={() => createField({ id: Math.random() })}>
+        <Row>
+          <Col
+            flex="350px"
+            className="h-[100vh] top-0 sticky shadow border bg-white"
+          >
+            <NavPanel />
+          </Col>
+          <Col flex="auto">
+            <Flex align="center" className="px-8 py-4 bg-white shadow">
+              <Typography.Title style={{ margin: 0 }} level={3}>
+                Section name
+              </Typography.Title>
+            </Flex>
+            <div className="p-8">
+              <ScenePanel />
             </div>
-          </div>
-        </Col>
-        <Col flex="auto" className="p-8">
-          <SectionEditor />
-        </Col>
-      </Row>
+            {/* <SectionEditor /> */}
+          </Col>
+        </Row>
+      </DndContext>
     </Form>
   );
 };
