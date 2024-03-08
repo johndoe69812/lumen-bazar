@@ -2,23 +2,28 @@ import { Flex, List, Typography } from "antd";
 import { AllWidgets, Widget } from "./widgets";
 import { SettingOutlined } from "@ant-design/icons";
 import { useDraggable } from "@dnd-kit/core";
+import clsx from "clsx";
 
 const WidgetListItem = (item: Widget) => {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: item.id.toString(),
-  });
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: item.id.toString(),
+    });
 
   const style = transform
     ? {
+        zIndex: 9999,
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
       }
     : undefined;
 
   return (
     <List.Item
-      draggable
+      className={clsx(
+        "aspect-square rounded-lg select-none cursor-grab bg-indigo-50 hover:drop-shadow-lg",
+        isDragging && "border z-100"
+      )}
       id={item.id.toString()}
-      className="aspect-square rounded-lg  select-none cursor-grab bg-indigo-100/40 hover:drop-shadow-lg"
       ref={setNodeRef}
       style={style}
       {...listeners}

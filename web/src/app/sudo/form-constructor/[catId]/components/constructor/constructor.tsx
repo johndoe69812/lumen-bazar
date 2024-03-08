@@ -40,7 +40,7 @@ const Constructor = () => {
                 Section name
               </Typography.Title>
             </Flex>
-            <div className="p-8">
+            <div className="h-full p-8">
               <ScenePanel />
             </div>
             {/* <SectionEditor /> */}

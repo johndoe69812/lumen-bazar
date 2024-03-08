@@ -21,7 +21,7 @@ const ScenePanel = () => {
   const fields = useFieldsState((state) => state.fields);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full">
       <Droppable id="drop">
         <Flex gap={16} vertical>
           <SortableContext items={fields}>

@@ -5,8 +5,9 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 const SceneField = (props: { id: number }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: props.id });
+  const { listeners, setNodeRef, transform, transition } = useSortable({
+    id: props.id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -17,11 +18,9 @@ const SceneField = (props: { id: number }) => {
     <Row
       gutter={16}
       align="stretch"
-      className="relative w-full h-24 rounded-xl bg-white shadow"
+      className="relative w-full h-24 select-none rounded-xl bg-white shadow"
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
     >
       <Tooltip title="Delete field">
         <Button
@@ -32,7 +31,8 @@ const SceneField = (props: { id: number }) => {
       </Tooltip>
       <Col
         flex="50px"
-        className="flex justify-center items-center text-2xl cursor-move text-gray-400"
+        className="flex justify-center items-center text-2xl transition cursor-move text-gray-400 hover:text-indigo-400"
+        {...listeners}
       >
         <MdDragIndicator />
       </Col>

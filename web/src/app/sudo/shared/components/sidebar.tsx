@@ -66,11 +66,11 @@ const Sidebar = () => {
           className="mx-auto"
           src="/logo.svg"
           alt="Lumen Bazar Logo"
-          width={200}
+          width={150}
           height={45}
           priority
         />
-        <nav>
+        <nav className="mt-8">
           <ul className="flex flex-col gap-2 py-4">
             {menuItems.map((item, index) => (
               <li key={index}>
