@@ -1,18 +1,14 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form } from "antd";
+import SectionItem from "./section-item";
 
 const SectionList = () => {
   return (
     <Form.List name="sections">
       {(fields, { add }) => (
         <div>
-          {fields.map(({ key }, index) => (
-            <Form.Item key={key} name={[index, "title"]}>
-              <Input
-                className="border-0 font-medium focus:ring focus:font-normal"
-                onDoubleClick={(e) => (e.target as HTMLInputElement).focus()}
-              />
-            </Form.Item>
+          {fields.map(({ key }) => (
+            <SectionItem key={key} />
           ))}
           <Button
             icon={<PlusOutlined />}

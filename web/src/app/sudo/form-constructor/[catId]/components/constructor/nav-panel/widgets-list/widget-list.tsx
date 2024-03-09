@@ -1,63 +1,46 @@
-import { Flex, List, Typography } from "antd";
-import { AllWidgets, Widget } from "./widgets";
-import { SettingOutlined } from "@ant-design/icons";
-import { useDraggable } from "@dnd-kit/core";
-import clsx from "clsx";
+import { Flex, Input, List, Typography } from "antd";
+import { AllWidgets } from "./widgets";
+import { SearchOutlined } from "@ant-design/icons";
+import WidgetItem from "./widget-item";
+import { ChangeEventHandler, useMemo, useState } from "react";
 
-const WidgetListItem = (item: Widget) => {
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useDraggable({
-      id: item.id.toString(),
-    });
+const WidgetList: React.FC = () => {
+  const [searchString, setSearchString] = useState("");
 
-  const style = transform
-    ? {
-        zIndex: 9999,
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      }
-    : undefined;
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.target;
+
+    setSearchString(value);
+  };
+
+  const filteredItems = useMemo(() => {
+    return AllWidgets.filter((widget) => widget.label.includes(searchString));
+  }, [searchString]);
 
   return (
-    <List.Item
-      className={clsx(
-        "aspect-square rounded-lg select-none cursor-grab bg-indigo-50 hover:drop-shadow-lg",
-        isDragging && "border z-100"
-      )}
-      id={item.id.toString()}
-      ref={setNodeRef}
-      style={style}
-      {...listeners}
-      {...attributes}
-    >
-      <Flex
-        vertical
-        gap={16}
-        justify="center"
-        align="center"
-        className="w-full h-full"
-      >
-        <span
-          style={{ fontSize: 24, marginTop: 10, height: 30 }}
-          className="text-indigo-400"
-        >
-          {item.icon ?? <SettingOutlined />}
-        </span>
-
-        <Typography.Text className="font-medium text-slate-800">
-          {item.label}
-        </Typography.Text>
-      </Flex>
-    </List.Item>
-  );
-};
-
-const WidgetList = () => {
-  return (
-    <List
-      grid={{ column: 3, gutter: 16 }}
-      dataSource={AllWidgets}
-      renderItem={(item) => <WidgetListItem {...item} />}
-    />
+    <Flex vertical>
+      <Input
+        size="large"
+        placeholder="Search through widgets"
+        className="bg-slate-50"
+        classNames={{
+          input: "text-gray-400 placeholder:!text-gray-400",
+        }}
+        suffix={<SearchOutlined className="text-gray-400" />}
+        onChange={handleChange}
+      />
+      <div className="mt-6">
+        <Typography.Title className="!text-gray-500" level={5}>
+          Basic
+        </Typography.Title>
+        <List
+          grid={{ column: 3, gutter: 16 }}
+          dataSource={filteredItems}
+          locale={{ emptyText: <div>No widgets found</div> }}
+          renderItem={(item) => <WidgetItem {...item} />}
+        />
+      </div>
+    </Flex>
   );
 };
 

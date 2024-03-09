@@ -2,36 +2,46 @@ import React, { HTMLAttributes, PropsWithChildren } from "react";
 import { UniqueIdentifier, useDroppable } from "@dnd-kit/core";
 import useFieldsState from "@/app/sudo/form-constructor/store/fields";
 import SceneField from "./scene-field";
-import { Flex } from "antd";
-import { SortableContext } from "@dnd-kit/sortable";
+import { Empty, Flex, List, Typography } from "antd";
+import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable";
+import { SCENE_WIDGETS_ID } from "./constants";
 
 type Props = PropsWithChildren<
   { id: UniqueIdentifier } & HTMLAttributes<HTMLElement>
 >;
 
-export const Droppable = (props: Props) => {
-  const { setNodeRef } = useDroppable({
-    id: props.id,
-  });
-
-  return <div ref={setNodeRef}>{props.children}</div>;
+const EmptyWidgets = () => {
+  return (
+    <Empty
+      description={
+        <>
+          <Typography.Title level={5}>No widgets in your form</Typography.Title>
+          <Typography.Text>Drop some of them here</Typography.Text>
+        </>
+      }
+    />
+  );
 };
 
 const ScenePanel = () => {
   const fields = useFieldsState((state) => state.fields);
+  const { setNodeRef } = useDroppable({ id: SCENE_WIDGETS_ID });
+
+  const isEmpty = fields.length === 0;
 
   return (
-    <div className="w-full">
-      <Droppable id="drop">
-        <Flex gap={16} vertical>
-          <SortableContext items={fields}>
-            {fields.map((field, index) => (
-              <SceneField id={field.id} key={index} />
-            ))}
-          </SortableContext>
-        </Flex>
-      </Droppable>
-    </div>
+    <SortableContext items={fields} strategy={rectSortingStrategy}>
+      <div className="w-full h-full" ref={setNodeRef}>
+        {isEmpty && <EmptyWidgets />}
+        <List>
+          {fields.map((field, index) => (
+            <List.Item key={index}>
+              <SceneField id={field.id} />
+            </List.Item>
+          ))}
+        </List>
+      </div>
+    </SortableContext>
   );
 };
 
