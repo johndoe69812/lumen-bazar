@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Active, Over, useDndMonitor, useDroppable } from "@dnd-kit/core";
 import useFieldsState from "@/app/sudo/form-constructor/store/fields";
 import SceneField from "./scene-field";
-import { Empty, Flex, List, Typography } from "antd";
+import { Empty, List, Typography } from "antd";
 import {
   SortableContext,
   verticalListSortingStrategy,
@@ -48,7 +48,6 @@ const ScenePanel = () => {
       if (type === "sceneWidget") {
         const overPos = fields.findIndex((f) => f.id === event.over?.id);
         const spacePos = fields.findIndex((f) => f.id === "placeholder");
-        console.log("overPos, sceneWidget", overPos, spacePos);
 
         if (overPos !== spacePos) moveFields(overPos, spacePos);
       }
@@ -59,28 +58,39 @@ const ScenePanel = () => {
       }
     },
     onDragEnd(event) {
-      console.log(event.over, event.active);
-
       if (spacerInsertedRef.current) {
         updateField("placeholder", { id: nanoid() });
       } else {
         const overPos = fields.findIndex((f) => f.id === event.over?.id);
         const spacePos = fields.findIndex((f) => f.id === event.active?.id);
-        console.log("overPos, spacePos", overPos, spacePos);
         moveFields(overPos, spacePos);
       }
 
       cleanup();
     },
-    onDragCancel(event) {
+    onDragCancel() {
       deleteField("placeholder");
       cleanup();
     },
   });
 
+  const isEmpty = fields.length === 0;
+
   return (
     <SortableContext items={fields} strategy={verticalListSortingStrategy}>
       <div className="w-full h-full" ref={setNodeRef}>
+        {isEmpty && (
+          <Empty
+            description={
+              <>
+                <Typography.Title level={5}>
+                  No widgets in your form
+                </Typography.Title>
+                <Typography.Text>Drop some of them here</Typography.Text>
+              </>
+            }
+          />
+        )}
         <List<WidgetField>
           locale={{
             emptyText: (

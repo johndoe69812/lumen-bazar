@@ -3,6 +3,8 @@ import { MdDragIndicator } from "@react-icons/all-files/md/MdDragIndicator";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useState } from "react";
+import clsx from "clsx";
 
 const SceneField = (props: { id: string }) => {
   const { listeners, setNodeRef, transform, transition } = useSortable({
@@ -17,10 +19,14 @@ const SceneField = (props: { id: string }) => {
     transition,
   };
 
+  const [active, setActive] = useState(false);
+
   if (props.id === "placeholder") {
     return (
-      <div className="relative w-full h-24 select-none rounded-xl bg-indigo-400 border-2 shadow">
-        Drop here
+      <div className="relative w-full h-24 flex justify-center items-center rounded-lg bg-indigo-100 border-2 border-indigo-400 border-dashed shadow">
+        <span className="text-indigo-400 text-lg font-medium select-none">
+          Drop here
+        </span>
       </div>
     );
   }
@@ -29,7 +35,11 @@ const SceneField = (props: { id: string }) => {
     <Row
       gutter={16}
       align="stretch"
-      className="relative w-full h-24 select-none rounded-xl bg-white shadow"
+      className={clsx(
+        "relative w-full h-24 select-none rounded-xl bg-white shadow",
+        active && "outline outline-indigo-400"
+      )}
+      onClick={() => setActive(true)}
       ref={setNodeRef}
       style={style}
     >

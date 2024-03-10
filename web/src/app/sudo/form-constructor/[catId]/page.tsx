@@ -6,6 +6,7 @@ import { FC, useMemo } from "react";
 import Constructor from "./components/constructor/constructor";
 import { useFlatCategories } from "../../shared/queries";
 import PageHeadline from "../../shared/components/page-headline";
+import Header from "./components/constructor-header";
 
 type Props = {
   params: { catId: string };
@@ -25,7 +26,7 @@ const FormConstructorPage: FC<Props> = (props) => {
 
   return (
     <>
-      {/* <PageHeadline title={`Form Constructor (${targetCategory?.title})`} /> */}
+      <Header />
       <Flex vertical gap={16}>
         <Constructor />
       </Flex>

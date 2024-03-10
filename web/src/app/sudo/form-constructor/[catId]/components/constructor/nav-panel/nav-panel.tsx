@@ -16,16 +16,18 @@ const NavPanel = () => {
   const [activeSection, setActiveSection] = useState<Section>("sections");
 
   return (
-    <div className="px-6 pt-8">
-      <Segmented
-        options={[
-          { label: "Sections", value: "sections" },
-          { label: "Widgets", value: "widgets" },
-        ]}
-        size="large"
-        onChange={setActiveSection}
-        block
-      />
+    <div className="pt-8">
+      <div className="px-6">
+        <Segmented
+          options={[
+            { label: "Sections", value: "sections" },
+            { label: "Widgets", value: "widgets" },
+          ]}
+          size="large"
+          onChange={setActiveSection}
+          block
+        />
+      </div>
       <div className="mt-8 w-full">
         {activeSection === "sections" && (
           <AnimatePresence>
