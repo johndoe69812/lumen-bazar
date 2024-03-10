@@ -3,8 +3,7 @@
 import { Col, Form, Row } from "antd";
 import NavPanel from "./nav-panel/nav-panel";
 import ScenePanel from "./scene-panel";
-
-import DndContext from "./dnd-context";
+import { DndContext, MouseSensor, useSensor, useSensors } from "@dnd-kit/core";
 
 const initialValues = {
   sections: [
@@ -17,9 +16,20 @@ const initialValues = {
 const Constructor = () => {
   const [form] = Form.useForm();
 
+  const mouseSensor = useSensor(MouseSensor, {
+    // Require the mouse to move by 10 pixels before activating
+    activationConstraint: {
+      distance: 10,
+      delay: 20,
+      tolerance: 5,
+    },
+  });
+
+  const sensors = useSensors(mouseSensor);
+
   return (
     <Form form={form} name="edit" initialValues={initialValues}>
-      <DndContext>
+      <DndContext sensors={sensors}>
         <Row>
           <Col
             flex="350px"

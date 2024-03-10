@@ -12,6 +12,9 @@ const WidgetItem = (item: Widget) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } =
     useDraggable({
       id: item.id.toString(),
+      data: {
+        type: "widgetInstance",
+      },
     });
 
   const style = transform ? getTransformStyle(transform) : undefined;

@@ -4,15 +4,26 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-const SceneField = (props: { id: number }) => {
+const SceneField = (props: { id: string }) => {
   const { listeners, setNodeRef, transform, transition } = useSortable({
     id: props.id,
+    data: {
+      type: "sceneWidget",
+    },
   });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
+  if (props.id === "placeholder") {
+    return (
+      <div className="relative w-full h-24 select-none rounded-xl bg-indigo-400 border-2 shadow">
+        Drop here
+      </div>
+    );
+  }
 
   return (
     <Row

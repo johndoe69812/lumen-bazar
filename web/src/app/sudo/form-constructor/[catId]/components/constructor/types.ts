@@ -4,3 +4,7 @@ export type FormValues = {
     title: number;
   }[];
 };
+
+export type WidgetField = {
+  id: string;
+};
