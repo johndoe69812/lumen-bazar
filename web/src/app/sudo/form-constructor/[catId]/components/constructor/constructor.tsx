@@ -4,6 +4,8 @@ import { Col, Form, Row } from "antd";
 import NavPanel from "./nav-panel/nav-panel";
 import ScenePanel from "./scene-panel";
 import { DndContext, MouseSensor, useSensor, useSensors } from "@dnd-kit/core";
+import SettingsPanel from "./settings-panel";
+import { FC } from "react";
 
 const initialValues = {
   sections: [
@@ -13,11 +15,10 @@ const initialValues = {
   ],
 };
 
-const Constructor = () => {
+const Constructor: FC = () => {
   const [form] = Form.useForm();
 
   const mouseSensor = useSensor(MouseSensor, {
-    // Require the mouse to move by 10 pixels before activating
     activationConstraint: {
       distance: 10,
       delay: 20,
@@ -32,21 +33,22 @@ const Constructor = () => {
       <DndContext sensors={sensors}>
         <Row>
           <Col
+            className="h-[calc(100vh_-64px)] top-0 z-10 sticky shadow border bg-white"
             flex="350px"
-            className="h-[100vh] top-0 z-10 sticky shadow border bg-white"
           >
             <NavPanel />
           </Col>
-          <Col flex="auto">
-            {/* <Flex align="center" className="px-8 py-4 bg-white shadow">
-              <Typography.Title style={{ margin: 0 }} level={3}>
-                Section name
-              </Typography.Title>
-            </Flex> */}
-            <div className="h-full p-8">
+          <Col flex="auto" className="h-[calc(100vh_-64px)] overflow-hidden">
+            <div className="h-full overflow-auto p-8">
               <ScenePanel />
             </div>
             {/* <SectionEditor /> */}
+          </Col>
+          <Col
+            className="h-[calc(100vh_-64px)] top-0 z-10 sticky shadow border bg-white"
+            flex="350px"
+          >
+            <SettingsPanel />
           </Col>
         </Row>
       </DndContext>

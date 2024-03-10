@@ -61,7 +61,7 @@ const Sidebar = () => {
 
   return (
     <aside className="sticky top-0 h-[100vh] bg-white shadow">
-      <div className="pt-8">
+      <div className="pt-6">
         <Image
           className="mx-auto"
           src="/logo.svg"

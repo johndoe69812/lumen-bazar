@@ -1,11 +1,9 @@
 "use client";
 
-import Heading from "@/shared/components/heading";
 import { Flex, Result } from "antd";
 import { FC, useMemo } from "react";
 import Constructor from "./components/constructor/constructor";
 import { useFlatCategories } from "../../shared/queries";
-import PageHeadline from "../../shared/components/page-headline";
 import Header from "./components/constructor-header";
 
 type Props = {

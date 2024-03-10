@@ -1,6 +1,6 @@
-import { Button, Col, Row, Tooltip } from "antd";
+import { Button, Col, Flex, Input, Row, Tooltip, Typography } from "antd";
 import { MdDragIndicator } from "@react-icons/all-files/md/MdDragIndicator";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
@@ -57,8 +57,16 @@ const SceneField = (props: { id: string }) => {
       >
         <MdDragIndicator />
       </Col>
-      <Col flex="auto" className="py-4">
-        SceneField
+      <Col className="py-4" flex="auto">
+        <Flex>
+          <div className="mr-2 w-6 h-6 flex justify-center items-center bg-indigo-50 text-indigo-400 rounded">
+            <SettingOutlined />
+          </div>
+          <span className="font-medium text-blue-950">Select field</span>
+        </Flex>
+        <Typography.Title className="mt-4" level={5}>
+          Engine type
+        </Typography.Title>
       </Col>
     </Row>
   );

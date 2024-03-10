@@ -3,6 +3,12 @@ export type FormValues = {
     id: number;
     title: number;
   }[];
+  fields: {
+    sectionId: number;
+    label: string;
+    config?: Record<string, unknown>;
+    children?: Object[];
+  };
 };
 
 export type WidgetField = {
