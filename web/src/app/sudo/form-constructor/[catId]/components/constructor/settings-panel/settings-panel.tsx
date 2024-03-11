@@ -1,16 +1,20 @@
 import { useAllParams } from "@/app/sudo/shared/queries/use-all-params";
 import { Typography } from "antd";
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 import WidgetSettings from "./widget-settings";
 import useSceneWidgets from "@/app/sudo/form-constructor/store/use-scene-widgets";
 
-const SettingsPanel = () => {
+const SettingsPanel: FC = () => {
   const { catId } = useParams<{ catId: string }>();
   const { data } = useAllParams();
 
   const widgetType = useSceneWidgets(
-    (state) => state.fields.find(({ id }) => id === state.activeId)?.type
+    (state) =>
+      state.activeSectionId &&
+      state.fields[state.activeSectionId].find(
+        ({ id }) => id === state.activeId
+      )?.type
   );
 
   const attributes = useMemo(() => {

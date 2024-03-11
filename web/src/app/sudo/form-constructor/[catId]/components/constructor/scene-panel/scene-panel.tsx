@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import {
   Active,
   Over,
@@ -6,7 +6,9 @@ import {
   useDndMonitor,
   useDroppable,
 } from "@dnd-kit/core";
-import useFieldsState from "@/app/sudo/form-constructor/store/use-scene-widgets";
+import useFieldsState, {
+  WidgetField,
+} from "@/app/sudo/form-constructor/store/use-scene-widgets";
 import SceneField from "./scene-field";
 import { Empty, List, Typography } from "antd";
 import {
@@ -14,18 +16,19 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SCENE_WIDGETS_ID } from "./constants";
-import { WidgetField } from "../types";
 import { Nullable } from "@/types/utils";
 import { isString } from "lodash";
 import { WidgetType } from "../widgets-config";
 import { nanoid } from "nanoid";
+import useSectionsStore from "@/app/sudo/form-constructor/store/use-sections-store";
 
 const getType = (prop?: Nullable<Active | Over>) => {
   return prop?.data?.current?.type ?? null;
 };
 
-const ScenePanel = () => {
-  const fields = useFieldsState((state) => state.fields);
+const ScenePanel = ({ fields }: { fields: WidgetField[] }) => {
+  const activeSection = useSectionsStore((state) => state.activeId);
+  // const fields = useFieldsState((state) => state.fields);
   const deleteField = useFieldsState((state) => state.delete);
   const updateField = useFieldsState((state) => state.update);
   const createField = useFieldsState((state) => state.create);
@@ -86,6 +89,7 @@ const ScenePanel = () => {
       if (spacerInsertedRef.current) {
         updateField("placeholder", {
           id: nanoid(),
+          sectionId: activeSection,
           type: activeId as WidgetType,
         });
       } else if (overId) {
@@ -143,4 +147,18 @@ const ScenePanel = () => {
   );
 };
 
-export default ScenePanel;
+const ScenePanelContainer = () => {
+  const activeSection = useSectionsStore((state) => state.activeId);
+
+  const fields = useFieldsState((state) =>
+    activeSection ? state.fields[activeSection] : []
+  );
+
+  if (!activeSection) {
+    return <>Please Choose the section from left side</>;
+  }
+
+  return <ScenePanel fields={fields} />;
+};
+
+export default ScenePanelContainer;

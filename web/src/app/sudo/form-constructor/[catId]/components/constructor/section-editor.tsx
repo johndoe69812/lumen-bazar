@@ -9,7 +9,7 @@ import {
   Typography,
 } from "antd";
 import { FormValues } from "./types";
-import useSectionsStore from "../../../store/sections";
+import useSectionsStore from "../../../store/use-sections-store";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAllParams } from "@/app/sudo/shared/queries/use-all-params";
 import { OptionProps } from "antd/es/select";

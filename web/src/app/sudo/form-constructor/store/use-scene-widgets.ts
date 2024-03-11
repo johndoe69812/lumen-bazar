@@ -1,28 +1,23 @@
-// import { arrayMove } from "@dnd-kit/sortable";
+import { arrayMove } from "@dnd-kit/sortable";
 import { create } from "zustand";
 import { WidgetType } from "../[catId]/components/constructor/widgets-config";
 
-export function arrayMove<T>(array: T[], from: number, to: number): T[] {
-  const deepClonedArray = array.map((item) => JSON.parse(JSON.stringify(item)));
-  const newArray = deepClonedArray.slice();
-  newArray.splice(
-    to < 0 ? newArray.length + to : to,
-    0,
-    newArray.splice(from, 1)[0]
-  );
-
-  return newArray;
-}
-
-type WidgetField = { id: string; type: WidgetType; isPlaceholder?: boolean };
+export type WidgetField = {
+  id: string;
+  type: WidgetType;
+  sectionId: number;
+  isPlaceholder?: boolean;
+};
 
 type State = {
-  fields: WidgetField[];
+  fields: Record<number, WidgetField[]>;
   activeId?: string;
+  activeSectionId?: number;
 };
 
 type Actions = {
   setActiveId: (id: string) => void;
+  setActiveSectionId: (id: number) => void;
   create: (field: Partial<WidgetField>, insertPos?: number) => void;
   update: (id: string, field: Partial<WidgetField>) => void;
   move: (srcIndex: number, dstIndex: number) => void;
@@ -30,10 +25,11 @@ type Actions = {
 };
 
 const useSceneWidgets = create<State & Actions>((set) => ({
-  fields: [],
+  fields: {},
   activeId: undefined,
+  activeSectionId: undefined,
 
-  setActiveId(id: string) {
+  setActiveId(id) {
     set((state) => {
       return {
         ...state,
@@ -42,43 +38,93 @@ const useSceneWidgets = create<State & Actions>((set) => ({
     });
   },
 
+  setActiveSectionId(sectionId) {
+    set((state) => {
+      const newState = {
+        ...state,
+        activeSectionId: sectionId,
+      };
+
+      if (!state.fields[sectionId]) {
+        newState.fields[sectionId] = [];
+      }
+
+      return newState;
+    });
+  },
+
   create(field, insertPos = 0) {
     const widgetField = field as WidgetField;
 
     set((state) => {
-      let newItems = [...state.fields, widgetField];
+      const { activeSectionId } = state;
+      if (!activeSectionId) return state;
+
+      let newItems = [...state.fields[activeSectionId], widgetField];
+
       return {
         ...state,
-        fields: arrayMove(newItems, newItems.length - 1, insertPos),
+        fields: {
+          ...state.fields,
+          [activeSectionId]: arrayMove(
+            newItems,
+            newItems.length - 1,
+            insertPos
+          ),
+        },
       };
     });
   },
 
   update(id, updates) {
     set((state) => {
+      const { activeSectionId } = state;
+      if (!activeSectionId) return state;
+
       return {
         ...state,
-        fields: state.fields.map((field) => {
-          return field.id === id ? { ...field, ...updates } : field;
-        }),
+        fields: {
+          ...state.fields,
+          [activeSectionId]: state.fields[activeSectionId].map((field) => {
+            return field.id === id ? { ...field, ...updates } : field;
+          }),
+        },
       };
     });
   },
 
   move(srcIndex, dstIndex) {
     set((state) => {
+      const { activeSectionId } = state;
+      if (!activeSectionId) return state;
+
       return {
         ...state,
-        fields: arrayMove(state.fields, srcIndex, dstIndex),
+        fields: {
+          ...state.fields,
+          [activeSectionId]: arrayMove(
+            state.fields[activeSectionId],
+            srcIndex,
+            dstIndex
+          ),
+        },
       };
     });
   },
 
   delete(id) {
     set((state) => {
+      const { activeSectionId } = state;
+      if (!activeSectionId) return state;
+
       return {
         ...state,
-        fields: state.fields.filter((field) => field.id !== id),
+        fields: {
+          ...state.fields,
+          [activeSectionId]: state.fields[activeSectionId].filter(
+            (field) => field.id !== id
+          ),
+        },
       };
     });
   },

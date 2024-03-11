@@ -10,6 +10,7 @@ import StoriesLoading from "@/shared/widgets/stories/stories.loading";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { FC } from "react";
 
 export const metadata: Metadata = {
   title: "Lumen Bazar - Best Worldwide Marketplace!",
@@ -20,7 +21,7 @@ const DynamicStories = dynamic(() => import("@/shared/widgets/stories"), {
   ssr: false,
 });
 
-const Home = async () => {
+const Home: FC = async () => {
   const stories = await generateStories(10);
   const ads = await generateAds(30);
 

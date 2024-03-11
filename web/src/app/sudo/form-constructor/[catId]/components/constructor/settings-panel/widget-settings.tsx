@@ -1,12 +1,13 @@
 import { Form, Input, Select } from "antd";
 import { WidgetType } from "../widgets-config";
 import { useAllParams } from "@/app/sudo/shared/queries/use-all-params";
+import { FC } from "react";
 
 type Props = {
   widgetType: WidgetType;
 };
 
-const WidgetSettings = (props: Props) => {
+const WidgetSettings: FC<Props> = (props) => {
   const { widgetType } = props;
 
   const { data } = useAllParams();

@@ -10,7 +10,3 @@ export type FormValues = {
     children?: Object[];
   };
 };
-
-export type WidgetField = {
-  id: string;
-};
