@@ -16,7 +16,7 @@ const NavPanel = () => {
   const [activeSection, setActiveSection] = useState<Section>("sections");
 
   return (
-    <div className="pt-8">
+    <div className="pt-8 h-full">
       <div className="px-6">
         <Segmented
           options={[

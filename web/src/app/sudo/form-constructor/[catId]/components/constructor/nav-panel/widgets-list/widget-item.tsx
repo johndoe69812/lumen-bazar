@@ -11,7 +11,7 @@ const getTransformStyle = ({ x, y }: { x: number; y: number }) => ({
 const WidgetItem = (item: Widget) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } =
     useDraggable({
-      id: item.id.toString(),
+      id: item.id,
       data: {
         type: "widgetInstance",
       },
@@ -25,7 +25,7 @@ const WidgetItem = (item: Widget) => {
         "relative aspect-square rounded-lg select-none cursor-grab bg-indigo-50 hover:drop-shadow-lg",
         isDragging && "z-10 border !cursor-grabbing"
       )}
-      id={item.id.toString()}
+      id={item.id + "-li"}
       ref={setNodeRef}
       style={style}
       {...listeners}

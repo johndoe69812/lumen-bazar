@@ -3,7 +3,7 @@ import { Button, Col, Flex, Row, Typography } from "antd";
 
 const Header = () => {
   return (
-    <div className="w-full h-16 bg-white drop-shadow-sm">
+    <div className="relative z-10 w-full h-16 shadow bg-white">
       <Row align="middle" className="h-full">
         <Col flex="auto">
           <Flex align="center" justify="center">

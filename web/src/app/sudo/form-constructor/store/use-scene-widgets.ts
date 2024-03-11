@@ -1,5 +1,6 @@
 // import { arrayMove } from "@dnd-kit/sortable";
 import { create } from "zustand";
+import { WidgetType } from "../[catId]/components/constructor/widgets-config";
 
 export function arrayMove<T>(array: T[], from: number, to: number): T[] {
   const deepClonedArray = array.map((item) => JSON.parse(JSON.stringify(item)));
@@ -13,21 +14,33 @@ export function arrayMove<T>(array: T[], from: number, to: number): T[] {
   return newArray;
 }
 
-type WidgetField = { id: string; isPlaceholder?: boolean };
+type WidgetField = { id: string; type: WidgetType; isPlaceholder?: boolean };
 
 type State = {
   fields: WidgetField[];
+  activeId?: string;
 };
 
 type Actions = {
+  setActiveId: (id: string) => void;
   create: (field: Partial<WidgetField>, insertPos?: number) => void;
   update: (id: string, field: Partial<WidgetField>) => void;
   move: (srcIndex: number, dstIndex: number) => void;
   delete: (id: string) => void;
 };
 
-const useFieldsState = create<State & Actions>((set) => ({
+const useSceneWidgets = create<State & Actions>((set) => ({
   fields: [],
+  activeId: undefined,
+
+  setActiveId(id: string) {
+    set((state) => {
+      return {
+        ...state,
+        activeId: id,
+      };
+    });
+  },
 
   create(field, insertPos = 0) {
     const widgetField = field as WidgetField;
@@ -71,4 +84,4 @@ const useFieldsState = create<State & Actions>((set) => ({
   },
 }));
 
-export default useFieldsState;
+export default useSceneWidgets;

@@ -15,7 +15,7 @@ const SectionItem: FC<Props> = (props) => {
       <Form.Item
         className={clsx(
           "px-6 py-3 cursor-pointer opacity-80 hover:opacity-100",
-          isActive && "opacity-100 bg-blue-50"
+          isActive && "!opacity-100 bg-blue-50"
         )}
       >
         <Row align="top">
@@ -23,7 +23,11 @@ const SectionItem: FC<Props> = (props) => {
             <BarsOutlined />
           </Col>
           <Col>
-            <Typography.Title className="!mb-0" level={5} editable>
+            <Typography.Title
+              className="!mb-0"
+              level={5}
+              editable={{ icon: null, triggerType: ["text"] }}
+            >
               Section name
             </Typography.Title>
             <Typography.Text>10 fields</Typography.Text>

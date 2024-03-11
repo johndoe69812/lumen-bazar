@@ -18,7 +18,7 @@ const WidgetList: React.FC = () => {
   }, [searchString]);
 
   return (
-    <Flex vertical className="px-6">
+    <Flex vertical className="px-6 max-h-full">
       <Input
         size="large"
         placeholder="Search through widgets"

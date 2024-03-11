@@ -3,25 +3,36 @@ import { MdDragIndicator } from "@react-icons/all-files/md/MdDragIndicator";
 import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useState } from "react";
+import { FC, memo, useState } from "react";
 import clsx from "clsx";
+import { WidgetType } from "../../widgets-config";
+import useSceneWidgets from "@/app/sudo/form-constructor/store/use-scene-widgets";
 
-const SceneField = (props: { id: string }) => {
+type Props = {
+  id: string;
+  type: WidgetType | "placeholder";
+};
+const SceneField: FC<Props> = (props) => {
+  const { id, type } = props;
+
   const { listeners, setNodeRef, transform, transition } = useSortable({
-    id: props.id,
+    id,
     data: {
       type: "sceneWidget",
     },
   });
+
+  const [activeId, setActiveId] = useSceneWidgets((state) => [
+    state.activeId,
+    state.setActiveId,
+  ]);
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
 
-  const [active, setActive] = useState(false);
-
-  if (props.id === "placeholder") {
+  if (id === "placeholder") {
     return (
       <div className="relative w-full h-24 flex justify-center items-center rounded-lg bg-indigo-100 border-2 border-indigo-400 border-dashed shadow">
         <span className="text-indigo-400 text-lg font-medium select-none">
@@ -37,9 +48,9 @@ const SceneField = (props: { id: string }) => {
       align="stretch"
       className={clsx(
         "relative w-full h-24 select-none rounded-xl bg-white shadow",
-        active && "outline outline-indigo-400"
+        id === activeId && "outline outline-indigo-400"
       )}
-      onClick={() => setActive(true)}
+      onClick={() => setActiveId(id)}
       ref={setNodeRef}
       style={style}
     >
@@ -62,7 +73,7 @@ const SceneField = (props: { id: string }) => {
           <div className="mr-2 w-6 h-6 flex justify-center items-center bg-indigo-50 text-indigo-400 rounded">
             <SettingOutlined />
           </div>
-          <span className="font-medium text-blue-950">Select field</span>
+          <span className="font-medium text-blue-950">{type}</span>
         </Flex>
         <Typography.Title className="mt-4" level={5}>
           Engine type
@@ -72,4 +83,4 @@ const SceneField = (props: { id: string }) => {
   );
 };
 
-export default SceneField;
+export default memo(SceneField);

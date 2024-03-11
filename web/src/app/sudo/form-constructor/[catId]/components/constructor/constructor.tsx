@@ -28,14 +28,14 @@ const Constructor: FC = () => {
 
   const sensors = useSensors(mouseSensor);
 
+  const sidebarClassName =
+    "h-[calc(100vh_-64px)] top-0 z-10 sticky shadow border bg-white";
+
   return (
     <Form form={form} name="edit" initialValues={initialValues}>
       <DndContext sensors={sensors}>
         <Row>
-          <Col
-            className="h-[calc(100vh_-64px)] top-0 z-10 sticky shadow border bg-white"
-            flex="350px"
-          >
+          <Col className={sidebarClassName} flex="350px">
             <NavPanel />
           </Col>
           <Col flex="auto" className="h-[calc(100vh_-64px)] overflow-hidden">
@@ -44,10 +44,7 @@ const Constructor: FC = () => {
             </div>
             {/* <SectionEditor /> */}
           </Col>
-          <Col
-            className="h-[calc(100vh_-64px)] top-0 z-10 sticky shadow border bg-white"
-            flex="350px"
-          >
+          <Col className={sidebarClassName} flex="350px">
             <SettingsPanel />
           </Col>
         </Row>

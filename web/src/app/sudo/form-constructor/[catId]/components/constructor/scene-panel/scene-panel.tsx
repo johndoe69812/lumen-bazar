@@ -1,6 +1,12 @@
-import React, { useRef } from "react";
-import { Active, Over, useDndMonitor, useDroppable } from "@dnd-kit/core";
-import useFieldsState from "@/app/sudo/form-constructor/store/fields";
+import React, { useCallback, useRef } from "react";
+import {
+  Active,
+  Over,
+  UniqueIdentifier,
+  useDndMonitor,
+  useDroppable,
+} from "@dnd-kit/core";
+import useFieldsState from "@/app/sudo/form-constructor/store/use-scene-widgets";
 import SceneField from "./scene-field";
 import { Empty, List, Typography } from "antd";
 import {
@@ -9,8 +15,10 @@ import {
 } from "@dnd-kit/sortable";
 import { SCENE_WIDGETS_ID } from "./constants";
 import { WidgetField } from "../types";
-import { nanoid } from "nanoid";
 import { Nullable } from "@/types/utils";
+import { isString } from "lodash";
+import { WidgetType } from "../widgets-config";
+import { nanoid } from "nanoid";
 
 const getType = (prop?: Nullable<Active | Over>) => {
   return prop?.data?.current?.type ?? null;
@@ -32,6 +40,13 @@ const ScenePanel = () => {
     isInserted.current = false;
   };
 
+  const getFieldIndex = useCallback(
+    (id?: UniqueIdentifier) => {
+      return fields.findIndex((f) => f.id === id);
+    },
+    [fields]
+  );
+
   useDndMonitor({
     onDragStart(event) {
       const type = getType(event.active);
@@ -40,14 +55,15 @@ const ScenePanel = () => {
         spacerInsertedRef.current = true;
       }
     },
+
     onDragOver(event) {
       if (!spacerInsertedRef.current) return;
 
       const type = getType(event.over);
 
       if (type === "sceneWidget") {
-        const overPos = fields.findIndex((f) => f.id === event.over?.id);
-        const spacePos = fields.findIndex((f) => f.id === "placeholder");
+        const overPos = getFieldIndex(event.over?.id);
+        const spacePos = getFieldIndex("placeholder");
 
         if (overPos !== spacePos) moveFields(overPos, spacePos);
       }
@@ -57,17 +73,30 @@ const ScenePanel = () => {
         isInserted.current = true;
       }
     },
+
     onDragEnd(event) {
+      const activeId = event.active.id;
+      const overId = event.over?.id;
+
+      if (!isString(activeId)) {
+        cleanup();
+        return;
+      }
+
       if (spacerInsertedRef.current) {
-        updateField("placeholder", { id: nanoid() });
-      } else {
-        const overPos = fields.findIndex((f) => f.id === event.over?.id);
-        const spacePos = fields.findIndex((f) => f.id === event.active?.id);
+        updateField("placeholder", {
+          id: nanoid(),
+          type: activeId as WidgetType,
+        });
+      } else if (overId) {
+        const overPos = getFieldIndex(overId as string);
+        const spacePos = getFieldIndex(activeId);
         moveFields(overPos, spacePos);
       }
 
       cleanup();
     },
+
     onDragCancel() {
       deleteField("placeholder");
       cleanup();
@@ -105,7 +134,7 @@ const ScenePanel = () => {
         >
           {fields.map((field) => (
             <List.Item key={field.id}>
-              <SceneField id={field.id} />
+              <SceneField id={field.id} type={field.type} />
             </List.Item>
           ))}
         </List>

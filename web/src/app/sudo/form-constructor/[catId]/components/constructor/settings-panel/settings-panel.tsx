@@ -1,11 +1,17 @@
 import { useAllParams } from "@/app/sudo/shared/queries/use-all-params";
-import { Form, Input, Select } from "antd";
+import { Typography } from "antd";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
+import WidgetSettings from "./widget-settings";
+import useSceneWidgets from "@/app/sudo/form-constructor/store/use-scene-widgets";
 
 const SettingsPanel = () => {
   const { catId } = useParams<{ catId: string }>();
   const { data } = useAllParams();
+
+  const widgetType = useSceneWidgets(
+    (state) => state.fields.find(({ id }) => id === state.activeId)?.type
+  );
 
   const attributes = useMemo(() => {
     const categoryId = parseInt(catId);
@@ -14,21 +20,8 @@ const SettingsPanel = () => {
 
   return (
     <div className="pt-8 px-6">
-      <Form>
-        <Form.Item name="label" label="Label">
-          <Input />
-        </Form.Item>
-        <Form.Item label="Attribute">
-          <Select
-            placeholder="Choose attribute"
-            options={data}
-            fieldNames={{ label: "name", value: "id" }}
-          />
-        </Form.Item>
-        <Form.Item label="Regular Expression">
-          <Input placeholder="e.g., /cat/" />
-        </Form.Item>
-      </Form>
+      <Typography.Title level={4}>Widget settings</Typography.Title>
+      {widgetType && <WidgetSettings widgetType={widgetType} />}
     </div>
   );
 };

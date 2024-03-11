@@ -3,6 +3,7 @@ import { MdOutlineAttachMoney } from "@react-icons/all-files/md/MdOutlineAttachM
 import { CiBoxList } from "@react-icons/all-files/ci/CiBoxList";
 
 import { ReactNode } from "react";
+import { WidgetType } from "../../widgets-config";
 
 // - TextField
 // - RadioGroup
@@ -17,7 +18,7 @@ import { ReactNode } from "react";
 
 export type Widget = {
   label: string;
-  id: number;
+  id: WidgetType;
   group?: string;
   icon?: ReactNode;
 };
@@ -25,31 +26,31 @@ export type Widget = {
 export const AllWidgets: Widget[] = [
   {
     label: "TextField",
-    id: 1,
+    id: "inputWidget",
     group: "primitive",
   },
   {
     label: "Uploader",
-    id: 2,
+    id: "uploaderWidget",
     icon: <UploadOutlined />,
   },
   {
     label: "Text Area",
-    id: 3,
+    id: "descriptionWidget",
   },
   {
     label: "Salary",
-    id: 4,
+    id: "salaryWidget",
     icon: <MdOutlineAttachMoney />,
   },
   {
     label: "Price",
-    id: 5,
+    id: "priceWidget",
     icon: <MdOutlineAttachMoney />,
   },
   {
     label: "Select",
-    id: 6,
+    id: "selectWidget",
     icon: <CiBoxList />,
   },
 ];
