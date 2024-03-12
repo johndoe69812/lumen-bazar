@@ -1,9 +1,9 @@
-import { Button, Col, Flex, Input, Row, Tooltip, Typography } from "antd";
+import { Button, Col, Flex, Row, Tooltip, Typography } from "antd";
 import { MdDragIndicator } from "@react-icons/all-files/md/MdDragIndicator";
 import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { FC, memo, useState } from "react";
+import { FC, memo } from "react";
 import clsx from "clsx";
 import { WidgetType } from "../../widgets-config";
 import useSceneWidgets from "@/app/sudo/form-constructor/store/use-scene-widgets";
@@ -12,10 +12,11 @@ type Props = {
   id: string;
   type: WidgetType | "placeholder";
 };
+
 const SceneField: FC<Props> = (props) => {
   const { id, type } = props;
 
-  const { listeners, setNodeRef, transform, transition } = useSortable({
+  const { listeners, transform, transition, setNodeRef } = useSortable({
     id,
     data: {
       type: "sceneWidget",

@@ -2,10 +2,11 @@ import { AdCategorySchema } from "@/api";
 import { useDeleteCategory } from "@/app/sudo/shared/queries/categories/use-delete-category";
 import { DeleteOutlined, FormOutlined } from "@ant-design/icons";
 import { Button, Flex, Popconfirm, Tooltip, notification } from "antd";
+import { FC } from "react";
 
 type Props = AdCategorySchema;
 
-const CategoryTreeItem = (props: Props) => {
+const CategoryTreeItem: FC<Props> = (props) => {
   const { title, id, subCategories } = props;
 
   const { mutate } = useDeleteCategory();

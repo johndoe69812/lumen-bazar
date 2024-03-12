@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Button from "../../button";
 import ButtonGroup from "../../button-group";
 import { Option } from "../select/types";
+import { FC } from "react";
 
 type Props = {
   options: Option[];
@@ -11,7 +12,7 @@ type Props = {
   as?: "button";
 };
 
-const RadioGroup = (props: Props) => {
+const RadioGroup: FC<Props> = (props) => {
   const { options, value } = props;
 
   return (

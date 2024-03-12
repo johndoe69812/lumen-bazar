@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, FC } from "react";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & { isLoading?: boolean };
 
-const Button = (props: Props) => {
+const Button: FC<Props> = (props) => {
   const { className, isLoading, children, ...rest } = props;
 
   return (

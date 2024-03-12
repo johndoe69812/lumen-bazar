@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import Link from "next/link";
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, FC, ReactNode } from "react";
 import { CiGrid41 } from "@react-icons/all-files/ci/CiGrid41";
 import { BiCategory } from "@react-icons/all-files/bi/BiCategory";
 import { VscTypeHierarchy } from "@react-icons/all-files/vsc/VscTypeHierarchy";
@@ -16,7 +16,7 @@ type Props = ComponentProps<typeof Link> & {
   isActive?: boolean;
 };
 
-const PageLink = (props: Props) => {
+const PageLink: FC<Props> = (props) => {
   const { children, icon, title, isActive = false, ...rest } = props;
 
   return (

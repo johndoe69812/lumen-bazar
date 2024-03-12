@@ -9,7 +9,7 @@ import Input, { InputField } from "@/shared/components/form/input";
 import { SelectField } from "@/shared/components/form/select";
 import Button from "@/shared/components/button";
 import { brandList } from "./brands.stub";
-import { PropsWithChildren, useState } from "react";
+import { FC, PropsWithChildren, useState } from "react";
 import Heading from "@/shared/components/heading";
 import clsx from "clsx";
 import { Option } from "@/shared/components/form/select/types";
@@ -19,7 +19,7 @@ type Props = {
   categoryId: string;
 };
 
-const Row = (props: PropsWithChildren<{ title: string }>) => {
+const Row: FC<PropsWithChildren<{ title: string }>> = (props) => {
   const { children, title } = props;
 
   return (
@@ -32,7 +32,7 @@ const Row = (props: PropsWithChildren<{ title: string }>) => {
   );
 };
 
-const Section = (props: PropsWithChildren<{ title: string }>) => {
+const Section: FC<PropsWithChildren<{ title: string }>> = (props) => {
   const { children, title } = props;
 
   return (
@@ -43,7 +43,7 @@ const Section = (props: PropsWithChildren<{ title: string }>) => {
   );
 };
 
-const MediaUploader = () => {
+const MediaUploader: FC = () => {
   return (
     <label className="w-24 h-20 flex justify-center items-center cursor-pointer border focus-within:ring hover:bg-gray-100">
       <input type="file" className="absolute opacity-0" />
@@ -54,7 +54,7 @@ const MediaUploader = () => {
   );
 };
 
-const ColorSwatches = () => {
+const ColorSwatches: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>();
 
   return (
@@ -263,7 +263,7 @@ const transmissionOptions: Option[] = [
   },
 ];
 
-const AdBuilder = (props: Props) => {
+const AdBuilder: FC<Props> = (props) => {
   const { categoryId } = props;
 
   if (!categoryId) {

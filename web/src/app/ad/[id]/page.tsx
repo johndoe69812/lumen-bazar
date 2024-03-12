@@ -6,12 +6,13 @@ import Button from "@/shared/components/button";
 import Price from "@/shared/components/price";
 import { Metadata } from "next";
 import { generateFullAd } from "@/mock-data/ads/generate-ads";
+import { FC } from "react";
 
 export const metadata: Metadata = {
   title: "Aj1 k8 NB300 new in stock Address/Region | Transport | Lumen Bazar",
 };
 
-const AdPage = () => {
+const AdPage: FC = () => {
   const ad = generateFullAd();
 
   return (

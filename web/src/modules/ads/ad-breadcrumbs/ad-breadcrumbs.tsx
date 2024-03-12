@@ -1,6 +1,6 @@
 import Link from "@/shared/components/link";
 import { IoChevronForward } from "@react-icons/all-files/io5/IoChevronForward";
-import { Fragment } from "react";
+import { FC, Fragment } from "react";
 
 type Props = {
   breadcrumbs: {
@@ -10,7 +10,7 @@ type Props = {
   }[];
 };
 
-const AdBreadcrumbs = (props: Props) => {
+const AdBreadcrumbs: FC<Props> = (props) => {
   const { breadcrumbs } = props;
 
   return (

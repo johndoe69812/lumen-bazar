@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import {
+  FC,
   ForwardedRef,
   InputHTMLAttributes,
   forwardRef,
@@ -36,7 +37,7 @@ type Props = InputHTMLAttributes<HTMLSelectElement> & {
 
 type Ref = ForwardedRef<HTMLInputElement>;
 
-const Select = forwardRef((props: Props, ref: Ref) => {
+const Select: FC<Props> = forwardRef((props: Props, ref: Ref) => {
   const {
     options,
     className,
@@ -45,7 +46,6 @@ const Select = forwardRef((props: Props, ref: Ref) => {
     value,
     isClearable = false,
     touched = false,
-    relyOnContext = true,
     onChange,
   } = props;
 

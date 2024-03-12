@@ -5,8 +5,9 @@ import ParamOptions from "./param-options/param-options";
 import { Flex, Popover, Space, Typography } from "antd";
 import PageHeadline from "../shared/components/page-headline";
 import { InfoCircleOutlined } from "@ant-design/icons";
+import { FC } from "react";
 
-const AdParamsPage = () => {
+const AdParamsPage: FC = () => {
   return (
     <div className="pt-6 pb-2 px-6">
       <Space direction="vertical" size={0}>

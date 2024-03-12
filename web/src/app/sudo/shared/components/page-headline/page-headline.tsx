@@ -1,13 +1,14 @@
 "use client";
 
 import { Space, Typography } from "antd";
+import { FC } from "react";
 
 type Props = {
   title: string;
   subTitle?: string;
 };
 
-const PageHeadline = (props: Props) => {
+const PageHeadline: FC<Props> = (props) => {
   const { title, subTitle } = props;
 
   return (

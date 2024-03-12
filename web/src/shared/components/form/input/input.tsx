@@ -1,7 +1,13 @@
 "use client";
 
 import clsx from "clsx";
-import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from "react";
+import {
+  FC,
+  ForwardedRef,
+  InputHTMLAttributes,
+  forwardRef,
+  useState,
+} from "react";
 import { CgSpinner } from "@react-icons/all-files/cg/CgSpinner";
 import { FaEye } from "@react-icons/all-files/fa/FaEye";
 import { FaEyeSlash } from "@react-icons/all-files/fa/FaEyeSlash";
@@ -19,7 +25,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 
 type Ref = ForwardedRef<HTMLInputElement>;
 
-const Input = forwardRef((props: Props, ref: Ref) => {
+const Input: FC<Props> = forwardRef((props, ref: Ref) => {
   const {
     className,
     isClearable = false,

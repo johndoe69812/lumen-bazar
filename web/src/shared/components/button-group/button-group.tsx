@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import {
+  FC,
   ForwardedRef,
   HTMLAttributes,
   PropsWithChildren,
@@ -9,7 +10,7 @@ import {
 type Props = PropsWithChildren<HTMLAttributes<HTMLDivElement>>;
 type Ref = ForwardedRef<HTMLDivElement>;
 
-const ButtonGroup = forwardRef((props: Props, ref: Ref) => {
+const ButtonGroup: FC<Props> = forwardRef((props, ref: Ref) => {
   const { children, className, ...rest } = props;
 
   return (

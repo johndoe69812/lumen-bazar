@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { IoChevronBack } from "@react-icons/all-files/io5/IoChevronBack";
 import { IoChevronForward } from "@react-icons/all-files/io5/IoChevronForward";
 import Button from "@/shared/components/button";
@@ -11,7 +11,7 @@ import { AdGallery, Image } from "@/types";
 
 type Props = { gallery: AdGallery };
 
-const Gallery = (props: Props) => {
+const Gallery: FC<Props> = (props) => {
   const { gallery } = props;
 
   const [currentImage, setCurrentImage] = useState(0);

@@ -1,17 +1,17 @@
 "use client";
 
-import { ComponentProps, ForwardedRef, forwardRef } from "react";
+import { ComponentProps, FC, ForwardedRef, forwardRef } from "react";
 import { Field } from "formik";
 import Input from "./input";
 
 type Props = ComponentProps<typeof Input>;
 type Ref = ForwardedRef<HTMLInputElement>;
 
-const InputField = forwardRef((props: Props, ref: Ref) => {
+const InputField: FC<Props> = forwardRef((props, ref: Ref) => {
   const { name, ...rest } = props;
 
   return (
-    <Field name={name}>
+    <Field name={name} ref={ref}>
       {({ field }: { field: ComponentProps<typeof Input> }) => (
         <Input {...field} {...rest} />
       )}

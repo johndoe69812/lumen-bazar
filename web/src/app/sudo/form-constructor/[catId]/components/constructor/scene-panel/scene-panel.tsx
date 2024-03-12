@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { FC, useCallback, useRef } from "react";
 import {
   Active,
   Over,
@@ -26,9 +26,12 @@ const getType = (prop?: Nullable<Active | Over>) => {
   return prop?.data?.current?.type ?? null;
 };
 
-const ScenePanel = ({ fields }: { fields: WidgetField[] }) => {
+type Props = { fields: WidgetField[] };
+
+const ScenePanel: FC<Props> = (props) => {
+  const { fields } = props;
+
   const activeSection = useSectionsStore((state) => state.activeId);
-  // const fields = useFieldsState((state) => state.fields);
   const deleteField = useFieldsState((state) => state.delete);
   const updateField = useFieldsState((state) => state.update);
   const createField = useFieldsState((state) => state.create);
@@ -95,7 +98,7 @@ const ScenePanel = ({ fields }: { fields: WidgetField[] }) => {
       } else if (overId) {
         const overPos = getFieldIndex(overId as string);
         const spacePos = getFieldIndex(activeId);
-        moveFields(overPos, spacePos);
+        moveFields(spacePos, overPos);
       }
 
       cleanup();
@@ -124,18 +127,7 @@ const ScenePanel = ({ fields }: { fields: WidgetField[] }) => {
             }
           />
         )}
-        <List<WidgetField>
-          locale={{
-            emptyText: (
-              <>
-                <Typography.Title level={5}>
-                  No widgets in your form
-                </Typography.Title>
-                <Typography.Text>Drop some of them here</Typography.Text>
-              </>
-            ),
-          }}
-        >
+        <List<WidgetField>>
           {fields.map((field) => (
             <List.Item key={field.id}>
               <SceneField id={field.id} type={field.type} />

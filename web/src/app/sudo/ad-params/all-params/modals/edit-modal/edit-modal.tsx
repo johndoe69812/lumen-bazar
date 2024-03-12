@@ -1,7 +1,6 @@
-import { Option } from "@/shared/components/form/select/types";
 import useAllCategories from "@/shared/hooks/use-all-categories";
-import { Form, Input, Modal, Select, Tooltip } from "antd";
-import { useEffect, useMemo } from "react";
+import { Form, Input, Modal, Select } from "antd";
+import { FC, useEffect } from "react";
 import { useAllParams } from "../../../../shared/queries/use-all-params";
 import useResetFormOnCloseModal from "@/app/sudo/shared/hooks/use-reset-form-on-close-modal";
 
@@ -14,7 +13,7 @@ interface Props {
   id?: number;
 }
 
-const EditModal: React.FC<Props> = (props: Props) => {
+const EditModal: FC<Props> = (props: Props) => {
   const { id, open, onCancel } = props;
 
   const { data: allParams } = useAllParams();

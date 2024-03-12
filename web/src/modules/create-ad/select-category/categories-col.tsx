@@ -1,5 +1,6 @@
 import { AdCategorySchema } from "@/api";
 import clsx from "clsx";
+import { FC } from "react";
 
 type Props = {
   title: string;
@@ -8,7 +9,7 @@ type Props = {
   active?: string;
 };
 
-const CategoriesCol = (props: Props) => {
+const CategoriesCol: FC<Props> = (props) => {
   const { title, list, active, onClick } = props;
 
   return (

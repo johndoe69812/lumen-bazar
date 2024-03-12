@@ -5,7 +5,7 @@ import {
 import { Button, Checkbox, Flex, TableColumnsType } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import APIService from "@/api/api-service";
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
 import { dateFromNow } from "../../shared/utils/date-from-now";
 
 type Handlers = {
@@ -17,7 +17,7 @@ type Props = Handlers & {
   id: React.Key;
 };
 
-const Actions = (props: Props) => {
+const Actions: FC<Props> = (props) => {
   const { id, onDelete, onEdit } = props;
 
   return (

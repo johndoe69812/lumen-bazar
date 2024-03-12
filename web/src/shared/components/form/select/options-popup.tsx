@@ -1,7 +1,7 @@
 import { FaCheck } from "@react-icons/all-files/fa/FaCheck";
 
 import { Option } from "./types";
-import { ForwardedRef, forwardRef } from "react";
+import { FC, ForwardedRef, forwardRef } from "react";
 
 type Props = {
   options: Option[];
@@ -9,8 +9,8 @@ type Props = {
   selected?: Option;
 };
 
-const OptionsPopup = forwardRef(
-  (props: Props, ref: ForwardedRef<HTMLDivElement>) => {
+const OptionsPopup: FC<Props> = forwardRef(
+  (props, ref: ForwardedRef<HTMLDivElement>) => {
     const { options, selected, onSelect } = props;
 
     return (

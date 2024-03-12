@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { FC, HTMLAttributes } from "react";
 import { IoHeartSharp } from "@react-icons/all-files/io5/IoHeartSharp";
 import Link from "../link";
 import Button from "../button";
@@ -10,7 +10,7 @@ type Props = HTMLAttributes<HTMLDivElement> & {
   price?: string;
 };
 
-const FavoriteCard = (props: Props) => {
+const FavoriteCard: FC<Props> = (props) => {
   const { image, title, link, price } = props;
 
   return (

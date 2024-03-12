@@ -1,5 +1,5 @@
 import { Button, Divider, Flex, Form, Input, Modal, Select } from "antd";
-import { useCallback, useEffect, useMemo } from "react";
+import { FC, useCallback, useEffect, useMemo } from "react";
 import { useAllParams } from "../../../shared/queries/use-all-params";
 import useResetFormOnCloseModal from "@/app/sudo/shared/hooks/use-reset-form-on-close-modal";
 import { MinusCircleOutlined } from "@ant-design/icons";
@@ -10,7 +10,7 @@ interface Props {
   id?: number;
 }
 
-const EditModal: React.FC<Props> = (props: Props) => {
+const EditModal: FC<Props> = (props) => {
   const { id, open, onCancel } = props;
 
   const { data } = useAllParams();

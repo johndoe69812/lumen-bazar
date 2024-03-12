@@ -1,18 +1,21 @@
 "use client";
 
-import { ComponentProps, ForwardedRef, forwardRef } from "react";
-import { Field, FieldAttributes, useField } from "formik";
+import { ComponentProps, FC, ForwardedRef, forwardRef } from "react";
+import { useField } from "formik";
 import Select from "./select";
 
 type Props = ComponentProps<typeof Select>;
-type Ref = ForwardedRef<HTMLInputElement>;
+type Ref = ForwardedRef<typeof Select>;
 
-const SelectField = forwardRef((props: Props, ref: Ref) => {
-  const [field, , helpers] = useField(props.name);
+const SelectField: FC<Props> = forwardRef((props, ref: Ref) => {
+  const { name, ...rest } = props;
+
+  const [field, , helpers] = useField(name);
 
   return (
     <Select
-      {...props}
+      {...rest}
+      name={name}
       value={field.value}
       onChange={(newVal) => helpers.setValue(newVal)}
     />

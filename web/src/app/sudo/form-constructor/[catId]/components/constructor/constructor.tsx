@@ -8,23 +8,21 @@ import SettingsPanel from "./settings-panel";
 import { FC } from "react";
 
 const initialValues = {
-  sections: [
-    {
-      title: "New section",
-    },
-  ],
+  sections: [],
+};
+
+const sensorConfig = {
+  activationConstraint: {
+    distance: 10,
+    delay: 20,
+    tolerance: 5,
+  },
 };
 
 const Constructor: FC = () => {
   const [form] = Form.useForm();
 
-  const mouseSensor = useSensor(MouseSensor, {
-    activationConstraint: {
-      distance: 10,
-      delay: 20,
-      tolerance: 5,
-    },
-  });
+  const mouseSensor = useSensor(MouseSensor, sensorConfig);
 
   const sensors = useSensors(mouseSensor);
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { AdCategorySchema, CreateCategoryDTO } from "@/api";
-import { useCallback, useMemo, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import buildCategoryTree from "../../../shared/utils/build-category-tree";
 import { Button, Card, Flex, Tree } from "antd";
 import CreateCategoryModal from "../../modals/create-category.modal";
@@ -12,7 +12,7 @@ import { useFlatCategories } from "../../../shared/queries";
 import CategoryTreeItem from "./category-tree-item";
 import styles from "./categories-tree.module.scss";
 
-const CategoriesTree = () => {
+const CategoriesTree: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate } = useCreateCategory();
   const { data: categories, isFetching, refetch } = useFlatCategories();

@@ -3,12 +3,12 @@
 import { CreateAdParamDTO } from "@/api";
 import APIService from "@/api/api-service";
 import { Form, Button, Table, Flex } from "antd";
-import { Key, useCallback, useMemo, useState } from "react";
+import { FC, Key, useCallback, useMemo, useState } from "react";
 import { getColumns } from "./get-columns";
 import EditModal from "./modals/edit-modal/edit-modal";
 import { useAllParams } from "../../shared/queries/use-all-params";
 
-const AllParameters = () => {
+const AllParameters: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeId, setActiveId] = useState<number>();
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);

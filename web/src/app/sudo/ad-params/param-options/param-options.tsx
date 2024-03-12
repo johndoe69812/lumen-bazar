@@ -2,13 +2,13 @@
 
 import { Button, Divider, Flex, Form, Popconfirm, Space, Table } from "antd";
 import { getColumns } from "./get-columns";
-import { Key, useCallback, useMemo, useState } from "react";
+import { FC, Key, useCallback, useMemo, useState } from "react";
 import { useAllOptions } from "../../shared/queries/use-all-options";
 import { ParamOptionSchema } from "@/api/__generated__/generated-api";
 import EditModal from "./modals/edit-modal";
 import APIService from "@/api/api-service";
 
-const ParamOptions = () => {
+const ParamOptions: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeId, setActiveId] = useState<number>();
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);

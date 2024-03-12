@@ -1,20 +1,23 @@
+import { nanoid } from "nanoid";
 import { create } from "zustand";
+import { arrayMove } from "./use-widget-params";
 
-type FieldsSection = {
-  id: number;
+export type FieldsSection = {
+  id: string;
   title: string;
 };
 
 type State = {
   list: FieldsSection[];
-  activeId?: number;
+  activeId?: string;
 };
 
 type Actions = {
-  setActiveId: (id: number) => void;
-  create: (section: FieldsSection) => void;
-  update: (id: number, updates: Partial<FieldsSection>) => void;
-  delete: (id: number) => void;
+  setActiveId: (id: string) => void;
+  create: (title: string) => void;
+  update: (id: string, updates: Partial<FieldsSection>) => void;
+  delete: (id: string) => void;
+  move: (srcId: string, dstId: string) => void;
 };
 
 const useSectionsStore = create<State & Actions>((set) => ({
@@ -27,9 +30,9 @@ const useSectionsStore = create<State & Actions>((set) => ({
     });
   },
 
-  create(section) {
+  create(title) {
     set((state) => {
-      return { ...state, list: [...state.list, section] };
+      return { ...state, list: [...state.list, { title, id: nanoid() }] };
     });
   },
 
@@ -38,8 +41,20 @@ const useSectionsStore = create<State & Actions>((set) => ({
       return {
         ...state,
         list: state.list.map((section) =>
-          section.id === id ? { ...section, updates } : section
+          section.id === id ? { ...section, ...updates } : section
         ),
+      };
+    });
+  },
+
+  move(srcId, dstId) {
+    set((state) => {
+      const srcIndex = state.list.findIndex(({ id }) => id === srcId);
+      const dstIndex = state.list.findIndex(({ id }) => id === dstId);
+
+      return {
+        ...state,
+        list: arrayMove(state.list, srcIndex, dstIndex),
       };
     });
   },

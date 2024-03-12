@@ -1,9 +1,10 @@
 import { useAllOptions } from "@/app/sudo/shared/queries/use-all-options";
 import { Checkbox, Form, InputNumber, Select } from "antd";
+import { FC } from "react";
 
 type Props = { dataType: "options" | "string" | "number" };
 
-const ParamSettings = (props: Props) => {
+const ParamSettings: FC<Props> = (props) => {
   const { dataType } = props;
 
   switch (dataType) {
@@ -18,7 +19,7 @@ const ParamSettings = (props: Props) => {
   }
 };
 
-const OptionsConstraints = () => {
+const OptionsConstraints: FC = () => {
   const { data: allOptions } = useAllOptions();
 
   return (
