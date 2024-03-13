@@ -1,6 +1,7 @@
 import { arrayMove } from "@dnd-kit/sortable";
 import { create } from "zustand";
 import { WidgetType } from "../[catId]/components/constructor/widgets-config";
+import { nanoid } from "nanoid";
 
 export type WidgetField = {
   id: string;
@@ -22,6 +23,7 @@ type Actions = {
   update: (id: string, field: Partial<WidgetField>) => void;
   move: (srcIndex: number, dstIndex: number) => void;
   delete: (id: string) => void;
+  clone: (id: string) => void;
 };
 
 const useSceneWidgets = create<State & Actions>((set) => ({
@@ -96,7 +98,6 @@ const useSceneWidgets = create<State & Actions>((set) => ({
   move(srcIndex, dstIndex) {
     set((state) => {
       const { activeSectionId } = state;
-      console.log("src", srcIndex, dstIndex);
       if (!activeSectionId) return state;
 
       return {
@@ -125,6 +126,31 @@ const useSceneWidgets = create<State & Actions>((set) => ({
           [activeSectionId]: state.fields[activeSectionId].filter(
             (field) => field.id !== id
           ),
+        },
+      };
+    });
+  },
+
+  clone(id) {
+    set((state) => {
+      const { activeSectionId } = state;
+      if (!activeSectionId) return state;
+
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          [activeSectionId]: state.fields[activeSectionId].reduce<
+            WidgetField[]
+          >((acc, field) => {
+            if (field.id === id) {
+              acc.push(field, { ...field, id: nanoid() });
+            } else {
+              acc.push(field);
+            }
+
+            return acc;
+          }, []),
         },
       };
     });

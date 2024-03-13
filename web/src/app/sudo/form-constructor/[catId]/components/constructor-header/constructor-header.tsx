@@ -1,10 +1,20 @@
 import { EyeOutlined, SaveOutlined } from "@ant-design/icons";
-import { Button, Col, Flex, Row, Typography } from "antd";
+import { Button, Col, Flex, Row, Tag, Typography } from "antd";
+import { FC } from "react";
 
-const Header = () => {
+type Props = {
+  categoryName: string;
+};
+
+const ConstructorHeader: FC<Props> = (props) => {
+  const { categoryName } = props;
+
   return (
     <div className="relative z-10 w-full h-16 shadow bg-white">
       <Row align="middle" className="h-full">
+        <Col flex="250px">
+          <Tag style={{ margin: "0 0 0 60px" }}>{categoryName}</Tag>
+        </Col>
         <Col flex="auto">
           <Flex align="center" justify="center">
             <Typography.Title level={4} className="!mb-0">
@@ -27,4 +37,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default ConstructorHeader;

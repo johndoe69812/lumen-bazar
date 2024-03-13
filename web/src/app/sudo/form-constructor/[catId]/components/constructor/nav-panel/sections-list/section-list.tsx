@@ -1,5 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Flex } from "antd";
+import { Affix, Button, Empty, Flex } from "antd";
 import SectionItem from "./section-item";
 import useSectionsStore from "@/app/sudo/form-constructor/store/use-sections-store";
 import useSceneWidgets from "@/app/sudo/form-constructor/store/use-scene-widgets";
@@ -42,7 +42,8 @@ const useFieldsCount = () => {
 
 const SectionList: FC = () => {
   const list = useSectionsStore((state) => state.list);
-  const { activeId, create, move, update, setActiveId } = useSectionsStore();
+  const { activeId, create, move, update, remove, setActiveId } =
+    useSectionsStore();
   const { setActiveSectionId } = useSceneWidgets();
 
   const mouseSensor = useSensor(MouseSensor, sensorConfig);
@@ -62,8 +63,11 @@ const SectionList: FC = () => {
     [move]
   );
 
+  const isEmpty = list.length === 0;
+
   return (
     <div className="h-full">
+      {isEmpty && <Empty description="No section found" />}
       <DndContext
         sensors={sensors}
         modifiers={[restrictToVerticalAxis]}
@@ -85,20 +89,26 @@ const SectionList: FC = () => {
                   setActiveId(id);
                   setActiveSectionId(id);
                 }}
+                onDelete={() => {
+                  remove(id);
+                }}
               />
             ))}
           </div>
         </SortableContext>
       </DndContext>
-      <Flex className="m-6" justify="stretch">
-        <Button
-          icon={<PlusOutlined />}
-          size="large"
-          onClick={() => create("New section")}
-        >
-          Add section
-        </Button>
-      </Flex>
+      <Affix offsetBottom={0}>
+        <Flex className="p-6 w-full" justify="stretch">
+          <Button
+            className="w-full"
+            size="large"
+            icon={<PlusOutlined />}
+            onClick={() => create("New section")}
+          >
+            Add section
+          </Button>
+        </Flex>
+      </Affix>
     </div>
   );
 };

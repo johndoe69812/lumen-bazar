@@ -1,6 +1,10 @@
 import { Button, Col, Flex, Row, Tooltip, Typography } from "antd";
 import { MdDragIndicator } from "@react-icons/all-files/md/MdDragIndicator";
-import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
+import {
+  CopyOutlined,
+  DeleteOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FC, memo } from "react";
@@ -11,10 +15,12 @@ import useSceneWidgets from "@/app/sudo/form-constructor/store/use-scene-widgets
 type Props = {
   id: string;
   type: WidgetType | "placeholder";
+  onClone: () => void;
+  onDelete: () => void;
 };
 
 const SceneField: FC<Props> = (props) => {
-  const { id, type } = props;
+  const { id, type, onClone, onDelete } = props;
 
   const { listeners, transform, transition, setNodeRef } = useSortable({
     id,
@@ -36,7 +42,7 @@ const SceneField: FC<Props> = (props) => {
   if (id === "placeholder") {
     return (
       <div className="relative w-full h-24 flex justify-center items-center rounded-lg bg-indigo-100 border-2 border-indigo-400 border-dashed shadow">
-        <span className="text-indigo-400 text-lg font-medium select-none">
+        <span className="text-indigo-500 text-lg font-medium select-none">
           Drop here
         </span>
       </div>
@@ -55,13 +61,24 @@ const SceneField: FC<Props> = (props) => {
       ref={setNodeRef}
       style={style}
     >
-      <Tooltip title="Delete field">
-        <Button
-          icon={<DeleteOutlined />}
-          className="absolute top-4 right-4 z-10 text-red-300 hover:!text-red-500 hover:!bg-red-100"
-          type="text"
-        />
-      </Tooltip>
+      <Flex className="absolute top-4 right-4 z-10">
+        <Tooltip title="Clone this field">
+          <Button
+            className="text-slate-400 hover:!text-slate-500 hover:!bg-slate-200"
+            type="text"
+            icon={<CopyOutlined />}
+            onClick={() => onClone()}
+          />
+        </Tooltip>
+        <Tooltip title="Delete this field">
+          <Button
+            className="text-red-300 hover:!text-red-500 hover:!bg-red-100"
+            type="text"
+            icon={<DeleteOutlined />}
+            onClick={() => onDelete()}
+          />
+        </Tooltip>
+      </Flex>
       <Col
         flex="50px"
         className="flex justify-center items-center text-2xl transition cursor-move text-gray-400 hover:text-indigo-400"
@@ -77,7 +94,7 @@ const SceneField: FC<Props> = (props) => {
           <span className="font-medium text-blue-950">{type}</span>
         </Flex>
         <Typography.Title className="mt-4" level={5}>
-          Engine type
+          Field label
         </Typography.Title>
       </Col>
     </Row>

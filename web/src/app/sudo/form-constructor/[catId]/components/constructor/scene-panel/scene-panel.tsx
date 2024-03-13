@@ -35,6 +35,7 @@ const ScenePanel: FC<Props> = (props) => {
   const deleteField = useFieldsState((state) => state.delete);
   const updateField = useFieldsState((state) => state.update);
   const createField = useFieldsState((state) => state.create);
+  const cloneField = useFieldsState((state) => state.clone);
   const moveFields = useFieldsState((state) => state.move);
   const spacerInsertedRef = useRef(false);
   const isInserted = useRef(false);
@@ -120,7 +121,7 @@ const ScenePanel: FC<Props> = (props) => {
             description={
               <>
                 <Typography.Title level={5}>
-                  No widgets in your form
+                  No widgets in this section
                 </Typography.Title>
                 <Typography.Text>Drop some of them here</Typography.Text>
               </>
@@ -130,7 +131,12 @@ const ScenePanel: FC<Props> = (props) => {
         <List<WidgetField>>
           {fields.map((field) => (
             <List.Item key={field.id}>
-              <SceneField id={field.id} type={field.type} />
+              <SceneField
+                id={field.id}
+                type={field.type}
+                onClone={() => cloneField(field.id)}
+                onDelete={() => deleteField(field.id)}
+              />
             </List.Item>
           ))}
         </List>
@@ -147,7 +153,7 @@ const ScenePanelContainer = () => {
   );
 
   if (!activeSection) {
-    return <>Please Choose the section from left side</>;
+    return <Empty description="Please Choose the section from left side" />;
   }
 
   return <ScenePanel fields={fields} />;

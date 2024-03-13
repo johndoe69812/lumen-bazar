@@ -1,6 +1,6 @@
+import { arrayMove } from "@dnd-kit/sortable";
 import { nanoid } from "nanoid";
 import { create } from "zustand";
-import { arrayMove } from "./use-widget-params";
 
 export type FieldsSection = {
   id: string;
@@ -16,7 +16,7 @@ type Actions = {
   setActiveId: (id: string) => void;
   create: (title: string) => void;
   update: (id: string, updates: Partial<FieldsSection>) => void;
-  delete: (id: string) => void;
+  remove: (id: string) => void;
   move: (srcId: string, dstId: string) => void;
 };
 
@@ -59,7 +59,7 @@ const useSectionsStore = create<State & Actions>((set) => ({
     });
   },
 
-  delete(id) {
+  remove(id) {
     set((state) => {
       return {
         ...state,

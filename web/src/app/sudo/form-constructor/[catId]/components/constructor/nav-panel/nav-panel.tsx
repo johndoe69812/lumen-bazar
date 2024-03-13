@@ -16,7 +16,7 @@ const NavPanel = () => {
   const [activeSection, setActiveSection] = useState<Section>("sections");
 
   return (
-    <div className="pt-8 h-full">
+    <div className="pt-8 h-full flex flex-col">
       <div className="px-6">
         <Segmented
           options={[
@@ -28,22 +28,25 @@ const NavPanel = () => {
           block
         />
       </div>
-      <div className="mt-8 w-full">
-        {activeSection === "sections" && (
+      {activeSection === "sections" && (
+        <div className="w-full h-full mt-8 overflow-y-auto">
           <AnimatePresence>
             <motion.div {...animationProps}>
               <SectionsList />
             </motion.div>
           </AnimatePresence>
-        )}
-        {activeSection === "widgets" && (
+        </div>
+      )}
+
+      {activeSection === "widgets" && (
+        <div className="w-full h-full mt-8">
           <AnimatePresence>
             <motion.div {...animationProps}>
               <WidgetsList />
             </motion.div>
           </AnimatePresence>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
