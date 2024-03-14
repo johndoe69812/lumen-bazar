@@ -1,6 +1,7 @@
 import { EyeOutlined, SaveOutlined } from "@ant-design/icons";
 import { Button, Col, Flex, Row, Tag, Typography } from "antd";
 import { FC } from "react";
+import useSectionsStore from "../../../store/use-sections-store";
 
 type Props = {
   categoryName: string;
@@ -9,16 +10,18 @@ type Props = {
 const ConstructorHeader: FC<Props> = (props) => {
   const { categoryName } = props;
 
+  const section = useSectionsStore((store) =>
+    store.list.find((section) => section.id === store.activeId)
+  );
+
   return (
     <div className="relative z-10 w-full h-16 shadow bg-white">
       <Row align="middle" className="h-full">
-        <Col flex="250px">
-          <Tag style={{ margin: "0 0 0 60px" }}>{categoryName}</Tag>
-        </Col>
+        <Col flex="250px" />
         <Col flex="auto">
           <Flex align="center" justify="center">
             <Typography.Title level={4} className="!mb-0">
-              Section Name
+              {categoryName}/{section && section.title}
             </Typography.Title>
           </Flex>
         </Col>

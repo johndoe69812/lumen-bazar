@@ -11,6 +11,7 @@ import { FC, memo } from "react";
 import clsx from "clsx";
 import { WidgetType } from "../../widgets-config";
 import useSceneWidgets from "@/app/sudo/form-constructor/store/use-scene-widgets";
+import FieldActions from "./field-actions";
 
 type Props = {
   id: string;
@@ -54,31 +55,14 @@ const SceneField: FC<Props> = (props) => {
       gutter={16}
       align="stretch"
       className={clsx(
-        "relative w-full h-24 select-none rounded-xl bg-white shadow",
+        "relative w-full min-h-24 select-none rounded-xl bg-white shadow",
         id === activeId && "outline outline-indigo-400"
       )}
       onClick={() => setActiveId(id)}
       ref={setNodeRef}
       style={style}
     >
-      <Flex className="absolute top-4 right-4 z-10">
-        <Tooltip title="Clone this field">
-          <Button
-            className="text-slate-400 hover:!text-slate-500 hover:!bg-slate-200"
-            type="text"
-            icon={<CopyOutlined />}
-            onClick={() => onClone()}
-          />
-        </Tooltip>
-        <Tooltip title="Delete this field">
-          <Button
-            className="text-red-300 hover:!text-red-500 hover:!bg-red-100"
-            type="text"
-            icon={<DeleteOutlined />}
-            onClick={() => onDelete()}
-          />
-        </Tooltip>
-      </Flex>
+      <FieldActions onClone={onClone} onDelete={onDelete} />
       <Col
         flex="50px"
         className="flex justify-center items-center text-2xl transition cursor-move text-gray-400 hover:text-indigo-400"
@@ -93,9 +77,12 @@ const SceneField: FC<Props> = (props) => {
           </div>
           <span className="font-medium text-blue-950">{type}</span>
         </Flex>
-        <Typography.Title className="mt-4" level={5}>
-          Field label
-        </Typography.Title>
+        <Flex vertical gap={16}>
+          <Typography.Title className="mt-4" level={5}>
+            Field label
+          </Typography.Title>
+          <div className="subwidgets"></div>
+        </Flex>
       </Col>
     </Row>
   );

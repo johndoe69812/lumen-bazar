@@ -64,6 +64,16 @@ const ScenePanel: FC<Props> = (props) => {
     },
 
     onDragOver(event) {
+      console.log("overId", event.over?.id);
+
+      if (event.over?.id === "fields-inner") {
+        console.log("inner");
+
+        deleteField("placeholder");
+        isInserted.current = false;
+        return;
+      }
+
       if (!spacerInsertedRef.current) return;
 
       const type = getType(event.over);
