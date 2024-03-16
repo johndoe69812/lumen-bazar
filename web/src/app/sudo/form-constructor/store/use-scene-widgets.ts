@@ -8,6 +8,7 @@ export type WidgetField = {
   type: WidgetType;
   sectionId: string;
   isPlaceholder?: boolean;
+  children?: WidgetField[];
 };
 
 type State = {
@@ -20,6 +21,12 @@ type Actions = {
   setActiveId: (id: string) => void;
   setActiveSectionId: (id: string) => void;
   create: (field: Partial<WidgetField>, insertPos?: number) => void;
+  createChild: (
+    id: string,
+    field: Partial<WidgetField>,
+    insertPos?: number
+  ) => void;
+  deleteChild: (parentId: string, childId: string) => void;
   update: (id: string, field: Partial<WidgetField>) => void;
   move: (srcIndex: number, dstIndex: number) => void;
   delete: (id: string) => void;
@@ -55,7 +62,7 @@ const useSceneWidgets = create<State & Actions>((set) => ({
     });
   },
 
-  create(field, insertPos = 0) {
+  create(field, insertPos) {
     const widgetField = field as WidgetField;
 
     set((state) => {
@@ -68,10 +75,56 @@ const useSceneWidgets = create<State & Actions>((set) => ({
         ...state,
         fields: {
           ...state.fields,
-          [activeSectionId]: arrayMove(
-            newItems,
-            newItems.length - 1,
-            insertPos
+          [activeSectionId]: insertPos
+            ? arrayMove(newItems, newItems.length - 1, insertPos)
+            : newItems,
+        },
+      };
+    });
+  },
+
+  createChild(parentId, candidateField, insertPos = 0) {
+    const widgetField = candidateField as WidgetField;
+
+    set((state) => {
+      const { activeSectionId } = state;
+      if (!activeSectionId) return state;
+
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          [activeSectionId]: state.fields[activeSectionId].map((field) => {
+            if (field.id === parentId) {
+              field.children = field.children ?? [];
+              field.children.push(widgetField);
+            }
+
+            return field;
+          }),
+        },
+      };
+    });
+  },
+
+  deleteChild(parentId, childId) {
+    set((state) => {
+      const { activeSectionId } = state;
+      if (!activeSectionId) return state;
+
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          [activeSectionId]: state.fields[activeSectionId].map((field) =>
+            field.id === parentId
+              ? {
+                  ...field,
+                  children: field.children?.filter(
+                    (child) => child.id !== childId
+                  ),
+                }
+              : field
           ),
         },
       };

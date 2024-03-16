@@ -10,18 +10,23 @@ import { CSS } from "@dnd-kit/utilities";
 import { FC, memo } from "react";
 import clsx from "clsx";
 import { WidgetType } from "../../widgets-config";
-import useSceneWidgets from "@/app/sudo/form-constructor/store/use-scene-widgets";
+import useSceneWidgets, {
+  WidgetField,
+} from "@/app/sudo/form-constructor/store/use-scene-widgets";
 import FieldActions from "./field-actions";
+import SubWidgets from "./sub-widgets";
+import PlaceholderItem from "../../../placeholder-item";
 
 type Props = {
   id: string;
   type: WidgetType | "placeholder";
   onClone: () => void;
   onDelete: () => void;
+  children?: WidgetField[];
 };
 
 const SceneField: FC<Props> = (props) => {
-  const { id, type, onClone, onDelete } = props;
+  const { id, type, children, onClone, onDelete } = props;
 
   const { listeners, transform, transition, setNodeRef } = useSortable({
     id,
@@ -41,13 +46,7 @@ const SceneField: FC<Props> = (props) => {
   };
 
   if (id === "placeholder") {
-    return (
-      <div className="relative w-full h-24 flex justify-center items-center rounded-lg bg-indigo-100 border-2 border-indigo-400 border-dashed shadow">
-        <span className="text-indigo-500 text-lg font-medium select-none">
-          Drop here
-        </span>
-      </div>
-    );
+    return <PlaceholderItem />;
   }
 
   return (
@@ -55,7 +54,7 @@ const SceneField: FC<Props> = (props) => {
       gutter={16}
       align="stretch"
       className={clsx(
-        "relative w-full min-h-24 select-none rounded-xl bg-white shadow",
+        "relative w-full min-h-24 h-auto select-none rounded-xl bg-white shadow",
         id === activeId && "outline outline-indigo-400"
       )}
       onClick={() => setActiveId(id)}
@@ -81,7 +80,7 @@ const SceneField: FC<Props> = (props) => {
           <Typography.Title className="mt-4" level={5}>
             Field label
           </Typography.Title>
-          <div className="subwidgets"></div>
+          <SubWidgets fields={children} id={`${id}.children`} />
         </Flex>
       </Col>
     </Row>

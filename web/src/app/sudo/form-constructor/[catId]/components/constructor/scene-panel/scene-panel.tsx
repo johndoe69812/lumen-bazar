@@ -1,11 +1,5 @@
-import React, { FC, useCallback, useRef } from "react";
-import {
-  Active,
-  Over,
-  UniqueIdentifier,
-  useDndMonitor,
-  useDroppable,
-} from "@dnd-kit/core";
+import React, { FC, useCallback, useEffect, useRef } from "react";
+import { UniqueIdentifier, useDndMonitor, useDroppable } from "@dnd-kit/core";
 import useFieldsState, {
   WidgetField,
 } from "@/app/sudo/form-constructor/store/use-scene-widgets";
@@ -15,16 +9,12 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { SCENE_WIDGETS_ID } from "./constants";
-import { Nullable } from "@/types/utils";
+import { SCENE_WIDGETS_ID, initialDragMeta } from "./constants";
 import { isString } from "lodash";
 import { WidgetType } from "../widgets-config";
 import { nanoid } from "nanoid";
 import useSectionsStore from "@/app/sudo/form-constructor/store/use-sections-store";
-
-const getType = (prop?: Nullable<Active | Over>) => {
-  return prop?.data?.current?.type ?? null;
-};
+import { getDraggableType } from "./scene-field/utils";
 
 type Props = { fields: WidgetField[] };
 
@@ -35,17 +25,21 @@ const ScenePanel: FC<Props> = (props) => {
   const deleteField = useFieldsState((state) => state.delete);
   const updateField = useFieldsState((state) => state.update);
   const createField = useFieldsState((state) => state.create);
+  const createChildField = useFieldsState((state) => state.createChild);
+  const deleteChildField = useFieldsState((state) => state.deleteChild);
   const cloneField = useFieldsState((state) => state.clone);
   const moveFields = useFieldsState((state) => state.move);
-  const spacerInsertedRef = useRef(false);
-  const isInserted = useRef(false);
+  const dragMeta = useRef(initialDragMeta);
 
   const { setNodeRef } = useDroppable({ id: SCENE_WIDGETS_ID });
 
   const cleanup = () => {
-    spacerInsertedRef.current = false;
-    isInserted.current = false;
+    dragMeta.current = { ...initialDragMeta };
   };
+
+  useEffect(() => {
+    cleanup();
+  }, []);
 
   const getFieldIndex = useCallback(
     (id?: UniqueIdentifier) => {
@@ -56,38 +50,55 @@ const ScenePanel: FC<Props> = (props) => {
 
   useDndMonitor({
     onDragStart(event) {
-      const type = getType(event.active);
+      const type = getDraggableType(event.active);
 
       if (type === "widgetInstance") {
-        spacerInsertedRef.current = true;
+        dragMeta.current.fromWidgets = true;
       }
     },
 
     onDragOver(event) {
-      console.log("overId", event.over?.id);
+      const overId = String(event.over?.id);
+      const type = getDraggableType(event.over);
 
-      if (event.over?.id === "fields-inner") {
-        console.log("inner");
+      const isOverChildren = String(overId).endsWith("children");
+      const isOverSceneItem = type === "sceneWidget";
+      const isOverScene = overId === "scene-widgets";
 
-        deleteField("placeholder");
-        isInserted.current = false;
+      if (!dragMeta.current.fromWidgets) {
+        cleanup();
         return;
       }
 
-      if (!spacerInsertedRef.current) return;
+      if (isOverChildren) {
+        const overFieldId = overId.split(".")[0];
 
-      const type = getType(event.over);
-
-      if (type === "sceneWidget") {
-        const overPos = getFieldIndex(event.over?.id);
-        const spacePos = getFieldIndex("placeholder");
-
-        if (overPos !== spacePos) moveFields(overPos, spacePos);
+        createChildField(overFieldId, { id: "placeholder" });
+        dragMeta.current.placeholderInField = overFieldId;
+        deleteField("placeholder");
+        dragMeta.current.placeholderIsInserted = false;
+        return;
       }
 
-      if (!isInserted.current) {
+      if (isOverSceneItem) {
+        const overPos = getFieldIndex(overId);
+        const placeholderPos = getFieldIndex("placeholder");
+
+        if (overPos !== placeholderPos) moveFields(overPos, placeholderPos);
+      }
+
+      if (dragMeta.current.placeholderInField) {
+        deleteChildField(dragMeta.current.placeholderInField, "placeholder");
+      }
+
+      if (!dragMeta.current.placeholderIsInserted) {
+        console.log("placeholder inserted");
         createField({ id: "placeholder" });
-        isInserted.current = true;
+        console.log(
+          "placeholderIsInserted",
+          dragMeta.current.placeholderIsInserted
+        );
+        dragMeta.current.placeholderIsInserted = true;
       }
     },
 
@@ -100,7 +111,7 @@ const ScenePanel: FC<Props> = (props) => {
         return;
       }
 
-      if (spacerInsertedRef.current) {
+      if (dragMeta.current.fromWidgets) {
         updateField("placeholder", {
           id: nanoid(),
           sectionId: activeSection,
@@ -124,7 +135,11 @@ const ScenePanel: FC<Props> = (props) => {
   const isEmpty = fields.length === 0;
 
   return (
-    <SortableContext items={fields} strategy={verticalListSortingStrategy}>
+    <SortableContext
+      id="scene"
+      items={fields}
+      strategy={verticalListSortingStrategy}
+    >
       <div className="w-full h-full" ref={setNodeRef}>
         {isEmpty && (
           <Empty
@@ -146,6 +161,7 @@ const ScenePanel: FC<Props> = (props) => {
                 type={field.type}
                 onClone={() => cloneField(field.id)}
                 onDelete={() => deleteField(field.id)}
+                children={field.children}
               />
             </List.Item>
           ))}
@@ -155,7 +171,7 @@ const ScenePanel: FC<Props> = (props) => {
   );
 };
 
-const ScenePanelContainer = () => {
+const ScenePanelContainer: FC = () => {
   const activeSection = useSectionsStore((state) => state.activeId);
 
   const fields = useFieldsState((state) =>

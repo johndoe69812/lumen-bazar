@@ -94,18 +94,18 @@ const SectionItem: FC<Props> = (props) => {
           </Col>
         </Row>
         <Flex className="absolute right-6 top-0 h-full" align="center">
-          <Tooltip title="Delete this section">
-            <Popconfirm
-              title="Are you sure you want to delete this section?"
-              onConfirm={onDelete}
-            >
+          <Popconfirm
+            title="Are you sure you want to delete this section?"
+            onConfirm={onDelete}
+          >
+            <Tooltip title="Delete this section">
               <Button
                 className="transition opacity-0 group-hover:opacity-100 focus:opacity-100"
                 size="small"
                 icon={<DeleteOutlined />}
               />
-            </Popconfirm>
-          </Tooltip>
+            </Tooltip>
+          </Popconfirm>
         </Flex>
       </div>
     </div>
