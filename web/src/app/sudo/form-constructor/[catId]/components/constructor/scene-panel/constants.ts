@@ -12,4 +12,4 @@ export const initialDragMeta: DragMeta = {
   fromWidgets: false,
   placeholderIsInserted: false,
   placeholderInField: null,
-};
+} as const;

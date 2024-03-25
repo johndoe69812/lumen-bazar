@@ -3,7 +3,13 @@
 import { Col, Form, Row } from "antd";
 import NavPanel from "./nav-panel/nav-panel";
 import ScenePanel from "./scene-panel";
-import { DndContext, MouseSensor, useSensor, useSensors } from "@dnd-kit/core";
+import {
+  DndContext,
+  MouseSensor,
+  rectIntersection,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import SettingsPanel from "./settings-panel";
 import { FC } from "react";
 
@@ -31,22 +37,26 @@ const Constructor: FC = () => {
 
   return (
     <Form form={form} name="edit" initialValues={initialValues}>
-      <DndContext sensors={sensors}>
-        <Row>
-          <Col className={sidebarClassName} flex="350px">
-            <NavPanel />
-          </Col>
-          <Col flex="auto" className="h-[calc(100vh_-64px)] overflow-hidden">
-            <div className="h-full overflow-auto p-8">
-              <ScenePanel />
-            </div>
-            {/* <SectionEditor /> */}
-          </Col>
-          <Col className={sidebarClassName} flex="350px">
-            <SettingsPanel />
-          </Col>
-        </Row>
-      </DndContext>
+      {/* <DndContext collisionDetection={rectIntersection} sensors={sensors}> */}
+      <Row>
+        <Col
+          className={sidebarClassName}
+          flex="350px"
+          onDragEnd={(event) => console.log("drag ended", event)}
+        >
+          <NavPanel />
+        </Col>
+        <Col flex="auto" className="h-[calc(100vh_-64px)] overflow-hidden">
+          <div className="h-full overflow-auto p-8">
+            <ScenePanel />
+          </div>
+          {/* <SectionEditor /> */}
+        </Col>
+        <Col className={sidebarClassName} flex="350px">
+          <SettingsPanel />
+        </Col>
+      </Row>
+      {/* </DndContext> */}
     </Form>
   );
 };

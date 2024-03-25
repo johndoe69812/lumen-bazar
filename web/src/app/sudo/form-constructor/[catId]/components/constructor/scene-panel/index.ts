@@ -1,1 +1,1 @@
-export { default } from "./scene-panel";
+export { default } from "./scene-container";

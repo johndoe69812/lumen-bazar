@@ -1,10 +1,10 @@
+import { ChangeEventHandler, FC, useMemo, useState } from "react";
 import { Flex, Input, List, Typography } from "antd";
 import { AllWidgets } from "./widgets";
 import { SearchOutlined } from "@ant-design/icons";
 import WidgetItem from "./widget-item";
-import { ChangeEventHandler, useMemo, useState } from "react";
 
-const WidgetList: React.FC = () => {
+const WidgetList: FC = () => {
   const [searchString, setSearchString] = useState("");
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -18,7 +18,13 @@ const WidgetList: React.FC = () => {
   }, [searchString]);
 
   return (
-    <Flex vertical className="px-6 max-h-full">
+    <Flex
+      vertical
+      className="px-6 max-h-full"
+      onDragOver={(event) => {
+        event.preventDefault();
+      }}
+    >
       <Input
         size="large"
         placeholder="Search through widgets"

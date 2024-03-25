@@ -1,35 +1,29 @@
 import { Flex, List, Typography } from "antd";
 import { Widget } from "./widgets";
 import { SettingOutlined } from "@ant-design/icons";
-import { useDraggable } from "@dnd-kit/core";
-import clsx from "clsx";
+import { DragEventHandler, FC, useCallback } from "react";
 
-const getTransformStyle = ({ x, y }: { x: number; y: number }) => ({
-  transform: `translate3d(${x}px, ${y}px, 0)`,
-});
+const WidgetItem: FC<Widget> = (item) => {
+  const handleDragStart: DragEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      const id = event.currentTarget.id;
+      document.body.classList.add("dragging");
+      event.dataTransfer.dropEffect = "move";
+      event.dataTransfer.setData("text", id);
+    },
+    []
+  );
 
-const WidgetItem = (item: Widget) => {
-  const { attributes, listeners, transform, isDragging, setNodeRef } =
-    useDraggable({
-      id: item.id,
-      data: {
-        type: "widgetInstance",
-      },
-    });
-
-  const style = transform ? getTransformStyle(transform) : undefined;
+  const handleDragEnd = useCallback(() => {
+    document.body.classList.remove("dragging");
+  }, []);
 
   return (
     <List.Item
-      className={clsx(
-        "relative aspect-square rounded-lg select-none cursor-grab bg-indigo-50 hover:drop-shadow-lg",
-        isDragging && "z-10 border !cursor-grabbing"
-      )}
-      id={item.id + "-li"}
-      ref={setNodeRef}
-      style={style}
-      {...listeners}
-      {...attributes}
+      className="relative aspect-square rounded-lg select-none cursor-grab bg-indigo-50 hover:drop-shadow-lg"
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      draggable
     >
       <Flex
         vertical

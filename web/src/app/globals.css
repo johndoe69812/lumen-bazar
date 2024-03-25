@@ -422,3 +422,19 @@ Ensure the default browser behavior of the `hidden` attribute.
 [hidden] {
   display: none;
 }
+
+.dragging [data-dnd-id] .drag-handler,
+.dragging [data-dnd-id] .field-type,
+.dragging [data-dnd-id] .field-title,
+.dragging #placeholder {
+  pointer-events: none;
+}
+
+.placeholder * {
+  pointer-events: none;
+}
+
+.placeholder.active {
+  opacity: 1;
+  height: 98px;
+}

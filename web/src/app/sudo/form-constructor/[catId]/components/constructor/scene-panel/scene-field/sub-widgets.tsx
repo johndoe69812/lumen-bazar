@@ -1,33 +1,89 @@
-import { WidgetField } from "@/app/sudo/form-constructor/store/use-scene-widgets";
+import useSceneWidgets, {
+  WidgetField,
+} from "@/app/sudo/form-constructor/store/use-scene-widgets";
 import { useSortable } from "@dnd-kit/sortable";
-import { FC } from "react";
+import {
+  DragEventHandler,
+  FC,
+  PropsWithChildren,
+  memo,
+  useCallback,
+} from "react";
 import PlaceholderItem from "../../../placeholder-item";
 import { Flex } from "antd";
+import SceneField from ".";
+import { DndContext, useDndMonitor, useDroppable } from "@dnd-kit/core";
+import { nanoid } from "nanoid";
 
 type Props = {
-  id: string;
-  fields?: WidgetField[];
+  fieldId: string;
 };
 
 const SubWidgets: FC<Props> = (props) => {
-  const { id, fields } = props;
+  const { fieldId } = props;
 
   const { listeners, transform, transition, setNodeRef } = useSortable({
-    id,
+    id: `${fieldId}:children`,
     data: {
       type: "subWidgets",
     },
   });
 
+  const createChild = useSceneWidgets((state) => state.createChild);
+  // useDndMonitor({
+  //   onDragOver(event) {
+  //     const over = event.over;
+
+  //     console.log("child over", over);
+  //   },
+  // });
+
+  const fields = useSceneWidgets((state) =>
+    state.activeSectionId
+      ? state.fields[state.activeSectionId]?.find(
+          (field) => field.id === fieldId
+        )?.children
+      : []
+  );
+
+  const handleDragEnter: DragEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("onDragEnter IN CHILD");
+    },
+    []
+  );
+
+  const handleDrop: DragEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      console.log("event", event);
+      createChild(fieldId, { id: nanoid() });
+    },
+    [createChild, fieldId]
+  );
+
   return (
-    <div className="min-h-8 flex flex-col" ref={setNodeRef}>
-      {fields?.map(({ id }) => {
-        const isPlaceholder = id === "placeholder";
+    <div
+      className="min-h-8 flex flex-col justify-center gap-2 bg-red-100"
+      data-dnd-id="field-children"
+      onDrop={handleDrop}
+      onDragEnter={handleDragEnter}
+    >
+      {fields?.map((field) => {
+        const isPlaceholder = field.id === "placeholder";
 
         return (
-          <div key={id}>
+          <div key={fieldId}>
             {isPlaceholder && <PlaceholderItem />}
-            {!isPlaceholder && <div>{id}</div>}
+            {!isPlaceholder && (
+              <SceneField
+                id={field.id}
+                type={field.type}
+                onClone={() => {}}
+                onDelete={() => {}}
+              />
+            )}
           </div>
         );
       })}
@@ -35,4 +91,8 @@ const SubWidgets: FC<Props> = (props) => {
   );
 };
 
-export default SubWidgets;
+const Wrapper = (props: Props) => {
+  return <SubWidgets fieldId={props.fieldId} />;
+};
+
+export default Wrapper;
