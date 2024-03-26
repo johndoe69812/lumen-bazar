@@ -14,6 +14,8 @@ import { Flex } from "antd";
 import SceneField from ".";
 import { DndContext, useDndMonitor, useDroppable } from "@dnd-kit/core";
 import { nanoid } from "nanoid";
+import { WidgetType } from "../../widgets-config";
+import { getWidgetType, isGroupWidget } from "../utils";
 
 type Props = {
   fieldId: string;
@@ -57,10 +59,12 @@ const SubWidgets: FC<Props> = (props) => {
 
   const handleDrop: DragEventHandler<HTMLDivElement> = useCallback(
     (event) => {
-      console.log("event", event);
-      createChild(fieldId, { id: nanoid() });
+      const type = getWidgetType(event);
+      const isGroup = isGroupWidget(type);
+
+      !isGroup && createChild(fieldId, { id: nanoid(), type });
     },
-    [createChild, fieldId]
+    [fieldId, createChild]
   );
 
   return (

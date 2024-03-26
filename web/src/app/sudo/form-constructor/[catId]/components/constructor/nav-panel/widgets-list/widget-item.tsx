@@ -3,7 +3,11 @@ import { Widget } from "./widgets";
 import { SettingOutlined } from "@ant-design/icons";
 import { DragEventHandler, FC, useCallback } from "react";
 
-const WidgetItem: FC<Widget> = (item) => {
+type Props = Widget;
+
+const WidgetItem: FC<Props> = (props) => {
+  const { icon, id, label } = props;
+
   const handleDragStart: DragEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       const id = event.currentTarget.id;
@@ -21,6 +25,7 @@ const WidgetItem: FC<Widget> = (item) => {
   return (
     <List.Item
       className="relative aspect-square rounded-lg select-none cursor-grab bg-indigo-50 hover:drop-shadow-lg"
+      id={id}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       draggable
@@ -36,11 +41,11 @@ const WidgetItem: FC<Widget> = (item) => {
           style={{ fontSize: 24, marginTop: 10, height: 30 }}
           className="text-indigo-400"
         >
-          {item.icon ?? <SettingOutlined />}
+          {icon ?? <SettingOutlined />}
         </span>
 
         <Typography.Text className="font-medium text-slate-800">
-          {item.label}
+          {label}
         </Typography.Text>
       </Flex>
     </List.Item>

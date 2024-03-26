@@ -1,7 +1,7 @@
 import { Col, Flex, Row, Typography } from "antd";
 import { MdDragIndicator } from "@react-icons/all-files/md/MdDragIndicator";
 import { SettingOutlined } from "@ant-design/icons";
-import { FC, memo } from "react";
+import { FC, MouseEventHandler, memo, useCallback } from "react";
 import clsx from "clsx";
 import { WidgetType } from "../../widgets-config";
 import useSceneWidgets, {
@@ -11,19 +11,21 @@ import FieldActions from "./field-actions";
 import SubWidgets from "./sub-widgets";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { isGroupWidget } from "../utils";
+import { useDndMonitor } from "@dnd-kit/core";
 
 type Props = {
   id: string;
-  type: WidgetType | "placeholder";
+  type: WidgetType;
   onClone: () => void;
   onDelete: () => void;
+  isCollapsed?: boolean;
   fields?: WidgetField[];
 };
 
 const SceneField: FC<Props> = (props) => {
-  const { id, type, fields, onClone, onDelete } = props;
+  const { id, type, fields, isCollapsed = false, onClone, onDelete } = props;
 
-  const isGroup = true;
   const { listeners, transform, transition, setNodeRef } = useSortable({ id });
 
   const [activeId, setActiveId] = useSceneWidgets((state) => [
@@ -31,10 +33,28 @@ const SceneField: FC<Props> = (props) => {
     state.setActiveId,
   ]);
 
+  const handleClick: MouseEventHandler = useCallback(
+    (event) => {
+      event.stopPropagation();
+      setActiveId(id);
+    },
+    [id, setActiveId]
+  );
+
+  useDndMonitor({
+    onDragStart(event) {
+      const active = event.active;
+
+      console.log("dragstart active", active);
+    },
+  });
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
+  const isGroup = isGroupWidget(type);
 
   return (
     <Flex gap={16} ref={setNodeRef} style={style} vertical>
@@ -45,7 +65,7 @@ const SceneField: FC<Props> = (props) => {
           "relative w-full m-0 min-h-24 h-auto select-none rounded-xl bg-white shadow",
           id === activeId && "outline outline-indigo-400"
         )}
-        onClick={() => setActiveId(id)}
+        onClick={handleClick}
       >
         <FieldActions onClone={onClone} onDelete={onDelete} />
         <Col
@@ -66,7 +86,7 @@ const SceneField: FC<Props> = (props) => {
             <Typography.Title className="field-title mt-4" level={5}>
               Field label
             </Typography.Title>
-            {isGroup && <SubWidgets fieldId={id} />}
+            {isGroup && !isCollapsed && <SubWidgets fieldId={id} />}
           </Flex>
         </Col>
       </Row>

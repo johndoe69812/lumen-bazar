@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { WidgetType } from "../[catId]/components/constructor/widgets-config";
 import { nanoid } from "nanoid";
 import { immer } from "zustand/middleware/immer";
-import { merge } from "lodash";
+import merge from "lodash/merge";
 
 export type WidgetField = {
   id: string;
@@ -62,19 +62,19 @@ const useSceneWidgets = create<State & Actions>()(
     create(field, insertPos) {
       const widgetField = field as WidgetField;
 
+      console.log("insertPos", insertPos);
+
       set((state) => {
         const { activeSectionId } = state;
         if (!activeSectionId) return;
 
-        state.fields[activeSectionId].push(widgetField);
+        let newFields = [...state.fields[activeSectionId], widgetField];
 
         if (insertPos) {
-          state.fields[activeSectionId] = arrayMove(
-            state.fields[activeSectionId],
-            state.fields[activeSectionId].length - 1,
-            insertPos
-          );
+          newFields = arrayMove(newFields, newFields.length - 1, insertPos);
         }
+
+        state.fields[activeSectionId] = newFields;
       });
     },
 

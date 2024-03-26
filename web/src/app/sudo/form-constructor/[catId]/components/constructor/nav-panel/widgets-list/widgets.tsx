@@ -1,4 +1,4 @@
-import { UploadOutlined } from "@ant-design/icons";
+import { GroupOutlined, UploadOutlined } from "@ant-design/icons";
 import { MdOutlineAttachMoney } from "@react-icons/all-files/md/MdOutlineAttachMoney";
 import { CiBoxList } from "@react-icons/all-files/ci/CiBoxList";
 
@@ -28,6 +28,12 @@ export const AllWidgets: Widget[] = [
     label: "TextField",
     id: "inputWidget",
     group: "primitive",
+  },
+  {
+    label: "Group",
+    id: "groupWidget",
+    group: "primitive",
+    icon: <GroupOutlined />,
   },
   {
     label: "Uploader",

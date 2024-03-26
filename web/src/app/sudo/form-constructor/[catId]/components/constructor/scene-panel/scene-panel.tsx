@@ -1,24 +1,17 @@
-import React, {
-  DragEventHandler,
-  FC,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
-import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
+import { DragEvent, DragEventHandler, FC, useCallback, useEffect } from "react";
+import { DndContext } from "@dnd-kit/core";
 import useFieldsState, {
   WidgetField,
 } from "@/app/sudo/form-constructor/store/use-scene-widgets";
 import SceneField from "./scene-field";
 import { Empty, Flex, Typography } from "antd";
 import { SortableContext } from "@dnd-kit/sortable";
-import { initialDragMeta } from "./constants";
-import { debounce } from "lodash";
 import { WidgetType } from "../widgets-config";
 import { nanoid } from "nanoid";
 import useSectionsStore from "@/app/sudo/form-constructor/store/use-sections-store";
 import PlaceholderItem from "../../placeholder-item";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import { getWidgetType } from "./utils";
 
 type Props = { fields: WidgetField[] };
 
@@ -30,33 +23,31 @@ const ScenePanel: FC<Props> = (props) => {
     const { fields, ...actions } = state;
     return actions;
   });
-  const dragMeta = useRef({ ...initialDragMeta });
 
-  const getFieldIndex = useCallback(
-    (id?: UniqueIdentifier) => {
-      return fields.findIndex((f) => f.id === id);
+  const handleDrop: DragEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      event.stopPropagation();
+      const type = getWidgetType(event);
+
+      let field = {
+        id: nanoid(),
+        sectionId: activeSection,
+        type,
+      };
+
+      actions.create(field);
     },
-    [fields]
+    [activeSection, actions]
   );
 
-  const moveItems = debounce((src, dst) => actions.move(src, dst), 50);
+  const handleDragOver: DragEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      event.preventDefault();
+    },
+    []
+  );
 
-  const createPlaceholderField = () => {
-    actions.create({ id: "placeholder" });
-    dragMeta.current.placeholderIsInserted = true;
-  };
-
-  const handleDragEnter: DragEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
-
-    if (
-      (event.target as HTMLDivElement).id === "fields-scene" &&
-      !dragMeta.current.placeholderIsInserted
-    ) {
-      createPlaceholderField();
-    }
-  };
-
+  // handle dnd in children
   useEffect(() => {
     const placeholders = document.querySelectorAll<HTMLDivElement>(
       "[data-dnd-id='placeholder']"
@@ -75,14 +66,16 @@ const ScenePanel: FC<Props> = (props) => {
         event?.preventDefault();
       };
 
-      item.ondrop = () => {
+      item.ondrop = (event) => {
+        event.stopPropagation();
+
         let updates = {
           id: nanoid(),
           sectionId: activeSection,
-          type: "selectWidget" as WidgetType,
+          type: getWidgetType(event as unknown as DragEvent<HTMLDivElement>),
         };
 
-        actions.create(updates, index);
+        actions.create(updates, index + 1);
         item.classList.remove("active");
       };
     });
@@ -94,33 +87,23 @@ const ScenePanel: FC<Props> = (props) => {
     <div
       className="w-full h-full"
       id="fields-scene"
-      onDragEnter={handleDragEnter}
-      onDragOver={(event) => {
-        event.preventDefault();
-      }}
-      onDrop={(event) => {
-        let updates = {
-          id: nanoid(),
-          sectionId: activeSection,
-          type: "selectWidget" as WidgetType,
-        };
-
-        actions.update("placeholder", updates);
-        dragMeta.current.placeholderIsInserted = false;
-        event.stopPropagation();
-      }}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
     >
       {isEmpty && (
-        <Empty
-          description={
-            <>
-              <Typography.Title level={5}>
-                No widgets in this section
-              </Typography.Title>
-              <Typography.Text>Drop some of them here</Typography.Text>
-            </>
-          }
-        />
+        <>
+          <Empty
+            description={
+              <>
+                <Typography.Title level={5}>
+                  No widgets in this section
+                </Typography.Title>
+                <Typography.Text>Drop some of them here</Typography.Text>
+              </>
+            }
+          />
+          <PlaceholderItem data-dnd-id="placeholder" key="base-placeholder" />
+        </>
       )}
       <Flex gap={0} vertical id="list">
         <DndContext modifiers={[restrictToVerticalAxis]}>
@@ -151,9 +134,6 @@ const ScenePanel: FC<Props> = (props) => {
                 <PlaceholderItem
                   data-dnd-id="placeholder"
                   key={`${index}-placeholder`}
-                  onMouseEnter={() => {
-                    console.log("mouseenter");
-                  }}
                 />
               </>
             ))}
